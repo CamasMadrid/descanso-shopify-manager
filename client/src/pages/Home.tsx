@@ -290,24 +290,36 @@ export default function Home() {
                     <span className="font-semibold text-primary text-lg">{product.price}</span>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <a
-                      href={`https://descanso-rapido-castilla.myshopify.com/products/${product.id}`}
-                      target="_blank" rel="noopener noreferrer"
-                      className="w-full"
-                    >
-                      <Button size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5">
-                        <CreditCard className="w-3.5 h-3.5" /> Comprar ahora
-                      </Button>
-                    </a>
-                    <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, me interesa el ${product.name}. ¿Podéis visitarme o puedo reservar sin pagar?`)}`}
-                      target="_blank" rel="noopener noreferrer"
-                      className="w-full"
-                    >
-                      <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
-                        <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
-                      </Button>
-                    </a>
+                    <div>
+                      <a
+                        href={`https://descanso-rapido-castilla.myshopify.com/products/${product.id}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="w-full"
+                      >
+                        <Button size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5">
+                          <CreditCard className="w-3.5 h-3.5" /> Comprar ahora
+                        </Button>
+                      </a>
+                      <p className="text-xs text-green-700 mt-1 flex items-center gap-1">
+                        <CheckCircle className="w-3 h-3 shrink-0" />
+                        Entrega garantizada en 48h · 14 días de devolución
+                      </p>
+                    </div>
+                    <div>
+                      <a
+                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, me interesa el ${product.name}. ¿Podéis visitarme o puedo reservar sin pagar?`)}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="w-full"
+                      >
+                        <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
+                          <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
+                        </Button>
+                      </a>
+                      <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+                        <Truck className="w-3 h-3 shrink-0" />
+                        Sujeto a disponibilidad ese día — si no, 48h garantizadas
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -342,12 +354,15 @@ export default function Home() {
               <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
                 No hace falta que vengas a ninguna tienda. Nuestro equipo se desplaza a tu domicilio con muestras de colchones y materiales para que puedas ver y tocar los productos antes de decidir.
               </p>
+              <p className="text-sm text-muted-foreground bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-6 leading-relaxed">
+                💡 <strong>Nota:</strong> Intentamos llevar siempre el modelo que te interesa. Si ese día no está disponible en la furgoneta, lo pedimos y lo tienes en 48 horas — sin esperas largas.
+              </p>
               <ul className="space-y-3 mb-8">
                 {[
                   "Sin compromiso de compra",
                   "Asesoramiento personalizado en casa",
                   "Medimos y comprobamos el espacio",
-                  "Entrega en 48h tras el pedido",
+                  "Entrega en 48h si no está disponible ese día",
                 ].map(item => (
                   <li key={item} className="flex items-center gap-3 text-sm text-foreground">
                     <CheckCircle className="w-4 h-4 text-green-600 shrink-0" />
