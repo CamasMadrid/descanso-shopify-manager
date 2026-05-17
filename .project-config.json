@@ -7,17 +7,18 @@
   ],
   "dev_command": "pnpm run dev",
   "env_vars": {
-    "DATABASE_URL": "mysql://24YeJNoJpCzCJhm.root:ZYFWrgo125L98u9gSZds@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/NteP5R75gry86mQCEyPh6j?ssl={\"rejectUnauthorized\":true}"
+    "DATABASE_URL": "mysql://24YeJNoJpCzCJhm.root:ZYFWrgo125L98u9gSZds@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/NteP5R75gry86mQCEyPh6j?ssl={\"rejectUnauthorized\":true}",
+    "DRIZZLE_DATABASE_URL": "mysql://24YeJNoJpCzCJhm.root:ZYFWrgo125L98u9gSZds@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/NteP5R75gry86mQCEyPh6j?ssl={\"rejectUnauthorized\":true}"
   },
   "experiments": [
     "no_db_push"
   ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663668909283/NteP5R75gry86mQCEyPh6j",
-    "access_key_id": "ASIAZV3A2ECZIYVMCYXL",
-    "secret_access_key": "+eRZVESSDejhXqy2CqMUZ/c98UR8HoMcOZmN4oVd",
-    "session_token": "IQoJb3JpZ2luX2VjEOD//////////wEaCXVzLWVhc3QtMSJHMEUCIQDSoGQdZr1TdH/BoCHgKBKCrqXWQazQrB0FITPXzbX8VAIgWFvLz8LkEZ5C9xputgftdwfE3Goca1pbQvB7j/F2lJIq/wMIqP//////////ARAEGgw2NjUzODYwOTg4NjYiDNqDVPl0oXlwCBkMgirTA7ZKnfEMCXy0PO1TU4rUldP5orNfuvjz0dkeeQwrU898mahul90YupkODA+3uoWybpOZ8l8Bv9XncpFcqQGEQ2FwWE74rLu6l7YRKcZbxSQAjhPA/ncqc4xflnbHcevkeadbicPDxWbih0LFtkjgNI0mb9DeXiJNfISY+QQiQXWWvTf343AkufJJTlXSHlrhjZHoIHoOoYNFZHAoyBN44XqHOy9/T5Ib9S1l8d+Wm1fg97CVX+NE5hx666nTDYM3UFjWuxmspfRIAibOkk8BH9gHhRkyMEegBCTQsgJoztPDQTD8+WcshQu1ttF0MfdxCl73fn+JxbtJGCPwmro06asm6vcycTnbvxQFkzsNoVhc1phM81jRAUwF1YiIlVpvIYVPaun92KdRZUzv6/aJuNx5jIM9kbP9GFSi7ax5ZkIpNMw8jTW531yebCeyTup9X8Wqf/FneTEWyjaUxti2C6c/qLZLLXT+OPJN0W1E8KbJmqmkTmoJZ0q5IeRwUOXRVdVp8ILqZLXo2AEbaRzedlctsV1L6+4bLgGbuNSerVyGJuSf6cW/S5wQa4sycjw/fGAExpQ0NSIXrPDIv8xGuOTXqQLJOk4hRRz8doMy5W08UGg2MJOyp9AGOp0BM2oZ9XAEV5gshAv2VYuq2pYUw5M1PJ6GXhYy7nDISwIMfFhKuv7gQ3pekEXTMFhz9ynvTGzBGLrWN5EJPInlhdamBEzGs/H7VALDTMZkbTGSaBrcrjctLGNd5Buev+jvB8ERYKiKMw3Cmt+MrkbeKBEAues+rdzkY9wSWlbJx4BmVRMGXNI+asN2Pg89tUW2WzXEhXc7SxgL1//hrA==",
-    "expiration": "2026-05-18T03:04:51.000Z"
+    "access_key_id": "ASIAZV3A2ECZHMBO6BUC",
+    "secret_access_key": "VdYsiqALohHJ+bvpa207Wxfq5y9RWmR3Xkk2w7w3",
+    "session_token": "IQoJb3JpZ2luX2VjEOD//////////wEaCXVzLWVhc3QtMSJHMEUCIQCLgggXW7wstxv+yaOONfhPs1+lrS2R84njknhFG4GsrwIgUUMnrXu04gbZ5yhONDZSOXf/ONUIB4g/vMNmorfF4Toq/wMIqP//////////ARAEGgw2NjUzODYwOTg4NjYiDEHLZtKBjP/VwuFHyirTA0OYexfVbIIxhQLXGfAf2lW9nMoXvoOY/4PTE2+2ZYD5JKErgfZ0g2uBYpAE6+o9qQ/e2o88kaYXerpXC6HopqlfUfNtIhkgDUuoLbqjs4iBtgJ0SG4GLpqXkzQBrhry1dVjKyt1pmUcR1T/KR9BTfRk3Zco6mppGO2Nd06JD2MQwAvzedBsCwpLYl0xJpNqmPpeXpGRw98BMJKIVO9qumZYtTWt2qRoceqwym4QYe8GpjqtRQBPjQDTFxvR13TK4ghvEzbNou6+OvxYXWzVE1QCnsKVBj5pdxJpekDC06bC17cd/0GrxeB6cIKW4kTfVPRLWLHhe3Yq8HFO1PzGtD0MvYliJn8sOAi6KRDqT5pseSvq7oXqzxbqVDealJsalm2dldTASB++Qu88uI3mCJ5Ssog9iBfaE9pzxtR3KoTJ8VI4RthtRfSPkq18Ij0W6UDmjQoDKVHOeAOxVGv9NspOtvggX2pEmZ7ucutKEQFye3w9bZ5PQp76K5T4grBvgc083TmsD0ftcO2h38KN2xLQACGmLdc8F+T0oxrD0oadGQWReFwveiYNY/ITodgj4UDje2q2TduQDW2b4p3QEFms993EPteTRAdMZfIVK5XzKD7kMLC2p9AGOp0BATFmBgHbzb211p77v3katMVuAtseApqUAePpjHXKG9N6y8Omm4NZevaaPBA/k0AD5WSSsygzqmszRS7MxCbDY72S5FpCDoYWYeVv3z6GO8BDaxE5+CbQiM5jxhZBEa3k2tWC+LjkMMxJjzM1kj4gr6astkMlMNWLtsj4pH9xgZ1PBdt1xlwXQkvpWRXvMCsquvEPnedaM/wM/NZxug==",
+    "expiration": "2026-05-18T03:13:52.000Z"
   },
   "name": "descanso-shopify-manager",
   "path": "/home/ubuntu/descanso-shopify-manager",
@@ -29,10 +30,13 @@
     "OAUTH_SERVER_URL": "https://api.manus.im",
     "OWNER_NAME": "Bill",
     "OWNER_OPEN_ID": "9i6AbJXBZ9Uzu37j5k5Fzy",
+    "SHOPIFY_CLIENT_ID": "d0727c3b9de273008adfe1c1a733cf93",
+    "SHOPIFY_CLIENT_SECRET": "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",
+    "SHOPIFY_STORE_DOMAIN": "descanso-rapido-castilla.myshopify.com",
     "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
     "VITE_ANALYTICS_WEBSITE_ID": "17c5f8b2-3259-47da-bd26-8f316ca3a19f",
     "VITE_APP_ID": "NteP5R75gry86mQCEyPh6j",
-    "VITE_APP_LOGO": "",
+    "VITE_APP_LOGO": "https://files.manuscdn.com/user_upload_by_module/web_dev_logo/310519663668909283/sfSbCxDkAXJhvwFw.png",
     "VITE_APP_TITLE": "Descanso Rapido Castilla - Store Manager",
     "VITE_FRONTEND_FORGE_API_KEY": "F89dKDkn8DbYUyZPwFpSzs",
     "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
