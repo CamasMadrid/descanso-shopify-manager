@@ -316,19 +316,19 @@ export default function Home() {
                               className="w-full block"
                             >
                               <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
-                                <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
+                                <MessageCircle className="w-3.5 h-3.5" /> Probar o pagar contrarembolso
                               </Button>
                             </a>
                           </TooltipTrigger>
                           <TooltipContent side="top" className="max-w-[220px] text-center text-xs leading-relaxed p-3">
-                            <p className="font-semibold mb-1">🚐 Showroom Móvil</p>
-                            <p>Nos desplazamos a tu casa con muestras para que veas y toques el producto antes de decidir. Sin compromiso. Si no tenemos el modelo ese día, entrega en 48h.</p>
+                            <p className="font-semibold mb-1">🚐 Probar o pagar contrarembolso</p>
+                            <p>Ven a probar en casa con nuestro showroom móvil, o recibe el producto y paga al repartidor — en efectivo, Bizum o tarjeta. Sin riesgo, sin compromiso previo.</p>
                           </TooltipContent>
                         </Tooltip>
                       </TooltipProvider>
                       <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                         <Truck className="w-3 h-3 shrink-0" />
-                        Sujeto a disponibilidad ese día — si no, 48h garantizadas
+                        Prueba en casa o paga al recibir — sin tarjeta por adelantado
                       </p>
                     </div>
                   </div>
