@@ -117,15 +117,30 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<"all" | "canapes" | "colchones" | "bases">("all");
   const [pillowModal, setPillowModal] = useState<{ open: boolean; productId: string; productName: string }>({ open: false, productId: "", productName: "" });
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
+  const [pillowError, setPillowError] = useState(false);
 
   const filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
 
   const handleBuyNow = (productId: string, productName: string) => {
     setPillowChoice(null);
+    setPillowError(false);
     setPillowModal({ open: true, productId, productName });
   };
 
+  const handleContinueToCheckout = () => {
+    if (!pillowChoice) {
+      setPillowError(true);
+      return;
+    }
+    const note = pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
+    const url = `https://descanso-rapido-castilla.myshopify.com/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+    setPillowModal({ open: false, productId: "", productName: "" });
+  };
+
   const handlePillowSelect = (choice: "double" | "two-singles") => {
+    setPillowChoice(choice);
+    setPillowError(false);
     const note = choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
     const url = `https://descanso-rapido-castilla.myshopify.com/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
     window.open(url, "_blank", "noopener,noreferrer");
@@ -146,11 +161,14 @@ export default function Home() {
               Por comprar <strong>{pillowModal.productName}</strong> online, te regalamos una almohada. ¿Cuál prefieres?
             </DialogDescription>
           </DialogHeader>
-          <p className="text-xs text-muted-foreground -mt-1 mb-1">Elige una opción para continuar al pago:</p>
           <div className="space-y-3 my-2">
             <button
               onClick={() => handlePillowSelect("double")}
-              className="w-full rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 p-4 text-left transition-all active:scale-[0.98]"
+              className={`w-full rounded-xl border-2 p-4 text-left transition-all active:scale-[0.98] ${
+                pillowChoice === "double"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary hover:bg-primary/5"
+              }`}
             >
               <div className="font-semibold text-sm text-foreground flex items-center justify-between">
                 🛏️ Almohada doble española
@@ -160,7 +178,11 @@ export default function Home() {
             </button>
             <button
               onClick={() => handlePillowSelect("two-singles")}
-              className="w-full rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 p-4 text-left transition-all active:scale-[0.98]"
+              className={`w-full rounded-xl border-2 p-4 text-left transition-all active:scale-[0.98] ${
+                pillowChoice === "two-singles"
+                  ? "border-primary bg-primary/5"
+                  : "border-border hover:border-primary hover:bg-primary/5"
+              }`}
             >
               <div className="font-semibold text-sm text-foreground flex items-center justify-between">
                 🛏️🛏️ Dos almohadas individuales
@@ -169,6 +191,18 @@ export default function Home() {
               <div className="text-xs text-muted-foreground mt-0.5">Dos almohadas individuales (70×40 cm aprox. cada una)</div>
             </button>
           </div>
+          {pillowError && (
+            <p className="text-xs text-center text-red-500 font-medium animate-in fade-in slide-in-from-top-1 duration-200">
+              👆 Por favor, elige tu almohada de regalo para continuar
+            </p>
+          )}
+          <Button
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+            onClick={handleContinueToCheckout}
+          >
+            <CreditCard className="w-4 h-4" />
+            Continuar al pago →
+          </Button>
           <p className="text-xs text-center text-muted-foreground">
             Entrega garantizada en 48h · 14 días de devolución gratuita
           </p>
