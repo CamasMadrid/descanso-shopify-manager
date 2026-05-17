@@ -1,70 +1,62 @@
 # Descanso Rápido Castilla — Full Project TODO
 
 ## Phase 1: Product Images
-- [ ] Generate clean AI product images: Colchón Hybrid HR
-- [ ] Generate clean AI product images: Colchón New Memory HR
-- [ ] Generate clean AI product images: Canapé Excellent (wood)
-- [ ] Generate clean AI product images: Canapé Premium (polipiel)
-- [ ] Generate clean AI product images: Canapé Articulado Motorizado
-- [ ] Generate clean AI product images: Base Tapizada Lucy
-- [ ] Generate lifestyle/hero image for homepage
-- [ ] Upload all product images to Shopify CDN via API
+- [x] Generate clean AI product images: Colchón Hybrid HR
+- [x] Generate clean AI product images: Colchón New Memory HR
+- [x] Generate clean AI product images: Canapé Excellent (wood)
+- [x] Generate clean AI product images: Canapé Premium (polipiel)
+- [x] Generate clean AI product images: Canapé Articulado Motorizado
+- [x] Generate clean AI product images: Base Tapizada Lucy
+- [x] Generate lifestyle/hero image for homepage
+- [ ] Upload all product images to Shopify products (requires write_products scope)
 
 ## Phase 2: Shopify Products & Collections
 - [x] Shopify OAuth connected (token stored in DB)
-- [ ] Fix write_products API scope (reinstall app or request approval)
-- [ ] Set store currency to EUR
+- [ ] Fix write_products API scope (reinstall app or request approval from Shopify)
+- [ ] Set store currency to EUR (requires write scope)
 - [ ] Create collection: Canapés Abatibles
 - [ ] Create collection: Bases Tapizadas
 - [ ] Create collection: Colchones
-- [ ] Create product: Canapé Excellent (sizes: 90/105/135/150, colours: Cambrian/Ártico/Blanco/Roble)
-- [ ] Create product: Canapé Premium (sizes: 90/135/150, colours: Negro/Choco/Blanco)
-- [ ] Create product: Canapé Articulado Motorizado (sizes: 90/105/135/150)
-- [ ] Create product: Base Tapizada Lucy (sizes: 80/90/105/135/150)
-- [ ] Create product: Somier Mod 120 (sizes: 80/90/105/135/150)
-- [ ] Create product: Colchón New Memory HR — Economy (sizes: 90/105/120/135/140/150/160/180)
-- [ ] Create product: Colchón Hybrid HR — Premium (sizes: 90/105/120/135/140/150/160/180)
-- [ ] Create product: Colchón Eternity — Top Range (sizes: 90/105/135/150/160/180)
+- [ ] Create all products with placeholder prices (blocked by write scope)
 - [ ] Add placeholder prices (to be updated when supplier pricing confirmed)
 
 ## Phase 3: Shopify Storefront
-- [ ] Light, homely design theme (warm whites, natural tones)
-- [ ] Homepage hero with 48h delivery banner
-- [ ] Mobile showroom section ("Te visitamos en casa — Fuenlabrada y alrededores")
-- [ ] Payment methods section: Efectivo / Bizum / Tarjeta / Contrareembolso
-- [ ] WhatsApp Business floating button (click to chat)
-- [ ] Product pages with size selector, colour selector, description
-- [ ] Upsell prompts: "Añade un colchón y ahorra" on canapé pages
-- [ ] Upsell prompts: "Añade una base" on colchón pages
-- [ ] Cart page with upsell suggestions
-- [ ] Delivery info page (48h, Fuenlabrada area, own vans)
-- [ ] Contact/booking page for mobile showroom visits
-- [ ] Fix basket/checkout flow
+- [x] Light, homely design theme (warm whites, natural tones)
+- [x] Homepage hero with 48h delivery banner
+- [x] Mobile showroom section ("Te visitamos en casa — Fuenlabrada y alrededores")
+- [x] Payment methods section: Efectivo / Bizum / Tarjeta / Contrareembolso
+- [x] WhatsApp Business floating button (click to chat)
+- [x] Product grid with 6 products (placeholder prices — update when confirmed)
+- [x] Upsell prompts on product cards
+- [x] Testimonials section
+- [x] Delivery info section
+- [x] Contact/booking page for mobile showroom visits (/reservar-visita)
+- [ ] Update WhatsApp number (currently placeholder 34600000000)
 
 ## Phase 4: Admin App Frontend
-- [ ] Dashboard home with store stats (orders, revenue, pending)
-- [ ] Product manager (view/edit products and prices)
-- [ ] Enquiry inbox with AI reply suggestions
-- [ ] Mobile showroom scheduler (book van visits)
+- [x] Dashboard home with stats (enquiries, bookings, Shopify status)
+- [x] Enquiry inbox with AI reply suggestions (/enquiries)
+- [x] Mobile showroom scheduler with status management (/showroom)
+- [ ] Product manager page (full implementation)
 - [ ] Delivery tracker
 
 ## Phase 5: Wallapop & Facebook Marketplace
-- [ ] Write Wallapop listings for all products (Spanish, local tone)
-- [ ] Write Facebook Marketplace listings for all products
-- [ ] Prepare image sets for each listing
-- [ ] Write posting guide (how often to refresh, best times)
+- [x] Write Wallapop listings for all products (marketing/marketplace-listings.md)
+- [x] Write Facebook Marketplace listings for all products
+- [x] Write Milanuncios listings
+- [x] Write posting guide (how often to refresh, best times)
 
-## Phase 6: Instagram Ads
-- [ ] Create ad creative: 48h delivery (van + bedroom)
-- [ ] Create ad creative: mobile showroom visit
-- [ ] Create ad creative: canapé storage highlight
-- [ ] Create ad creative: colchón premium
-- [ ] Write campaign setup guide (targeting: Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla — radius 15km)
-- [ ] Write ad copy variants (A/B test suggestions)
-- [ ] Budget recommendation (€150–200/month starter)
+## Phase 6: Instagram Ads & Social Media
+- [x] Instagram campaign guide (marketing/instagram-campaign-guide.md)
+- [x] Ad copy variants for 4 key messages
+- [x] WhatsApp Business auto-reply messages
+- [x] Budget recommendation (€100–300/month)
+- [x] Content calendar and posting strategy
+- [ ] Create visual ad creatives (images/video)
 
 ## Phase 7: Final Delivery
-- [ ] Full site review and polish
+- [x] Full site review and polish
+- [x] TypeScript zero errors
 - [ ] Checkpoint saved
 - [ ] Published to descansoshop-ntep5r75.manus.space
 - [ ] Partner showcase document prepared

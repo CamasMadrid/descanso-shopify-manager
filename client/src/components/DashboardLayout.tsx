@@ -52,7 +52,7 @@ const navGroups = [
   {
     label: "Principal",
     items: [
-      { icon: LayoutDashboard, label: "Panel General", path: "/" },
+      { icon: LayoutDashboard, label: "Panel General", path: "/dashboard" },
       { icon: ShoppingBag, label: "Conectar Shopify", path: "/shopify-connect" },
     ],
   },

@@ -8,23 +8,70 @@ import Home from "./pages/Home";
 import ReservarVisita from "./pages/ReservarVisita";
 import { lazy, Suspense } from "react";
 
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center text-muted-foreground text-sm">
+    Cargando...
+  </div>
+);
+
 // Admin pages — lazy loaded
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Enquiries = lazy(() => import("./pages/Enquiries"));
+const ShowroomAdmin = lazy(() => import("./pages/ShowroomAdmin"));
+
+function AdminRoute({ component: Component }: { component: React.ComponentType }) {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <Component />
+    </Suspense>
+  );
+}
 
 function Router() {
   return (
     <Switch>
-      {/* Public storefront */}
+      {/* ── Public storefront ── */}
       <Route path="/" component={Home} />
       <Route path="/reservar-visita" component={ReservarVisita} />
 
-      {/* Admin */}
+      {/* ── Admin panel ── */}
+      {/* The DashboardLayout nav uses paths without /admin prefix */}
+      <Route path="/dashboard">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/enquiries">
+        {() => <AdminRoute component={Enquiries} />}
+      </Route>
+      <Route path="/showroom">
+        {() => <AdminRoute component={ShowroomAdmin} />}
+      </Route>
+
+      {/* Legacy /admin route → redirect to /dashboard */}
       <Route path="/admin">
-        {() => (
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-muted-foreground">Cargando...</div>}>
-            <Dashboard />
-          </Suspense>
-        )}
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+
+      {/* Placeholder admin routes (coming soon) */}
+      <Route path="/products">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/collections">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/content">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/shopify-connect">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/upsell">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/delivery">
+        {() => <AdminRoute component={Dashboard} />}
+      </Route>
+      <Route path="/channels">
+        {() => <AdminRoute component={Dashboard} />}
       </Route>
 
       {/* 404 */}

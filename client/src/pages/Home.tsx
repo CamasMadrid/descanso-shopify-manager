@@ -19,7 +19,7 @@ const COLCHON_HYBRID = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283
 const COLCHON_MEMORY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
 const BASE_LUCY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/base-lucy-clean-jXtnAsBSxs6PHZnBuQTXMB.webp";
 
-const WHATSAPP_NUMBER = "34600000000"; // placeholder — update with real number
+const WHATSAPP_NUMBER = "34711204284";
 
 const products = [
   {
