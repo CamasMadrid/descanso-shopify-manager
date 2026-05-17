@@ -5,31 +5,39 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import ReservarVisita from "./pages/ReservarVisita";
+import { lazy, Suspense } from "react";
+
+// Admin pages — lazy loaded
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+      {/* Public storefront */}
+      <Route path="/" component={Home} />
+      <Route path="/reservar-visita" component={ReservarVisita} />
+
+      {/* Admin */}
+      <Route path="/admin">
+        {() => (
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-muted-foreground">Cargando...</div>}>
+            <Dashboard />
+          </Suspense>
+        )}
+      </Route>
+
+      {/* 404 */}
+      <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
+      <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster />
           <Router />

@@ -22,8 +22,8 @@ export const showroomRouter = router({
   create: publicProcedure
     .input(z.object({
       name: z.string().min(1),
-      email: z.string().email(),
-      phone: z.string().optional(),
+      email: z.string().email().optional(),
+      phone: z.string().min(1),
       district: z.string().min(1),
       preferredDate: z.string().min(1),
       preferredTime: z.string().min(1),
@@ -32,7 +32,10 @@ export const showroomRouter = router({
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new Error("Database unavailable");
-      const [result] = await db.insert(showroomBookings).values(input);
+      const [result] = await db.insert(showroomBookings).values({
+        ...input,
+        email: input.email ?? "",
+      });
       await notifyOwner({
         title: `Nueva solicitud de tienda móvil — ${input.district}`,
         content: `Cliente: ${input.name}\nEmail: ${input.email}\nTeléfono: ${input.phone || "No indicado"}\nZona: ${input.district}\nFecha preferida: ${input.preferredDate} a las ${input.preferredTime}\nNotas: ${input.notes || "Ninguna"}`,

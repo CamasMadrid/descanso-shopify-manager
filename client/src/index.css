@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -40,111 +41,102 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --color-gold: var(--gold);
-  --color-gold-light: var(--gold-light);
+  --color-warm: var(--warm);
+  --color-warm-light: var(--warm-light);
+  --color-teal: var(--teal);
+  --font-serif: var(--font-serif-family);
+  --font-sans: var(--font-sans-family);
 }
 
-/* Premium beds brand: deep navy + warm gold */
+/* Warm, homely light theme — cream whites, warm terracotta accent, soft navy */
 :root {
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  /* Deep navy primary */
-  --primary: oklch(0.28 0.06 255);
-  --primary-foreground: oklch(0.98 0.01 85);
+  --font-serif-family: 'Playfair Display', Georgia, serif;
+  --font-sans-family: 'Inter', system-ui, sans-serif;
 
-  /* Warm gold accent */
-  --gold: oklch(0.72 0.12 75);
-  --gold-light: oklch(0.88 0.08 80);
+  /* Warm cream background */
+  --background: oklch(0.985 0.008 80);
+  --foreground: oklch(0.18 0.015 40);
 
-  --background: oklch(0.99 0.002 85);
-  --foreground: oklch(0.18 0.02 255);
+  /* Primary: warm deep navy-teal */
+  --primary: oklch(0.30 0.07 220);
+  --primary-foreground: oklch(0.98 0.005 80);
+
+  /* Warm terracotta accent */
+  --warm: oklch(0.62 0.12 45);
+  --warm-light: oklch(0.92 0.04 70);
+  --teal: oklch(0.55 0.10 195);
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 255);
+  --card-foreground: oklch(0.18 0.015 40);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 255);
+  --popover-foreground: oklch(0.18 0.015 40);
 
-  --secondary: oklch(0.96 0.005 255);
-  --secondary-foreground: oklch(0.28 0.06 255);
+  --secondary: oklch(0.95 0.01 80);
+  --secondary-foreground: oklch(0.25 0.04 220);
 
-  --muted: oklch(0.96 0.004 255);
-  --muted-foreground: oklch(0.52 0.02 255);
+  --muted: oklch(0.94 0.008 80);
+  --muted-foreground: oklch(0.52 0.02 60);
 
-  --accent: oklch(0.94 0.01 75);
-  --accent-foreground: oklch(0.22 0.05 255);
+  --accent: oklch(0.92 0.04 70);
+  --accent-foreground: oklch(0.22 0.04 40);
 
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.90 0.006 255);
-  --input: oklch(0.90 0.006 255);
-  --ring: oklch(0.28 0.06 255);
+  --border: oklch(0.88 0.01 80);
+  --input: oklch(0.88 0.01 80);
+  --ring: oklch(0.30 0.07 220);
 
-  /* Chart colors — navy scale */
-  --chart-1: oklch(0.28 0.06 255);
-  --chart-2: oklch(0.42 0.08 255);
-  --chart-3: oklch(0.55 0.09 255);
-  --chart-4: oklch(0.72 0.12 75);
-  --chart-5: oklch(0.88 0.08 80);
+  --chart-1: oklch(0.30 0.07 220);
+  --chart-2: oklch(0.55 0.10 195);
+  --chart-3: oklch(0.62 0.12 45);
+  --chart-4: oklch(0.72 0.10 75);
+  --chart-5: oklch(0.85 0.06 80);
 
-  /* Sidebar — slightly off-white with navy accents */
-  --sidebar: oklch(0.975 0.004 255);
-  --sidebar-foreground: oklch(0.18 0.02 255);
-  --sidebar-primary: oklch(0.28 0.06 255);
-  --sidebar-primary-foreground: oklch(0.98 0.01 85);
-  --sidebar-accent: oklch(0.92 0.01 255);
-  --sidebar-accent-foreground: oklch(0.22 0.05 255);
-  --sidebar-border: oklch(0.88 0.008 255);
-  --sidebar-ring: oklch(0.28 0.06 255);
+  --sidebar: oklch(0.975 0.006 80);
+  --sidebar-foreground: oklch(0.18 0.015 40);
+  --sidebar-primary: oklch(0.30 0.07 220);
+  --sidebar-primary-foreground: oklch(0.98 0.005 80);
+  --sidebar-accent: oklch(0.92 0.01 80);
+  --sidebar-accent-foreground: oklch(0.22 0.04 40);
+  --sidebar-border: oklch(0.88 0.01 80);
+  --sidebar-ring: oklch(0.30 0.07 220);
 }
 
 .dark {
-  --primary: oklch(0.65 0.1 255);
-  --primary-foreground: oklch(0.12 0.02 255);
-
-  --gold: oklch(0.78 0.12 75);
-  --gold-light: oklch(0.88 0.08 80);
-
-  --background: oklch(0.12 0.015 255);
-  --foreground: oklch(0.92 0.005 85);
-
-  --card: oklch(0.16 0.018 255);
-  --card-foreground: oklch(0.92 0.005 85);
-
-  --popover: oklch(0.16 0.018 255);
-  --popover-foreground: oklch(0.92 0.005 85);
-
-  --secondary: oklch(0.22 0.02 255);
-  --secondary-foreground: oklch(0.78 0.01 85);
-
-  --muted: oklch(0.22 0.02 255);
-  --muted-foreground: oklch(0.62 0.015 255);
-
-  --accent: oklch(0.25 0.03 255);
-  --accent-foreground: oklch(0.92 0.005 85);
-
+  --background: oklch(0.14 0.015 220);
+  --foreground: oklch(0.92 0.006 80);
+  --primary: oklch(0.65 0.10 195);
+  --primary-foreground: oklch(0.12 0.02 220);
+  --warm: oklch(0.72 0.12 50);
+  --warm-light: oklch(0.28 0.04 50);
+  --teal: oklch(0.65 0.10 195);
+  --card: oklch(0.18 0.018 220);
+  --card-foreground: oklch(0.92 0.006 80);
+  --popover: oklch(0.18 0.018 220);
+  --popover-foreground: oklch(0.92 0.006 80);
+  --secondary: oklch(0.22 0.02 220);
+  --secondary-foreground: oklch(0.78 0.01 80);
+  --muted: oklch(0.22 0.02 220);
+  --muted-foreground: oklch(0.62 0.015 220);
+  --accent: oklch(0.25 0.03 220);
+  --accent-foreground: oklch(0.92 0.006 80);
   --destructive: oklch(0.65 0.2 22);
   --destructive-foreground: oklch(0.98 0 0);
-
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 14%);
-  --ring: oklch(0.65 0.1 255);
-
-  --chart-1: oklch(0.65 0.1 255);
-  --chart-2: oklch(0.52 0.09 255);
-  --chart-3: oklch(0.42 0.08 255);
-  --chart-4: oklch(0.78 0.12 75);
-  --chart-5: oklch(0.88 0.08 80);
-
-  --sidebar: oklch(0.14 0.016 255);
-  --sidebar-foreground: oklch(0.92 0.005 85);
-  --sidebar-primary: oklch(0.65 0.1 255);
-  --sidebar-primary-foreground: oklch(0.12 0.02 255);
-  --sidebar-accent: oklch(0.22 0.02 255);
-  --sidebar-accent-foreground: oklch(0.92 0.005 85);
+  --ring: oklch(0.65 0.10 195);
+  --sidebar: oklch(0.16 0.016 220);
+  --sidebar-foreground: oklch(0.92 0.006 80);
+  --sidebar-primary: oklch(0.65 0.10 195);
+  --sidebar-primary-foreground: oklch(0.12 0.02 220);
+  --sidebar-accent: oklch(0.22 0.02 220);
+  --sidebar-accent-foreground: oklch(0.92 0.006 80);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.65 0.1 255);
+  --sidebar-ring: oklch(0.65 0.10 195);
 }
 
 @layer base {
@@ -153,7 +145,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans-family);
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-serif-family);
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -197,9 +193,40 @@
     }
   }
 
-  /* Premium button active state */
   button:active:not(:disabled) {
-    transform: scale(0.98);
+    transform: scale(0.97);
     transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  /* Delivery badge */
+  .delivery-badge {
+    background: oklch(0.30 0.07 220);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+  }
+
+  /* WhatsApp floating button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #25D366;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 200ms;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
   }
 }
