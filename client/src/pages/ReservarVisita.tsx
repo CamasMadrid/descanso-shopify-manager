@@ -73,7 +73,7 @@ export default function ReservarVisita() {
                 <ArrowLeft className="w-4 h-4" /> Volver al inicio
               </Button>
             </Link>
-            <a href="https://wa.me/34600000000?text=Hola,%20acabo%20de%20solicitar%20una%20visita%20a%20domicilio" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/34711204284?text=Hola,%20acabo%20de%20solicitar%20una%20visita%20a%20domicilio" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#25D366] hover:bg-[#1ebe5d] text-white gap-2">
                 <MessageCircle className="w-4 h-4" /> Confirmar por WhatsApp
               </Button>

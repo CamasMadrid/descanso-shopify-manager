@@ -13,7 +13,7 @@
 ## Phase 2: Shopify Products & Collections
 - [x] Shopify OAuth connected (token stored in DB)
 - [ ] Fix write_products API scope (reinstall app or request approval from Shopify)
-- [ ] Set store currency to EUR (requires write scope)
+- [ ] Set store currency to EUR — MANUAL STEP REQUIRED: Go to Shopify Admin > Settings > General > Store currency > Change to EUR
 - [ ] Create collection: Canapés Abatibles
 - [ ] Create collection: Bases Tapizadas
 - [ ] Create collection: Colchones
@@ -31,7 +31,7 @@
 - [x] Testimonials section
 - [x] Delivery info section
 - [x] Contact/booking page for mobile showroom visits (/reservar-visita)
-- [ ] Update WhatsApp number (currently placeholder 34600000000)
+- [x] Update WhatsApp number (set to 34711204284 across all pages including ReservarVisita)
 
 ## Phase 4: Admin App Frontend
 - [x] Dashboard home with stats (enquiries, bookings, Shopify status)
@@ -57,7 +57,7 @@
 ## Phase 7: Final Delivery
 - [x] Full site review and polish
 - [x] TypeScript zero errors
-- [ ] Checkpoint saved
-- [ ] Published to descansoshop-ntep5r75.manus.space
+- [x] Checkpoint saved
+- [x] Published to descansoshop-ntep5r75.manus.space
 - [ ] Partner showcase document prepared
 - [ ] Handover notes: what to update when prices confirmed

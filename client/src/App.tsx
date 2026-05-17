@@ -6,6 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import ReservarVisita from "./pages/ReservarVisita";
+import ProductDetail from "./pages/ProductDetail";
 import { lazy, Suspense } from "react";
 
 const LoadingFallback = () => (
@@ -33,6 +34,7 @@ function Router() {
       {/* ── Public storefront ── */}
       <Route path="/" component={Home} />
       <Route path="/reservar-visita" component={ReservarVisita} />
+      <Route path="/producto/:id" component={ProductDetail} />
 
       {/* ── Admin panel ── */}
       {/* The DashboardLayout nav uses paths without /admin prefix */}

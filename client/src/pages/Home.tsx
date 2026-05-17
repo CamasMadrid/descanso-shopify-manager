@@ -364,12 +364,17 @@ export default function Home() {
                   </span>
                 </div>
                 <CardContent className="p-5">
-                  <div className="mb-1">
-                    <h3 className="font-serif font-semibold text-lg text-foreground">{product.name}</h3>
-                    <p className="text-sm text-muted-foreground">{product.subtitle}</p>
+                  <div className="mb-1 flex items-start justify-between gap-2">
+                    <div>
+                      <h3 className="font-serif font-semibold text-lg text-foreground">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground">{product.subtitle}</p>
+                    </div>
+                    <Link href={`/producto/${product.id}`} className="shrink-0">
+                      <button className="text-xs text-primary hover:underline font-medium whitespace-nowrap">Ver detalles →</button>
+                    </Link>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 mb-3 leading-relaxed">{product.description}</p>
-                  <div className="flex flex-wrap gap-1 mb-4">
+                  <div className="flex flex-wrap gap-1 mb-1">
                     {product.sizes.slice(0, 4).map(s => (
                       <span key={s} className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">{s}</span>
                     ))}
@@ -377,6 +382,7 @@ export default function Home() {
                       <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">+{product.sizes.length - 4}</span>
                     )}
                   </div>
+                  <p className="text-xs text-muted-foreground mb-3">Elige talla en la página del producto</p>
                   <div className="mb-3">
                     <span className="font-semibold text-primary text-lg">{product.price}</span>
                   </div>
