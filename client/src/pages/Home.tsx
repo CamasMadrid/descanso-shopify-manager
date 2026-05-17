@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Truck, Clock, MapPin, Phone, Star, ChevronRight,
   Shield, CreditCard, Smartphone, Banknote, Package,
@@ -306,15 +307,25 @@ export default function Home() {
                       </p>
                     </div>
                     <div>
-                      <a
-                        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, me interesa el ${product.name}. ¿Podéis visitarme o puedo reservar sin pagar?`)}`}
-                        target="_blank" rel="noopener noreferrer"
-                        className="w-full"
-                      >
-                        <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
-                          <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
-                        </Button>
-                      </a>
+                      <TooltipProvider delayDuration={200}>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <a
+                              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, me interesa el ${product.name}. ¿Podéis visitarme o puedo reservar sin pagar?`)}`}
+                              target="_blank" rel="noopener noreferrer"
+                              className="w-full block"
+                            >
+                              <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
+                                <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
+                              </Button>
+                            </a>
+                          </TooltipTrigger>
+                          <TooltipContent side="top" className="max-w-[220px] text-center text-xs leading-relaxed p-3">
+                            <p className="font-semibold mb-1">🚐 Showroom Móvil</p>
+                            <p>Nos desplazamos a tu casa con muestras para que veas y toques el producto antes de decidir. Sin compromiso. Si no tenemos el modelo ese día, entrega en 48h.</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                       <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
                         <Truck className="w-3 h-3 shrink-0" />
                         Sujeto a disponibilidad ese día — si no, 48h garantizadas
