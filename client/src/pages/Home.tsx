@@ -125,9 +125,8 @@ export default function Home() {
     setPillowModal({ open: true, productId, productName });
   };
 
-  const handleContinueToCheckout = () => {
-    if (!pillowChoice) return;
-    const note = pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
+  const handlePillowSelect = (choice: "double" | "two-singles") => {
+    const note = choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
     const url = `https://descanso-rapido-castilla.myshopify.com/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal({ open: false, productId: "", productName: "" });
@@ -147,38 +146,29 @@ export default function Home() {
               Por comprar <strong>{pillowModal.productName}</strong> online, te regalamos una almohada. ¿Cuál prefieres?
             </DialogDescription>
           </DialogHeader>
+          <p className="text-xs text-muted-foreground -mt-1 mb-1">Elige una opción para continuar al pago:</p>
           <div className="space-y-3 my-2">
             <button
-              onClick={() => setPillowChoice("double")}
-              className={`w-full rounded-xl border-2 p-4 text-left transition-all ${
-                pillowChoice === "double"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/40"
-              }`}
+              onClick={() => handlePillowSelect("double")}
+              className="w-full rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 p-4 text-left transition-all active:scale-[0.98]"
             >
-              <div className="font-semibold text-sm text-foreground">🛏️ Almohada doble española</div>
+              <div className="font-semibold text-sm text-foreground flex items-center justify-between">
+                🛏️ Almohada doble española
+                <span className="text-xs text-primary font-medium">Elegir →</span>
+              </div>
               <div className="text-xs text-muted-foreground mt-0.5">Una almohada grande estilo matrimonial (150×45 cm aprox.)</div>
             </button>
             <button
-              onClick={() => setPillowChoice("two-singles")}
-              className={`w-full rounded-xl border-2 p-4 text-left transition-all ${
-                pillowChoice === "two-singles"
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/40"
-              }`}
+              onClick={() => handlePillowSelect("two-singles")}
+              className="w-full rounded-xl border-2 border-border hover:border-primary hover:bg-primary/5 p-4 text-left transition-all active:scale-[0.98]"
             >
-              <div className="font-semibold text-sm text-foreground">🛏️🛏️ Dos almohadas individuales</div>
+              <div className="font-semibold text-sm text-foreground flex items-center justify-between">
+                🛏️🛏️ Dos almohadas individuales
+                <span className="text-xs text-primary font-medium">Elegir →</span>
+              </div>
               <div className="text-xs text-muted-foreground mt-0.5">Dos almohadas individuales (70×40 cm aprox. cada una)</div>
             </button>
           </div>
-          <Button
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-2 mt-1"
-            disabled={!pillowChoice}
-            onClick={handleContinueToCheckout}
-          >
-            <CreditCard className="w-4 h-4" />
-            Continuar con el pedido →
-          </Button>
           <p className="text-xs text-center text-muted-foreground">
             Entrega garantizada en 48h · 14 días de devolución gratuita
           </p>
