@@ -9,6 +9,7 @@ import {
   CreditCard, Gift, ChevronRight, Package
 } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
+import { useCurrency, type Currency } from "@/contexts/CurrencyContext";
 
 const WHATSAPP_NUMBER = "34711204284";
 
@@ -27,6 +28,16 @@ interface ProductData {
   category: "canapes" | "colchones" | "bases";
   upsellIds?: string[];
 }
+
+// Base EUR prices per size for each product
+const BASE_PRICES_BY_SIZE: Record<string, number[]> = {
+  "canape-excellent": [249, 279, 309, 339],
+  "canape-premium": [329, 389, 429],
+  "canape-articulado": [499, 549, 629, 699],
+  "colchon-memory": [149, 169, 189, 209, 229, 249],
+  "colchon-hybrid": [299, 339, 379, 419, 449, 499],
+  "base-lucy": [129, 139, 159, 179, 199],
+};
 
 // Static data (images, sizes, categories) — text comes from translations
 const productMeta: Record<string, ProductData> = {
@@ -222,6 +233,7 @@ const productContent: Record<string, Record<string, {
 
 export default function ProductDetail() {
   const { lang, setLang, t } = useLang();
+  const { currency, setCurrency, formatPrice } = useCurrency();
   const { id } = useParams<{ id: string }>();
   const meta = id ? productMeta[id] : null;
   const content = id ? productContent[id]?.[lang] : null;
@@ -281,9 +293,17 @@ export default function ProductDetail() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
-  const selectedPrice = selectedSize
-    ? meta.sizes.find(s => s.label === selectedSize)?.price
-    : meta.sizes[0]?.price;
+  // Convert prices using currency context
+  const getSizePrice = (sizeIdx: number): string => {
+    const baseArr = id ? BASE_PRICES_BY_SIZE[id] : undefined;
+    const base = baseArr?.[sizeIdx];
+    if (base == null) return meta.sizes[sizeIdx]?.price ?? "";
+    const prefix = lang === "es" ? "Desde" : "From";
+    return `${prefix} ${formatPrice(base)}`;
+  };
+
+  const selectedSizeIdx = selectedSize ? meta.sizes.findIndex(s => s.label === selectedSize) : 0;
+  const selectedPrice = getSizePrice(selectedSizeIdx < 0 ? 0 : selectedSizeIdx);
 
   const categoryLabel = lang === "es"
     ? (meta.category === "canapes" ? "Canapés" : meta.category === "colchones" ? "Colchones" : "Bases")
@@ -403,6 +423,18 @@ export default function ProductDetail() {
                   EN
                 </button>
               </div>
+              {/* Currency toggle */}
+              <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
+                {(["EUR", "USD", "GBP"] as Currency[]).map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setCurrency(c)}
+                    className={`px-2 py-1 rounded-full transition-all duration-200 ${currency === c ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                  >
+                    {c === "EUR" ? "€" : c === "USD" ? "$" : "£"}
+                  </button>
+                ))}
+              </div>
               <Link href="/">
                 <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
                   <ArrowLeft className="w-4 h-4" />
@@ -476,7 +508,7 @@ export default function ProductDetail() {
                   )}
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {meta.sizes.map((size) => (
+                  {meta.sizes.map((size, idx) => (
                     <button
                       key={size.label}
                       onClick={() => setSelectedSize(size.label)}
@@ -487,7 +519,7 @@ export default function ProductDetail() {
                       }`}
                     >
                       <div className="text-sm font-semibold text-foreground">{size.label}</div>
-                      <div className="text-xs text-primary font-medium mt-0.5">{size.price}</div>
+                      <div className="text-xs text-primary font-medium mt-0.5">{getSizePrice(idx)}</div>
                     </button>
                   ))}
                 </div>

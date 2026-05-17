@@ -69,3 +69,10 @@
 - [ ] Wire ProductDetail.tsx to language context
 - [ ] Wire ReservarVisita.tsx to language context
 - [ ] Add discreet ES/EN toggle button to nav header
+
+## Phase 9: Currency Switcher (EUR / USD / GBP)
+
+- [ ] Create CurrencyContext with EUR/USD/GBP and live conversion rates
+- [ ] Add currency toggle pill to nav (Home, ProductDetail)
+- [ ] Wire all product prices through currency formatter
+- [ ] Persist currency choice across navigation (localStorage)

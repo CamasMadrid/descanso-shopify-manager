@@ -11,6 +11,7 @@ import {
   CheckCircle, ArrowRight, MessageCircle, Gift
 } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
+import { useCurrency, type Currency } from "@/contexts/CurrencyContext";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/hero-48h-delivery-nwmBqks655ZGdDDfya8dbh.webp";
 const LIFESTYLE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/lifestyle-bedroom-h6krn835mojxD4zXBGoKPq.webp";
@@ -50,8 +51,19 @@ const testimonialNames = [
   { name: "Ana M.", location: "Getafe" },
 ];
 
+// Base EUR prices for each product (used for currency conversion)
+const BASE_PRICES: Record<string, number> = {
+  "canape-excellent": 249,
+  "canape-premium": 329,
+  "canape-articulado": 499,
+  "colchon-memory": 149,
+  "colchon-hybrid": 299,
+  "base-lucy": 129,
+};
+
 export default function Home() {
   const { lang, setLang, t } = useLang();
+  const { currency, setCurrency, formatPrice } = useCurrency();
   const [activeCategory, setActiveCategory] = useState<"all" | "canapes" | "colchones" | "bases">("all");
   const [pillowModal, setPillowModal] = useState<{ open: boolean; productId: string; productName: string }>({ open: false, productId: "", productName: "" });
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
@@ -64,6 +76,7 @@ export default function Home() {
     subtitle: t.products[m.id]?.subtitle ?? "",
     description: t.products[m.id]?.description ?? "",
     badge: t.products[m.id]?.badge ?? "",
+    displayPrice: `${lang === "es" ? "Desde" : "From"} ${formatPrice(BASE_PRICES[m.id] ?? 0)}`,
   }));
 
   const filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
@@ -207,6 +220,18 @@ export default function Home() {
               >
                 EN
               </button>
+            </div>
+            {/* Currency toggle */}
+            <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
+              {(["EUR", "USD", "GBP"] as Currency[]).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setCurrency(c)}
+                  className={`px-2 py-1 rounded-full transition-all duration-200 ${currency === c ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  {c === "EUR" ? "€" : c === "USD" ? "$" : "£"}
+                </button>
+              ))}
             </div>
             <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20me%20interesa%20información%20sobre%20vuestros%20productos`}
                target="_blank" rel="noopener noreferrer">
@@ -359,7 +384,7 @@ export default function Home() {
                   </div>
                   <p className="text-xs text-muted-foreground mb-3">{t.productSizeHint}</p>
                   <div className="mb-3">
-                    <span className="font-semibold text-primary text-lg">{product.price}</span>
+                    <span className="font-semibold text-primary text-lg">{product.displayPrice}</span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <div>
