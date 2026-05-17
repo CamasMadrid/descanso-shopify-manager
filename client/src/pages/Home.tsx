@@ -105,19 +105,24 @@ export default function Home() {
       setPillowError(true);
       return;
     }
+    // Pass the pillow choice as a Shopify cart note (order attribute)
+    // Using /cart/add with attributes then redirect to checkout
     const note = pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
+    // Shopify checkout URL with note attribute appended
+    const baseUrl = `https://descanso-rapido-castilla.myshopify.com/cart`;
+    const params = new URLSearchParams({
+      "note": note,
+      "return_to": "/checkout",
+    });
+    const url = `${baseUrl}?${params.toString()}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal({ open: false, productId: "", productName: "" });
   };
 
+  // Clicking an option only selects it — no navigation
   const handlePillowSelect = (choice: "double" | "two-singles") => {
     setPillowChoice(choice);
     setPillowError(false);
-    const note = choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-    setPillowModal({ open: false, productId: "", productName: "" });
   };
 
   return (
@@ -135,33 +140,49 @@ export default function Home() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3 my-2">
+            {/* Option 1 */}
             <button
+              type="button"
               onClick={() => handlePillowSelect("double")}
               className={`w-full rounded-xl border-2 p-4 text-left transition-all active:scale-[0.98] ${
                 pillowChoice === "double"
                   ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary hover:bg-primary/5"
+                  : "border-border hover:border-primary/50 hover:bg-primary/5"
               }`}
             >
-              <div className="font-semibold text-sm text-foreground flex items-center justify-between">
-                {t.pillowOption1Title}
-                <span className="text-xs text-primary font-medium">{t.pillowChooseLabel}</span>
+              <div className="flex items-center gap-3">
+                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                  pillowChoice === "double" ? "border-primary bg-primary" : "border-muted-foreground"
+                }`}>
+                  {pillowChoice === "double" && <div className="w-2 h-2 rounded-full bg-white" />}
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-foreground">{t.pillowOption1Title}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption1Desc}</div>
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption1Desc}</div>
             </button>
+            {/* Option 2 */}
             <button
+              type="button"
               onClick={() => handlePillowSelect("two-singles")}
               className={`w-full rounded-xl border-2 p-4 text-left transition-all active:scale-[0.98] ${
                 pillowChoice === "two-singles"
                   ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary hover:bg-primary/5"
+                  : "border-border hover:border-primary/50 hover:bg-primary/5"
               }`}
             >
-              <div className="font-semibold text-sm text-foreground flex items-center justify-between">
-                {t.pillowOption2Title}
-                <span className="text-xs text-primary font-medium">{t.pillowChooseLabel}</span>
+              <div className="flex items-center gap-3">
+                <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 transition-colors ${
+                  pillowChoice === "two-singles" ? "border-primary bg-primary" : "border-muted-foreground"
+                }`}>
+                  {pillowChoice === "two-singles" && <div className="w-2 h-2 rounded-full bg-white" />}
+                </div>
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-foreground">{t.pillowOption2Title}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption2Desc}</div>
+                </div>
               </div>
-              <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption2Desc}</div>
             </button>
           </div>
           {pillowError && (
