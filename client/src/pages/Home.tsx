@@ -501,22 +501,114 @@ export default function Home() {
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-3">{t.deliveryTitle}</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">{t.deliverySubtitle}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { step: "1", icon: MessageCircle, title: t.delivery1Title, desc: t.delivery1Desc },
-              { step: "2", icon: Truck, title: t.delivery2Title, desc: t.delivery2Desc },
-              { step: "3", icon: CheckCircle, title: t.delivery3Title, desc: t.delivery3Desc },
-            ].map(({ step, icon: Icon, title, desc }) => (
-              <div key={step} className="text-center p-6 rounded-2xl bg-card border border-border">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-6 h-6 text-primary" />
+
+          {/* ── Timeline comparison ── */}
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+
+            {/* Column 1: Mobile showroom visit */}
+            <div className="rounded-2xl border-2 border-primary/20 bg-primary/5 p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shrink-0">
+                  <Truck className="w-5 h-5 text-primary-foreground" />
                 </div>
-                <div className="text-xs font-bold text-muted-foreground mb-2 tracking-widest">{lang === "es" ? `PASO ${step}` : `STEP ${step}`}</div>
-                <h3 className="font-serif font-semibold text-lg text-foreground mb-2">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+                <div>
+                  <div className="font-serif font-bold text-foreground text-base">
+                    {lang === "es" ? "Visita del Showroom Móvil" : "Mobile Showroom Visit"}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {lang === "es" ? "Venimos a tu casa" : "We come to you"}
+                  </div>
+                </div>
               </div>
-            ))}
+              <div className="space-y-3">
+                {[
+                  { time: lang === "es" ? "Hoy" : "Today",        label: lang === "es" ? "Reservas tu visita por WhatsApp" : "Book your visit via WhatsApp",          color: "bg-primary" },
+                  { time: lang === "es" ? "24–48h" : "24–48h",    label: lang === "es" ? "Llegamos con muestras reales a tu domicilio" : "We arrive with real samples at your home", color: "bg-primary" },
+                  { time: lang === "es" ? "En el momento" : "Same visit", label: lang === "es" ? "Eliges, pruebas y confirmas en persona" : "You choose, try and confirm in person", color: "bg-primary" },
+                  { time: lang === "es" ? "48–72h" : "48–72h",    label: lang === "es" ? "Entrega e instalación en tu hogar" : "Delivery and installation at your home", color: "bg-green-600" },
+                ].map((step, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className={`w-2.5 h-2.5 rounded-full mt-1 ${step.color}`} />
+                      {i < 3 && <div className="w-px h-6 bg-border mt-1" />}
+                    </div>
+                    <div className="pb-1">
+                      <span className="text-xs font-bold text-primary mr-2">{step.time}</span>
+                      <span className="text-sm text-foreground">{step.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800 flex items-start gap-2">
+                <span className="shrink-0 mt-0.5">⚠️</span>
+                <span>{lang === "es" ? "Sujeto a disponibilidad de stock. Te confirmamos disponibilidad al reservar." : "Subject to stock availability. We confirm availability when you book."}</span>
+              </div>
+            </div>
+
+            {/* Column 2: Order online */}
+            <div className="rounded-2xl border border-border bg-card p-6">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-10 h-10 bg-muted rounded-xl flex items-center justify-center shrink-0">
+                  <Package className="w-5 h-5 text-muted-foreground" />
+                </div>
+                <div>
+                  <div className="font-serif font-bold text-foreground text-base">
+                    {lang === "es" ? "Pedido Online" : "Order Online"}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    {lang === "es" ? "Desde casa, en minutos" : "From home, in minutes"}
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { time: lang === "es" ? "Ahora" : "Now",         label: lang === "es" ? "Seleccionas talla y modelo en la web" : "Select size and model on the website",    color: "bg-muted-foreground" },
+                  { time: lang === "es" ? "Inmediato" : "Instant",  label: lang === "es" ? "Pago seguro online o contrarembolso" : "Secure online payment or cash on delivery", color: "bg-muted-foreground" },
+                  { time: lang === "es" ? "48–72h" : "48–72h",      label: lang === "es" ? "Entrega e instalación en tu domicilio" : "Delivery and installation at your home",  color: "bg-green-600" },
+                ].map((step, i) => (
+                  <div key={i} className="flex gap-3 items-start">
+                    <div className="flex flex-col items-center shrink-0">
+                      <div className={`w-2.5 h-2.5 rounded-full mt-1 ${step.color}`} />
+                      {i < 2 && <div className="w-px h-6 bg-border mt-1" />}
+                    </div>
+                    <div className="pb-1">
+                      <span className="text-xs font-bold text-muted-foreground mr-2">{step.time}</span>
+                      <span className="text-sm text-foreground">{step.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800 flex items-start gap-2">
+                <span className="shrink-0 mt-0.5">⚠️</span>
+                <span>{lang === "es" ? "Sujeto a disponibilidad. Si un artículo no está en stock, te avisamos antes de confirmar." : "Subject to availability. If an item is out of stock, we notify you before confirming."}</span>
+              </div>
+            </div>
           </div>
+
+          {/* Shared delivery guarantee banner */}
+          <div className="rounded-2xl bg-primary text-primary-foreground p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center shrink-0">
+                <Truck className="w-6 h-6" />
+              </div>
+              <div>
+                <div className="font-serif font-bold text-lg">
+                  {lang === "es" ? "Entrega garantizada en 48–72 horas" : "Guaranteed delivery in 48–72 hours"}
+                </div>
+                <div className="text-sm text-primary-foreground/80">
+                  {lang === "es" ? "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón y alrededores" : "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón and surroundings"}
+                </div>
+              </div>
+            </div>
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lang === "es" ? "Hola, quiero saber más sobre los plazos de entrega" : "Hello, I'd like to know more about delivery times")}`}
+               target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 gap-2 whitespace-nowrap">
+                <MessageCircle className="w-4 h-4" />
+                {lang === "es" ? "Consultar disponibilidad" : "Check availability"}
+              </Button>
+            </a>
+          </div>
+
         </div>
       </section>
 
