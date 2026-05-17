@@ -61,3 +61,11 @@
 - [x] Published to descansoshop-ntep5r75.manus.space
 - [ ] Partner showcase document prepared
 - [ ] Handover notes: what to update when prices confirmed
+
+## Phase 8: Internationalisation (EN/ES Toggle)
+- [ ] Create LanguageContext with ES/EN toggle
+- [ ] Add translations file covering all storefront copy
+- [ ] Wire Home.tsx to language context
+- [ ] Wire ProductDetail.tsx to language context
+- [ ] Wire ReservarVisita.tsx to language context
+- [ ] Add discreet ES/EN toggle button to nav header

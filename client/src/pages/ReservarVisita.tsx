@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle, ArrowLeft, MapPin, Clock, Phone, MessageCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
+import { useLang } from "@/contexts/LanguageContext";
 
 const AREAS = [
   "Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón",
@@ -20,6 +21,7 @@ const TIME_SLOTS = [
 ];
 
 export default function ReservarVisita() {
+  const { lang, setLang } = useLang();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", district: "",
@@ -60,22 +62,28 @@ export default function ReservarVisita() {
           <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-8 h-8 text-green-600" />
           </div>
-          <h1 className="font-serif text-3xl font-bold text-foreground mb-3">¡Solicitud recibida!</h1>
+          <h1 className="font-serif text-3xl font-bold text-foreground mb-3">
+            {lang === "es" ? "¡Solicitud recibida!" : "Request received!"}
+          </h1>
           <p className="text-muted-foreground mb-6 leading-relaxed">
-            Hemos recibido tu solicitud de visita. Nuestro equipo se pondrá en contacto contigo en las próximas horas para confirmar la cita.
+            {lang === "es"
+              ? "Hemos recibido tu solicitud de visita. Nuestro equipo se pondrá en contacto contigo en las próximas horas para confirmar la cita."
+              : "We have received your visit request. Our team will contact you within the next few hours to confirm the appointment."}
           </p>
           <div className="bg-muted/40 rounded-xl p-4 mb-6 text-sm text-muted-foreground">
-            También puedes contactarnos directamente por WhatsApp para confirmar más rápido.
+            {lang === "es"
+              ? "También puedes contactarnos directamente por WhatsApp para confirmar más rápido."
+              : "You can also contact us directly on WhatsApp to confirm faster."}
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/">
               <Button variant="outline" className="gap-2">
-                <ArrowLeft className="w-4 h-4" /> Volver al inicio
+                <ArrowLeft className="w-4 h-4" /> {lang === "es" ? "Volver al inicio" : "Back to home"}
               </Button>
             </Link>
             <a href="https://wa.me/34711204284?text=Hola,%20acabo%20de%20solicitar%20una%20visita%20a%20domicilio" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#25D366] hover:bg-[#1ebe5d] text-white gap-2">
-                <MessageCircle className="w-4 h-4" /> Confirmar por WhatsApp
+                <MessageCircle className="w-4 h-4" /> {lang === "es" ? "Confirmar por WhatsApp" : "Confirm on WhatsApp"}
               </Button>
             </a>
           </div>
@@ -88,13 +96,32 @@ export default function ReservarVisita() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b border-border bg-background/95 backdrop-blur sticky top-0 z-40">
-        <div className="container flex items-center h-16 gap-4">
-          <Link href="/">
-            <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
-              <ArrowLeft className="w-4 h-4" /> Volver
-            </Button>
-          </Link>
-          <div className="font-serif font-semibold text-foreground">Reservar visita a domicilio</div>
+        <div className="container flex items-center justify-between h-16">
+          <div className="flex items-center gap-4">
+            <Link href="/">
+              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground">
+                <ArrowLeft className="w-4 h-4" /> {lang === "es" ? "Volver" : "Back"}
+              </Button>
+            </Link>
+            <div className="font-serif font-semibold text-foreground">
+              {lang === "es" ? "Reservar visita a domicilio" : "Book a home visit"}
+            </div>
+          </div>
+          {/* Language toggle */}
+          <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
+            <button
+              onClick={() => setLang("es")}
+              className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "es" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              ES
+            </button>
+            <button
+              onClick={() => setLang("en")}
+              className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+            >
+              EN
+            </button>
+          </div>
         </div>
       </header>
 
@@ -103,18 +130,25 @@ export default function ReservarVisita() {
           {/* Left: info */}
           <div>
             <h1 className="font-serif text-3xl font-bold text-foreground mb-4">
-              El showroom viene a ti
+              {lang === "es" ? "El showroom viene a ti" : "The showroom comes to you"}
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              Nuestro equipo se desplaza a tu domicilio con muestras de materiales para que puedas ver y tocar los productos antes de decidir. Sin compromiso de compra.
+              {lang === "es"
+                ? "Nuestro equipo se desplaza a tu domicilio con muestras de materiales para que puedas ver y tocar los productos antes de decidir. Sin compromiso de compra."
+                : "Our team travels to your home with material samples so you can see and feel the products before deciding. No purchase commitment."}
             </p>
             <div className="space-y-4">
-              {[
+              {(lang === "es" ? [
                 { icon: Clock, title: "Visita en 24-48h", desc: "Confirmamos cita en el mismo día" },
                 { icon: MapPin, title: "Zona sur Madrid", desc: "Fuenlabrada, Leganés, Getafe, Móstoles y más" },
                 { icon: Phone, title: "Asesoramiento experto", desc: "Te ayudamos a elegir el colchón y base perfectos" },
                 { icon: CheckCircle, title: "Sin compromiso", desc: "La visita es gratuita y sin obligación de compra" },
-              ].map(({ icon: Icon, title, desc }) => (
+              ] : [
+                { icon: Clock, title: "Visit within 24-48h", desc: "We confirm the appointment on the same day" },
+                { icon: MapPin, title: "South Madrid area", desc: "Fuenlabrada, Leganés, Getafe, Móstoles and more" },
+                { icon: Phone, title: "Expert advice", desc: "We help you choose the perfect mattress and base" },
+                { icon: CheckCircle, title: "No commitment", desc: "The visit is free with no obligation to buy" },
+              ]).map(({ icon: Icon, title, desc }) => (
                 <div key={title} className="flex items-start gap-3">
                   <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-primary" />
@@ -131,16 +165,16 @@ export default function ReservarVisita() {
           {/* Right: form */}
           <Card className="border border-border shadow-sm">
             <CardHeader className="pb-4">
-              <CardTitle className="font-serif text-xl">Solicitar visita gratuita</CardTitle>
+              <CardTitle className="font-serif text-xl">{lang === "es" ? "Solicitar visita gratuita" : "Request a free home visit"}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2">
-                    <Label htmlFor="name">Nombre *</Label>
+                    <Label htmlFor="name">{lang === "es" ? "Nombre *" : "Name *"}</Label>
                     <Input
                       id="name"
-                      placeholder="Tu nombre"
+                      placeholder={lang === "es" ? "Tu nombre" : "Your name"}
                       value={form.name}
                       onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                       className="mt-1"
@@ -148,7 +182,7 @@ export default function ReservarVisita() {
                     />
                   </div>
                   <div>
-                    <Label htmlFor="phone">Teléfono *</Label>
+                    <Label htmlFor="phone">{lang === "es" ? "Teléfono *" : "Phone *"}</Label>
                     <Input
                       id="phone"
                       placeholder="600 000 000"
@@ -172,10 +206,10 @@ export default function ReservarVisita() {
                 </div>
 
                 <div>
-                  <Label>Zona *</Label>
+                  <Label>{lang === "es" ? "Zona *" : "Area *"}</Label>
                   <Select onValueChange={v => setForm(f => ({ ...f, district: v }))}>
                     <SelectTrigger className="mt-1">
-                      <SelectValue placeholder="Selecciona tu zona" />
+                      <SelectValue placeholder={lang === "es" ? "Selecciona tu zona" : "Select your area"} />
                     </SelectTrigger>
                     <SelectContent>
                       {AREAS.map(a => (
@@ -187,7 +221,7 @@ export default function ReservarVisita() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="date">Fecha preferida *</Label>
+                    <Label htmlFor="date">{lang === "es" ? "Fecha preferida *" : "Preferred date *"}</Label>
                     <Input
                       id="date"
                       type="date"
@@ -199,10 +233,10 @@ export default function ReservarVisita() {
                     />
                   </div>
                   <div>
-                    <Label>Hora preferida *</Label>
+                    <Label>{lang === "es" ? "Hora preferida *" : "Preferred time *"}</Label>
                     <Select onValueChange={v => setForm(f => ({ ...f, preferredTime: v }))}>
                       <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Horario" />
+                        <SelectValue placeholder={lang === "es" ? "Horario" : "Time slot"} />
                       </SelectTrigger>
                       <SelectContent>
                         {TIME_SLOTS.map(t => (
@@ -214,10 +248,10 @@ export default function ReservarVisita() {
                 </div>
 
                 <div>
-                  <Label htmlFor="notes">¿Qué te interesa? (opcional)</Label>
+                  <Label htmlFor="notes">{lang === "es" ? "¿Qué te interesa? (opcional)" : "What are you interested in? (optional)"}</Label>
                   <Input
                     id="notes"
-                    placeholder="Ej: canapé 150cm, colchón para dos personas..."
+                    placeholder={lang === "es" ? "Ej: canapé 150cm, colchón para dos personas..." : "E.g. storage bed 150cm, mattress for two people..."}
                     value={form.notes}
                     onChange={e => setForm(f => ({ ...f, notes: e.target.value }))}
                     className="mt-1"
@@ -229,11 +263,11 @@ export default function ReservarVisita() {
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   disabled={createBooking.isPending}
                 >
-                  {createBooking.isPending ? "Enviando..." : "Solicitar visita gratuita"}
+                  {createBooking.isPending ? (lang === "es" ? "Enviando..." : "Sending...") : (lang === "es" ? "Solicitar visita gratuita" : "Request free home visit")}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
-                  Te confirmaremos la cita por teléfono o WhatsApp en las próximas horas.
+                  {lang === "es" ? "Te confirmaremos la cita por teléfono o WhatsApp en las próximas horas." : "We will confirm your appointment by phone or WhatsApp within the next few hours."}
                 </p>
               </form>
             </CardContent>

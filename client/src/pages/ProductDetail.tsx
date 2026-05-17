@@ -6,8 +6,9 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import {
   ArrowLeft, Truck, Shield, Star, CheckCircle, MessageCircle,
-  CreditCard, Gift, ChevronRight, Package, Info
+  CreditCard, Gift, ChevronRight, Package
 } from "lucide-react";
+import { useLang } from "@/contexts/LanguageContext";
 
 const WHATSAPP_NUMBER = "34711204284";
 
@@ -20,139 +21,57 @@ const BASE_LUCY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP
 
 interface ProductData {
   id: string;
-  name: string;
-  subtitle: string;
   image: string;
-  badge: string;
   badgeColor: string;
-  description: string;
-  longDescription: string;
   sizes: { label: string; price: string }[];
-  features: string[];
-  specs: { label: string; value: string }[];
   category: "canapes" | "colchones" | "bases";
-  upsell?: { name: string; price: string; reason: string }[];
+  upsellIds?: string[];
 }
 
-const products: Record<string, ProductData> = {
+// Static data (images, sizes, categories) — text comes from translations
+const productMeta: Record<string, ProductData> = {
   "canape-excellent": {
     id: "canape-excellent",
-    name: "Canapé Excellent",
-    subtitle: "Canapé abatible de madera con almacenaje",
     image: CANAPE_EXCELLENT,
-    badge: "Más vendido",
     badgeColor: "bg-amber-100 text-amber-800",
-    description: "Canapé abatible de madera con 28 cm de almacenaje interior. Disponible en 4 colores.",
-    longDescription: "El Canapé Excellent es nuestra opción más popular por su relación calidad-precio. Fabricado con estructura de madera maciza y tapa abatible de 3D transpirable, ofrece 28 cm de almacenaje interior — ideal para guardar ropa de cama, mantas y más. Disponible en blanco, gris, beige y wengué.",
     sizes: [
       { label: "90 × 190 cm", price: "Desde 249€" },
       { label: "105 × 190 cm", price: "Desde 279€" },
       { label: "135 × 190 cm", price: "Desde 309€" },
       { label: "150 × 190 cm", price: "Desde 339€" },
     ],
-    features: [
-      "28 cm de almacenaje interior",
-      "Tapa abatible con apertura suave",
-      "Estructura de madera maciza reforzada",
-      "Tapa 3D transpirable antiácaros",
-      "Disponible en 4 colores",
-      "Montaje incluido en entrega",
-    ],
-    specs: [
-      { label: "Material", value: "Madera maciza + tapa 3D transpirable" },
-      { label: "Almacenaje", value: "28 cm de profundidad" },
-      { label: "Colores", value: "Blanco, Gris, Beige, Wengué" },
-      { label: "Profundidad cama", value: "190 cm (estándar)" },
-      { label: "Garantía", value: "2 años" },
-      { label: "Entrega", value: "48 horas garantizadas" },
-    ],
     category: "canapes",
-    upsell: [
-      { name: "Colchón New Memory HR", price: "Desde 149€", reason: "El colchón más popular para este canapé" },
-      { name: "Colchón Hybrid HR", price: "Desde 299€", reason: "Máximo confort con muelles ensacados" },
-    ],
+    upsellIds: ["colchon-memory", "colchon-hybrid"],
   },
   "canape-premium": {
     id: "canape-premium",
-    name: "Canapé Premium",
-    subtitle: "Canapé abatible tapizado en polipiel",
     image: CANAPE_PREMIUM,
-    badge: "Premium",
     badgeColor: "bg-slate-100 text-slate-700",
-    description: "Canapé abatible tapizado en polipiel con 30 cm de almacenaje. Acabado elegante.",
-    longDescription: "El Canapé Premium eleva el dormitorio con su tapizado en polipiel de alta calidad. Con 30 cm de almacenaje y una tapa de apertura suave, combina funcionalidad y elegancia. Ideal para dormitorios modernos o nórdicos. Disponible en gris perla, blanco roto y antracita.",
     sizes: [
       { label: "90 × 190 cm", price: "Desde 329€" },
       { label: "135 × 190 cm", price: "Desde 389€" },
       { label: "150 × 190 cm", price: "Desde 429€" },
     ],
-    features: [
-      "30 cm de almacenaje interior",
-      "Tapizado en polipiel resistente",
-      "Apertura suave con pistones de gas",
-      "Estructura reforzada de alta densidad",
-      "Acabado cosido a mano",
-      "Montaje incluido en entrega",
-    ],
-    specs: [
-      { label: "Material", value: "Polipiel premium + estructura madera" },
-      { label: "Almacenaje", value: "30 cm de profundidad" },
-      { label: "Colores", value: "Gris perla, Blanco roto, Antracita" },
-      { label: "Profundidad cama", value: "190 cm (estándar)" },
-      { label: "Garantía", value: "2 años" },
-      { label: "Entrega", value: "48 horas garantizadas" },
-    ],
     category: "canapes",
-    upsell: [
-      { name: "Colchón Hybrid HR", price: "Desde 299€", reason: "Combina perfectamente con el Premium" },
-      { name: "Base Tapizada Lucy", price: "Desde 129€", reason: "Para camas con cabecero separado" },
-    ],
+    upsellIds: ["colchon-hybrid", "base-lucy"],
   },
   "canape-articulado": {
     id: "canape-articulado",
-    name: "Canapé Articulado Motorizado",
-    subtitle: "Somier articulado con motor eléctrico",
     image: CANAPE_ARTICULADO,
-    badge: "Top gama",
     badgeColor: "bg-blue-100 text-blue-800",
-    description: "Canapé articulado motorizado con somier de láminas integrado. Confort máximo.",
-    longDescription: "El Canapé Articulado Motorizado es la cúspide del confort. Con motor eléctrico silencioso, puedes ajustar la posición de cabeza y pies con un mando a distancia. Las láminas de madera flexible se adaptan a tu cuerpo para un descanso óptimo. Incluye función anti-ronquidos (elevación de cabeza).",
     sizes: [
       { label: "90 × 190 cm", price: "Desde 499€" },
       { label: "105 × 190 cm", price: "Desde 549€" },
       { label: "135 × 190 cm", price: "Desde 629€" },
       { label: "150 × 190 cm", price: "Desde 699€" },
     ],
-    features: [
-      "Motor eléctrico silencioso",
-      "Mando a distancia incluido",
-      "Láminas de madera flexible",
-      "Función anti-ronquidos",
-      "Posición lectura y TV",
-      "Montaje e instalación incluidos",
-    ],
-    specs: [
-      { label: "Motor", value: "Eléctrico silencioso (< 45dB)" },
-      { label: "Control", value: "Mando a distancia inalámbrico" },
-      { label: "Láminas", value: "Madera de abedul flexible" },
-      { label: "Funciones", value: "Cabeza, pies, anti-ronquidos" },
-      { label: "Garantía", value: "3 años (motor 5 años)" },
-      { label: "Entrega", value: "48 horas garantizadas" },
-    ],
     category: "canapes",
-    upsell: [
-      { name: "Colchón Hybrid HR", price: "Desde 299€", reason: "Recomendado para bases articuladas" },
-    ],
+    upsellIds: ["colchon-hybrid"],
   },
   "colchon-memory": {
     id: "colchon-memory",
-    name: "Colchón New Memory HR",
-    subtitle: "Viscoelástico de alta resistencia · 21 cm",
     image: COLCHON_MEMORY,
-    badge: "Económico",
     badgeColor: "bg-green-100 text-green-800",
-    description: "Colchón de espuma viscoelástica y HR de alta resistencia. Ideal para uso diario.",
-    longDescription: "El Colchón New Memory HR ofrece la comodidad de la viscoelástica a un precio accesible. Con 21 cm de altura total, combina una capa superior de memoria viscoelástica con un núcleo de espuma HR de alta resistencia. Tratamiento antiácaros y funda lavable incluida.",
     sizes: [
       { label: "90 × 190 cm", price: "Desde 149€" },
       { label: "105 × 190 cm", price: "Desde 169€" },
@@ -161,37 +80,13 @@ const products: Record<string, ProductData> = {
       { label: "160 × 190 cm", price: "Desde 229€" },
       { label: "180 × 190 cm", price: "Desde 249€" },
     ],
-    features: [
-      "Capa viscoelástica adaptable",
-      "Núcleo HR de alta resistencia",
-      "21 cm de altura total",
-      "Tratamiento antiácaros",
-      "Funda lavable con cremallera",
-      "Reversible (cara verano/invierno)",
-    ],
-    specs: [
-      { label: "Altura total", value: "21 cm" },
-      { label: "Capa superior", value: "3 cm viscoelástica" },
-      { label: "Núcleo", value: "HR alta resistencia 18 cm" },
-      { label: "Funda", value: "Tejido Aloe Vera lavable" },
-      { label: "Firmeza", value: "Media (adaptable)" },
-      { label: "Garantía", value: "5 años" },
-    ],
     category: "colchones",
-    upsell: [
-      { name: "Canapé Excellent", price: "Desde 249€", reason: "El canapé más popular para este colchón" },
-      { name: "Base Tapizada Lucy", price: "Desde 129€", reason: "Base económica y resistente" },
-    ],
+    upsellIds: ["canape-excellent", "base-lucy"],
   },
   "colchon-hybrid": {
     id: "colchon-hybrid",
-    name: "Colchón Hybrid HR",
-    subtitle: "Muelles ensacados + Viscoelástica Aloe · 31 cm",
     image: COLCHON_HYBRID,
-    badge: "Premium",
     badgeColor: "bg-slate-100 text-slate-700",
-    description: "Muelles ensacados con capa de viscoelástica con aloe vera. Alta resistencia para mayor peso.",
-    longDescription: "El Colchón Hybrid HR combina lo mejor de dos mundos: la transpirabilidad y soporte de los muelles ensacados con la comodidad de la viscoelástica enriquecida con aloe vera. Con 31 cm de altura, ofrece un descanso premium. Especialmente recomendado para personas con más de 90 kg o parejas con pesos muy diferentes.",
     sizes: [
       { label: "90 × 190 cm", price: "Desde 299€" },
       { label: "105 × 190 cm", price: "Desde 339€" },
@@ -200,37 +95,13 @@ const products: Record<string, ProductData> = {
       { label: "160 × 190 cm", price: "Desde 449€" },
       { label: "180 × 190 cm", price: "Desde 499€" },
     ],
-    features: [
-      "Muelles ensacados independientes",
-      "Capa viscoelástica con Aloe Vera",
-      "31 cm de altura premium",
-      "Alta transpirabilidad",
-      "Ideal para peso superior a 90 kg",
-      "Funda lavable con cremallera",
-    ],
-    specs: [
-      { label: "Altura total", value: "31 cm" },
-      { label: "Muelles", value: "Ensacados independientes" },
-      { label: "Capa superior", value: "5 cm visco Aloe Vera" },
-      { label: "Transpirabilidad", value: "Alta (muelles ventilados)" },
-      { label: "Firmeza", value: "Media-alta" },
-      { label: "Garantía", value: "10 años" },
-    ],
     category: "colchones",
-    upsell: [
-      { name: "Canapé Premium", price: "Desde 329€", reason: "Combinación perfecta para dormitorio premium" },
-      { name: "Canapé Articulado", price: "Desde 499€", reason: "Máximo confort con base articulada" },
-    ],
+    upsellIds: ["canape-premium", "canape-articulado"],
   },
   "base-lucy": {
     id: "base-lucy",
-    name: "Base Tapizada Lucy",
-    subtitle: "Tela 3D transpirable con aireadores laterales",
     image: BASE_LUCY,
-    badge: "Nuevo",
     badgeColor: "bg-purple-100 text-purple-700",
-    description: "Base tapizada en tela 3D gris con aireadores laterales. Estructura tubular 40×30mm.",
-    longDescription: "La Base Tapizada Lucy es la solución perfecta cuando quieres un look limpio y moderno sin canapé. Tapizada en tela 3D gris transpirable con aireadores laterales para evitar la humedad. Estructura tubular de acero 40×30mm de alta resistencia. Patas regulables en altura. Compatible con todos nuestros colchones.",
     sizes: [
       { label: "80 × 190 cm", price: "Desde 129€" },
       { label: "90 × 190 cm", price: "Desde 139€" },
@@ -238,46 +109,136 @@ const products: Record<string, ProductData> = {
       { label: "135 × 190 cm", price: "Desde 179€" },
       { label: "150 × 190 cm", price: "Desde 199€" },
     ],
-    features: [
-      "Tela 3D transpirable antiácaros",
-      "Aireadores laterales anti-humedad",
-      "Estructura tubular 40×30 mm",
-      "Patas regulables en altura",
-      "Fácil montaje sin herramientas",
-      "Compatible con todos los colchones",
-    ],
-    specs: [
-      { label: "Tapizado", value: "Tela 3D gris transpirable" },
-      { label: "Estructura", value: "Acero tubular 40×30 mm" },
-      { label: "Patas", value: "Regulables (25–30 cm)" },
-      { label: "Aireadores", value: "Laterales anti-humedad" },
-      { label: "Color", value: "Gris (único)" },
-      { label: "Garantía", value: "2 años" },
-    ],
     category: "bases",
-    upsell: [
-      { name: "Colchón New Memory HR", price: "Desde 149€", reason: "Colchón económico y cómodo para esta base" },
-      { name: "Colchón Hybrid HR", price: "Desde 299€", reason: "Máximo confort sobre esta base" },
-    ],
+    upsellIds: ["colchon-memory", "colchon-hybrid"],
+  },
+};
+
+// Per-language extended content
+const productContent: Record<string, Record<string, {
+  subtitle: string;
+  longDescription: string;
+  features: string[];
+  specs: { label: string; value: string }[];
+  upsellReasons: string[];
+}>> = {
+  "canape-excellent": {
+    es: {
+      subtitle: "Canapé abatible de madera con almacenaje",
+      longDescription: "El Canapé Excellent es nuestra opción más popular por su relación calidad-precio. Fabricado con estructura de madera maciza y tapa abatible de 3D transpirable, ofrece 28 cm de almacenaje interior — ideal para guardar ropa de cama, mantas y más. Disponible en blanco, gris, beige y wengué.",
+      features: ["28 cm de almacenaje interior", "Tapa abatible con apertura suave", "Estructura de madera maciza reforzada", "Tapa 3D transpirable antiácaros", "Disponible en 4 colores", "Montaje incluido en entrega"],
+      specs: [{ label: "Material", value: "Madera maciza + tapa 3D transpirable" }, { label: "Almacenaje", value: "28 cm de profundidad" }, { label: "Colores", value: "Blanco, Gris, Beige, Wengué" }, { label: "Profundidad cama", value: "190 cm (estándar)" }, { label: "Garantía", value: "2 años" }, { label: "Entrega", value: "48 horas garantizadas" }],
+      upsellReasons: ["El colchón más popular para este canapé", "Máximo confort con muelles ensacados"],
+    },
+    en: {
+      subtitle: "Lift-up storage bed in solid wood",
+      longDescription: "The Excellent Storage Bed is our most popular model for its quality-to-price ratio. Built with a solid wood frame and breathable 3D lift-up top, it offers 28 cm of internal storage — perfect for bedding, blankets and more. Available in white, grey, beige and wenge.",
+      features: ["28 cm of internal storage", "Smooth-opening lift-up top", "Reinforced solid wood frame", "Anti-mite breathable 3D top", "Available in 4 colours", "Assembly included on delivery"],
+      specs: [{ label: "Material", value: "Solid wood + breathable 3D top" }, { label: "Storage depth", value: "28 cm" }, { label: "Colours", value: "White, Grey, Beige, Wenge" }, { label: "Bed depth", value: "190 cm (standard)" }, { label: "Warranty", value: "2 years" }, { label: "Delivery", value: "Guaranteed 48 hours" }],
+      upsellReasons: ["Most popular mattress for this bed", "Maximum comfort with pocket springs"],
+    },
+  },
+  "canape-premium": {
+    es: {
+      subtitle: "Canapé abatible tapizado en polipiel",
+      longDescription: "El Canapé Premium eleva el dormitorio con su tapizado en polipiel de alta calidad. Con 30 cm de almacenaje y una tapa de apertura suave, combina funcionalidad y elegancia. Ideal para dormitorios modernos o nórdicos. Disponible en gris perla, blanco roto y antracita.",
+      features: ["30 cm de almacenaje interior", "Tapizado en polipiel resistente", "Apertura suave con pistones de gas", "Estructura reforzada de alta densidad", "Acabado cosido a mano", "Montaje incluido en entrega"],
+      specs: [{ label: "Material", value: "Polipiel premium + estructura madera" }, { label: "Almacenaje", value: "30 cm de profundidad" }, { label: "Colores", value: "Gris perla, Blanco roto, Antracita" }, { label: "Profundidad cama", value: "190 cm (estándar)" }, { label: "Garantía", value: "2 años" }, { label: "Entrega", value: "48 horas garantizadas" }],
+      upsellReasons: ["Combina perfectamente con el Premium", "Para camas con cabecero separado"],
+    },
+    en: {
+      subtitle: "Lift-up storage bed upholstered in faux leather",
+      longDescription: "The Premium Storage Bed elevates the bedroom with its high-quality faux leather upholstery. With 30 cm of storage and a gas-piston smooth-open top, it combines functionality and elegance. Ideal for modern or Scandinavian bedrooms. Available in pearl grey, off-white and anthracite.",
+      features: ["30 cm of internal storage", "Durable faux leather upholstery", "Gas-piston smooth opening", "High-density reinforced frame", "Hand-stitched finish", "Assembly included on delivery"],
+      specs: [{ label: "Material", value: "Premium faux leather + wood frame" }, { label: "Storage depth", value: "30 cm" }, { label: "Colours", value: "Pearl grey, Off-white, Anthracite" }, { label: "Bed depth", value: "190 cm (standard)" }, { label: "Warranty", value: "2 years" }, { label: "Delivery", value: "Guaranteed 48 hours" }],
+      upsellReasons: ["Perfect pairing with the Premium", "For beds with a separate headboard"],
+    },
+  },
+  "canape-articulado": {
+    es: {
+      subtitle: "Somier articulado con motor eléctrico",
+      longDescription: "El Canapé Articulado Motorizado es la cúspide del confort. Con motor eléctrico silencioso, puedes ajustar la posición de cabeza y pies con un mando a distancia. Las láminas de madera flexible se adaptan a tu cuerpo para un descanso óptimo. Incluye función anti-ronquidos.",
+      features: ["Motor eléctrico silencioso", "Mando a distancia incluido", "Láminas de madera flexible", "Función anti-ronquidos", "Posición lectura y TV", "Montaje e instalación incluidos"],
+      specs: [{ label: "Motor", value: "Eléctrico silencioso (< 45dB)" }, { label: "Control", value: "Mando a distancia inalámbrico" }, { label: "Láminas", value: "Madera de abedul flexible" }, { label: "Funciones", value: "Cabeza, pies, anti-ronquidos" }, { label: "Garantía", value: "3 años (motor 5 años)" }, { label: "Entrega", value: "48 horas garantizadas" }],
+      upsellReasons: ["Recomendado para bases articuladas"],
+    },
+    en: {
+      subtitle: "Adjustable bed base with electric motor",
+      longDescription: "The Motorised Adjustable Bed is the pinnacle of comfort. With a whisper-quiet electric motor, you can adjust the head and foot positions with a remote control. Flexible birch wood slats adapt to your body for optimal rest. Includes anti-snore function.",
+      features: ["Whisper-quiet electric motor", "Remote control included", "Flexible birch wood slats", "Anti-snore function", "Reading and TV positions", "Full installation included"],
+      specs: [{ label: "Motor", value: "Electric silent (< 45dB)" }, { label: "Control", value: "Wireless remote control" }, { label: "Slats", value: "Flexible birch wood" }, { label: "Functions", value: "Head, feet, anti-snore" }, { label: "Warranty", value: "3 years (motor 5 years)" }, { label: "Delivery", value: "Guaranteed 48 hours" }],
+      upsellReasons: ["Recommended for adjustable bases"],
+    },
+  },
+  "colchon-memory": {
+    es: {
+      subtitle: "Viscoelástico de alta resistencia · 21 cm",
+      longDescription: "El Colchón New Memory HR ofrece la comodidad de la viscoelástica a un precio accesible. Con 21 cm de altura total, combina una capa superior de memoria viscoelástica con un núcleo de espuma HR de alta resistencia. Tratamiento antiácaros y funda lavable incluida.",
+      features: ["Capa viscoelástica adaptable", "Núcleo HR de alta resistencia", "21 cm de altura total", "Tratamiento antiácaros", "Funda lavable con cremallera", "Reversible (cara verano/invierno)"],
+      specs: [{ label: "Altura total", value: "21 cm" }, { label: "Capa superior", value: "3 cm viscoelástica" }, { label: "Núcleo", value: "HR alta resistencia 18 cm" }, { label: "Funda", value: "Tejido Aloe Vera lavable" }, { label: "Firmeza", value: "Media (adaptable)" }, { label: "Garantía", value: "5 años" }],
+      upsellReasons: ["El canapé más popular para este colchón", "Base económica y resistente"],
+    },
+    en: {
+      subtitle: "High-resilience memory foam · 21 cm",
+      longDescription: "The New Memory HR Mattress delivers memory foam comfort at an accessible price. At 21 cm total height, it combines a top layer of memory foam with a high-resilience HR foam core. Anti-mite treatment and washable cover included.",
+      features: ["Adaptive memory foam layer", "High-resilience HR core", "21 cm total height", "Anti-mite treatment", "Zip-off washable cover", "Reversible (summer/winter sides)"],
+      specs: [{ label: "Total height", value: "21 cm" }, { label: "Top layer", value: "3 cm memory foam" }, { label: "Core", value: "18 cm HR high-resilience" }, { label: "Cover", value: "Washable Aloe Vera fabric" }, { label: "Firmness", value: "Medium (adaptive)" }, { label: "Warranty", value: "5 years" }],
+      upsellReasons: ["Most popular bed base for this mattress", "Economical and sturdy base"],
+    },
+  },
+  "colchon-hybrid": {
+    es: {
+      subtitle: "Muelles ensacados + Viscoelástica Aloe · 31 cm",
+      longDescription: "El Colchón Hybrid HR combina lo mejor de dos mundos: la transpirabilidad y soporte de los muelles ensacados con la comodidad de la viscoelástica enriquecida con aloe vera. Con 31 cm de altura, ofrece un descanso premium. Especialmente recomendado para personas con más de 90 kg.",
+      features: ["Muelles ensacados independientes", "Capa viscoelástica con Aloe Vera", "31 cm de altura premium", "Alta transpirabilidad", "Ideal para peso superior a 90 kg", "Funda lavable con cremallera"],
+      specs: [{ label: "Altura total", value: "31 cm" }, { label: "Muelles", value: "Ensacados independientes" }, { label: "Capa superior", value: "5 cm visco Aloe Vera" }, { label: "Transpirabilidad", value: "Alta (muelles ventilados)" }, { label: "Firmeza", value: "Media-alta" }, { label: "Garantía", value: "10 años" }],
+      upsellReasons: ["Combinación perfecta para dormitorio premium", "Máximo confort con base articulada"],
+    },
+    en: {
+      subtitle: "Pocket springs + Aloe Vera visco · 31 cm",
+      longDescription: "The Hybrid HR Mattress combines the best of both worlds: the breathability and support of pocket springs with the comfort of aloe vera-enriched memory foam. At 31 cm height, it delivers a premium sleep experience. Especially recommended for people over 90 kg or couples with very different weights.",
+      features: ["Independent pocket springs", "Aloe Vera memory foam layer", "31 cm premium height", "High breathability", "Ideal for 90 kg+ sleepers", "Zip-off washable cover"],
+      specs: [{ label: "Total height", value: "31 cm" }, { label: "Springs", value: "Independent pocket springs" }, { label: "Top layer", value: "5 cm Aloe Vera visco" }, { label: "Breathability", value: "High (ventilated springs)" }, { label: "Firmness", value: "Medium-firm" }, { label: "Warranty", value: "10 years" }],
+      upsellReasons: ["Perfect pairing for a premium bedroom", "Maximum comfort on an adjustable base"],
+    },
+  },
+  "base-lucy": {
+    es: {
+      subtitle: "Tela 3D transpirable con aireadores laterales",
+      longDescription: "La Base Tapizada Lucy es la solución perfecta cuando quieres un look limpio y moderno sin canapé. Tapizada en tela 3D gris transpirable con aireadores laterales para evitar la humedad. Estructura tubular de acero 40×30mm de alta resistencia. Patas regulables en altura.",
+      features: ["Tela 3D transpirable antiácaros", "Aireadores laterales anti-humedad", "Estructura tubular 40×30 mm", "Patas regulables en altura", "Fácil montaje sin herramientas", "Compatible con todos los colchones"],
+      specs: [{ label: "Tapizado", value: "Tela 3D gris transpirable" }, { label: "Estructura", value: "Acero tubular 40×30 mm" }, { label: "Patas", value: "Regulables (25–30 cm)" }, { label: "Aireadores", value: "Laterales anti-humedad" }, { label: "Color", value: "Gris (único)" }, { label: "Garantía", value: "2 años" }],
+      upsellReasons: ["Colchón económico y cómodo para esta base", "Máximo confort sobre esta base"],
+    },
+    en: {
+      subtitle: "Breathable 3D fabric with side air vents",
+      longDescription: "The Lucy Divan Base is the perfect solution when you want a clean, modern look without a storage bed. Upholstered in breathable grey 3D fabric with side air vents to prevent moisture. 40×30 mm high-resistance tubular steel frame. Height-adjustable legs.",
+      features: ["Anti-mite breathable 3D fabric", "Side air vents to prevent moisture", "40×30 mm tubular steel frame", "Height-adjustable legs", "Tool-free easy assembly", "Compatible with all mattresses"],
+      specs: [{ label: "Upholstery", value: "Grey breathable 3D fabric" }, { label: "Frame", value: "40×30 mm tubular steel" }, { label: "Legs", value: "Adjustable (25–30 cm)" }, { label: "Air vents", value: "Side anti-moisture vents" }, { label: "Colour", value: "Grey (single)" }, { label: "Warranty", value: "2 years" }],
+      upsellReasons: ["Economical and comfortable mattress for this base", "Maximum comfort on this base"],
+    },
   },
 };
 
 export default function ProductDetail() {
+  const { lang, setLang, t } = useLang();
   const { id } = useParams<{ id: string }>();
-  const product = id ? products[id] : null;
+  const meta = id ? productMeta[id] : null;
+  const content = id ? productContent[id]?.[lang] : null;
+  const tProduct = id ? t.products[id] : null;
 
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [pillowModal, setPillowModal] = useState(false);
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
   const [pillowError, setPillowError] = useState(false);
 
-  if (!product) {
+  if (!meta || !content || !tProduct) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
-        <p className="text-muted-foreground">Producto no encontrado</p>
+        <p className="text-muted-foreground">{lang === "es" ? "Producto no encontrado" : "Product not found"}</p>
         <Link href="/">
           <Button variant="outline" className="gap-2">
-            <ArrowLeft className="w-4 h-4" /> Volver a productos
+            <ArrowLeft className="w-4 h-4" /> {lang === "es" ? "Volver a productos" : "Back to products"}
           </Button>
         </Link>
       </div>
@@ -297,7 +258,7 @@ export default function ProductDetail() {
     }
     const sizeNote = selectedSize ? ` — Talla: ${selectedSize}` : "";
     const note = (pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales") + sizeNote;
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${product.id}?note=${encodeURIComponent(note)}`;
+    const url = `https://descanso-rapido-castilla.myshopify.com/products/${meta.id}?note=${encodeURIComponent(note)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal(false);
   };
@@ -307,20 +268,48 @@ export default function ProductDetail() {
     setPillowError(false);
     const sizeNote = selectedSize ? ` — Talla: ${selectedSize}` : "";
     const note = (choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales") + sizeNote;
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${product.id}?note=${encodeURIComponent(note)}`;
+    const url = `https://descanso-rapido-castilla.myshopify.com/products/${meta.id}?note=${encodeURIComponent(note)}`;
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal(false);
   };
 
   const handleWhatsApp = () => {
-    const sizeText = selectedSize ? ` en talla ${selectedSize}` : "";
-    const msg = `Hola, me interesa el ${product.name}${sizeText}. ¿Podéis visitarme o puedo reservar sin pagar?`;
+    const sizeText = selectedSize ? ` (${selectedSize})` : "";
+    const msg = lang === "es"
+      ? `Hola, me interesa el ${tProduct.name}${sizeText}. ¿Podéis visitarme o puedo reservar sin pagar?`
+      : `Hello, I'm interested in the ${tProduct.name}${sizeText}. Can you visit me or can I reserve without paying upfront?`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   const selectedPrice = selectedSize
-    ? product.sizes.find(s => s.label === selectedSize)?.price
-    : product.sizes[0]?.price;
+    ? meta.sizes.find(s => s.label === selectedSize)?.price
+    : meta.sizes[0]?.price;
+
+  const categoryLabel = lang === "es"
+    ? (meta.category === "canapes" ? "Canapés" : meta.category === "colchones" ? "Colchones" : "Bases")
+    : (meta.category === "canapes" ? "Storage Beds" : meta.category === "colchones" ? "Mattresses" : "Divan Bases");
+
+  const deliveryItems = lang === "es" ? [
+    { title: "Entrega en 48 horas", desc: "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla y alrededores" },
+    { title: "Montaje incluido", desc: "Nuestro equipo monta el producto en tu habitación sin coste adicional" },
+    { title: "Formas de pago", desc: "Efectivo, Bizum, tarjeta crédito/débito o contrareembolso al recibir" },
+    { title: "14 días de devolución", desc: "Si no estás satisfecho, recogemos el producto sin preguntas" },
+  ] : [
+    { title: "48-hour delivery", desc: "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla and surrounding areas" },
+    { title: "Assembly included", desc: "Our team assembles the product in your room at no extra cost" },
+    { title: "Payment options", desc: "Cash, Bizum, credit/debit card or cash on delivery" },
+    { title: "14-day returns", desc: "If you're not satisfied, we collect the product — no questions asked" },
+  ];
+
+  const testimonials = lang === "es" ? [
+    { name: "María G.", location: "Fuenlabrada", text: "Pedí el canapé el lunes y lo tenía el miércoles. El chico fue muy amable y lo subió él solo." },
+    { name: "Carlos R.", location: "Leganés", text: "Vinieron a casa a enseñarme los colchones sin compromiso. Al final compré el Hybrid HR y estoy encantado." },
+    { name: "Ana M.", location: "Getafe", text: "Precio muy competitivo y entrega rapidísima. El colchón es exactamente lo que buscaba." },
+  ] : [
+    { name: "María G.", location: "Fuenlabrada", text: "I ordered the storage bed on Monday and had it by Wednesday. The delivery guy was really helpful and brought it up on his own." },
+    { name: "Carlos R.", location: "Leganés", text: "They came to my house to show me the mattresses with no pressure. I ended up buying the Hybrid HR and I'm delighted." },
+    { name: "Ana M.", location: "Getafe", text: "Very competitive prices and incredibly fast delivery. The mattress is exactly what I was looking for." },
+  ];
 
   return (
     <TooltipProvider>
@@ -331,10 +320,10 @@ export default function ProductDetail() {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-lg">
                 <Gift className="w-5 h-5 text-primary" />
-                ¡Tu almohada de regalo!
+                {t.pillowTitle}
               </DialogTitle>
               <DialogDescription className="text-sm text-muted-foreground">
-                Por comprar <strong>{product.name}</strong> online, te regalamos una almohada. ¿Cuál prefieres?
+                {t.pillowDesc(tProduct.name)}
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-3 my-2">
@@ -345,10 +334,10 @@ export default function ProductDetail() {
                 }`}
               >
                 <div className="font-semibold text-sm text-foreground flex items-center justify-between">
-                  🛏️ Almohada doble española
-                  <span className="text-xs text-primary font-medium">Elegir →</span>
+                  {t.pillowOption1Title}
+                  <span className="text-xs text-primary font-medium">{t.pillowChooseLabel}</span>
                 </div>
-                <div className="text-xs text-muted-foreground mt-0.5">Una almohada grande estilo matrimonial (150×45 cm aprox.)</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption1Desc}</div>
               </button>
               <button
                 onClick={() => handlePillowSelect("two-singles")}
@@ -357,15 +346,15 @@ export default function ProductDetail() {
                 }`}
               >
                 <div className="font-semibold text-sm text-foreground flex items-center justify-between">
-                  🛏️🛏️ Dos almohadas individuales
-                  <span className="text-xs text-primary font-medium">Elegir →</span>
+                  {t.pillowOption2Title}
+                  <span className="text-xs text-primary font-medium">{t.pillowChooseLabel}</span>
                 </div>
-                <div className="text-xs text-muted-foreground mt-0.5">Dos almohadas individuales (70×40 cm aprox. cada una)</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{t.pillowOption2Desc}</div>
               </button>
             </div>
             {pillowError && (
               <p className="text-xs text-center text-red-500 font-medium animate-in fade-in slide-in-from-top-1 duration-200">
-                👆 Por favor, elige tu almohada de regalo para continuar
+                {t.pillowError}
               </p>
             )}
             <Button
@@ -373,17 +362,17 @@ export default function ProductDetail() {
               onClick={handleContinueToCheckout}
             >
               <CreditCard className="w-4 h-4" />
-              Continuar al pago →
+              {t.pillowContinue}
             </Button>
             <p className="text-xs text-center text-muted-foreground">
-              Entrega garantizada en 48h · 14 días de devolución gratuita
+              {t.pillowFooter}
             </p>
           </DialogContent>
         </Dialog>
 
         {/* Top bar */}
         <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-medium tracking-wide">
-          🚚 Entrega en 48 horas · Fuenlabrada y alrededores · Pago al recibir disponible
+          {t.topBar}
         </div>
 
         {/* Nav */}
@@ -395,28 +384,43 @@ export default function ProductDetail() {
               </div>
               <div>
                 <div className="font-serif font-semibold text-foreground leading-tight text-base">Descanso Rápido</div>
-                <div className="text-xs text-muted-foreground leading-tight">Castilla · Madrid</div>
+                <div className="text-xs text-muted-foreground leading-tight">{t.brandSubtitle}</div>
               </div>
             </Link>
-            <Link href="/">
-              <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
-                <ArrowLeft className="w-4 h-4" />
-                <span className="hidden sm:inline">Volver a productos</span>
-              </Button>
-            </Link>
+            <div className="flex items-center gap-2">
+              {/* Language toggle */}
+              <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
+                <button
+                  onClick={() => setLang("es")}
+                  className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "es" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  ES
+                </button>
+                <button
+                  onClick={() => setLang("en")}
+                  className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                >
+                  EN
+                </button>
+              </div>
+              <Link href="/">
+                <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
+                  <ArrowLeft className="w-4 h-4" />
+                  <span className="hidden sm:inline">{lang === "es" ? "Volver a productos" : "Back to products"}</span>
+                </Button>
+              </Link>
+            </div>
           </div>
         </header>
 
         {/* Breadcrumb */}
         <div className="container py-3">
           <nav className="flex items-center gap-1.5 text-xs text-muted-foreground">
-            <Link href="/" className="hover:text-foreground transition-colors">Inicio</Link>
+            <Link href="/" className="hover:text-foreground transition-colors">{lang === "es" ? "Inicio" : "Home"}</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link href="/#productos" className="hover:text-foreground transition-colors capitalize">
-              {product.category === "canapes" ? "Canapés" : product.category === "colchones" ? "Colchones" : "Bases"}
-            </Link>
+            <Link href="/#productos" className="hover:text-foreground transition-colors">{categoryLabel}</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground font-medium">{product.name}</span>
+            <span className="text-foreground font-medium">{tProduct.name}</span>
           </nav>
         </div>
 
@@ -427,21 +431,17 @@ export default function ProductDetail() {
             {/* Image */}
             <div className="relative">
               <div className="rounded-2xl overflow-hidden bg-muted aspect-[4/3]">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
+                <img src={meta.image} alt={tProduct.name} className="w-full h-full object-cover" />
               </div>
-              <Badge className={`absolute top-4 left-4 text-xs font-semibold ${product.badgeColor}`}>
-                {product.badge}
+              <Badge className={`absolute top-4 left-4 text-xs font-semibold ${meta.badgeColor}`}>
+                {tProduct.badge}
               </Badge>
               {/* Trust badges */}
               <div className="mt-4 grid grid-cols-3 gap-3">
                 {[
-                  { icon: Truck, label: "Entrega 48h", sub: "Garantizada" },
-                  { icon: Shield, label: "Garantía", sub: "2–10 años" },
-                  { icon: Package, label: "Montaje", sub: "Incluido" },
+                  { icon: Truck, label: lang === "es" ? "Entrega 48h" : "48h Delivery", sub: lang === "es" ? "Garantizada" : "Guaranteed" },
+                  { icon: Shield, label: lang === "es" ? "Garantía" : "Warranty", sub: "2–10 años" },
+                  { icon: Package, label: lang === "es" ? "Montaje" : "Assembly", sub: lang === "es" ? "Incluido" : "Included" },
                 ].map(({ icon: Icon, label, sub }) => (
                   <div key={label} className="flex flex-col items-center gap-1 p-3 rounded-xl bg-muted/50 text-center">
                     <Icon className="w-5 h-5 text-primary" />
@@ -456,27 +456,27 @@ export default function ProductDetail() {
             <div className="flex flex-col gap-5">
               <div>
                 <h1 className="font-serif text-2xl sm:text-3xl font-bold text-foreground leading-tight">
-                  {product.name}
+                  {tProduct.name}
                 </h1>
-                <p className="text-muted-foreground mt-1">{product.subtitle}</p>
+                <p className="text-muted-foreground mt-1">{content.subtitle}</p>
               </div>
 
               {/* Price */}
               <div className="flex items-baseline gap-2">
                 <span className="text-3xl font-bold text-primary">{selectedPrice}</span>
-                <span className="text-sm text-muted-foreground line-through">Precio de mercado +20%</span>
+                <span className="text-sm text-muted-foreground line-through">{lang === "es" ? "Precio de mercado +20%" : "Market price +20%"}</span>
               </div>
 
               {/* Size selector */}
               <div>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="text-sm font-semibold text-foreground">Elige tu medida:</span>
+                  <span className="text-sm font-semibold text-foreground">{lang === "es" ? "Elige tu medida:" : "Choose your size:"}</span>
                   {!selectedSize && (
-                    <span className="text-xs text-amber-600 font-medium">← Selecciona antes de comprar</span>
+                    <span className="text-xs text-amber-600 font-medium">{lang === "es" ? "← Selecciona antes de comprar" : "← Select before buying"}</span>
                   )}
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                  {product.sizes.map((size) => (
+                  {meta.sizes.map((size) => (
                     <button
                       key={size.label}
                       onClick={() => setSelectedSize(size.label)}
@@ -500,10 +500,10 @@ export default function ProductDetail() {
                   onClick={handleBuyNow}
                 >
                   <CreditCard className="w-5 h-5" />
-                  Comprar ahora
+                  {t.btnBuyNow}
                 </Button>
                 <p className="text-xs text-center text-muted-foreground -mt-1">
-                  🎁 Almohada gratis · 48h garantizadas · 14 días devolución
+                  {t.btnBuyNowSub}
                 </p>
 
                 <Tooltip>
@@ -514,32 +514,31 @@ export default function ProductDetail() {
                       onClick={handleWhatsApp}
                     >
                       <MessageCircle className="w-5 h-5 text-green-600" />
-                      Probar o pagar contrarembolso
+                      {t.btnTryPay}
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs text-sm" side="bottom">
-                    🚐 <strong>Showroom Móvil</strong> — Nos desplazamos a tu casa con muestras para que veas y toques el producto antes de decidir. Sin compromiso. O recíbelo y paga al repartidor en efectivo, Bizum o tarjeta.
+                    🚐 <strong>{lang === "es" ? "Showroom Móvil" : "Mobile Showroom"}</strong> — {t.tooltipTryPay}
                   </TooltipContent>
                 </Tooltip>
                 <p className="text-xs text-center text-muted-foreground -mt-1">
-                  Prueba en casa o paga al recibir — sin tarjeta por adelantado
+                  {t.btnTryPaySub}
                 </p>
               </div>
 
               {/* Short description */}
               <p className="text-sm text-muted-foreground leading-relaxed border-t border-border pt-4">
-                {product.longDescription}
+                {content.longDescription}
               </p>
             </div>
           </div>
 
           {/* Features & Specs */}
           <div className="mt-12 grid md:grid-cols-2 gap-8">
-            {/* Features */}
             <div>
-              <h2 className="font-serif text-xl font-bold text-foreground mb-4">Características</h2>
+              <h2 className="font-serif text-xl font-bold text-foreground mb-4">{lang === "es" ? "Características" : "Features"}</h2>
               <ul className="space-y-2">
-                {product.features.map((f) => (
+                {content.features.map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-foreground">
                     <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                     {f}
@@ -547,17 +546,13 @@ export default function ProductDetail() {
                 ))}
               </ul>
             </div>
-
-            {/* Specs */}
             <div>
-              <h2 className="font-serif text-xl font-bold text-foreground mb-4">Especificaciones</h2>
+              <h2 className="font-serif text-xl font-bold text-foreground mb-4">{lang === "es" ? "Especificaciones" : "Specifications"}</h2>
               <div className="rounded-xl border border-border overflow-hidden">
-                {product.specs.map((spec, i) => (
+                {content.specs.map((spec, i) => (
                   <div
                     key={spec.label}
-                    className={`flex items-center justify-between px-4 py-3 text-sm ${
-                      i % 2 === 0 ? "bg-muted/30" : "bg-background"
-                    }`}
+                    className={`flex items-center justify-between px-4 py-3 text-sm ${i % 2 === 0 ? "bg-muted/30" : "bg-background"}`}
                   >
                     <span className="text-muted-foreground font-medium">{spec.label}</span>
                     <span className="text-foreground font-semibold text-right">{spec.value}</span>
@@ -568,25 +563,35 @@ export default function ProductDetail() {
           </div>
 
           {/* Upsell */}
-          {product.upsell && product.upsell.length > 0 && (
+          {meta.upsellIds && meta.upsellIds.length > 0 && (
             <div className="mt-12">
-              <h2 className="font-serif text-xl font-bold text-foreground mb-2">Completa tu compra</h2>
-              <p className="text-sm text-muted-foreground mb-5">Productos que combinan perfectamente con el {product.name}</p>
+              <h2 className="font-serif text-xl font-bold text-foreground mb-2">
+                {lang === "es" ? "Completa tu compra" : "Complete your setup"}
+              </h2>
+              <p className="text-sm text-muted-foreground mb-5">
+                {lang === "es" ? `Productos que combinan perfectamente con el ${tProduct.name}` : `Products that pair perfectly with the ${tProduct.name}`}
+              </p>
               <div className="grid sm:grid-cols-2 gap-4">
-                {product.upsell.map((item) => (
-                  <div key={item.name} className="flex items-center justify-between p-4 rounded-xl border border-border hover:border-primary/40 transition-colors bg-card">
-                    <div>
-                      <div className="font-semibold text-sm text-foreground">{item.name}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{item.reason}</div>
+                {meta.upsellIds.map((upsellId, idx) => {
+                  const upsellProduct = t.products[upsellId];
+                  const upsellMeta = productMeta[upsellId];
+                  const reason = content.upsellReasons[idx] ?? "";
+                  if (!upsellProduct || !upsellMeta) return null;
+                  return (
+                    <div key={upsellId} className="flex items-center justify-between p-4 rounded-xl border border-border hover:border-primary/40 transition-colors bg-card">
+                      <div>
+                        <div className="font-semibold text-sm text-foreground">{upsellProduct.name}</div>
+                        <div className="text-xs text-muted-foreground mt-0.5">{reason}</div>
+                      </div>
+                      <div className="text-right shrink-0 ml-4">
+                        <div className="text-sm font-bold text-primary">{upsellMeta.sizes[0]?.price}</div>
+                        <Link href={`/producto/${upsellId}`}>
+                          <button className="text-xs text-primary hover:underline mt-0.5">{lang === "es" ? "Ver →" : "View →"}</button>
+                        </Link>
+                      </div>
                     </div>
-                    <div className="text-right shrink-0 ml-4">
-                      <div className="text-sm font-bold text-primary">{item.price}</div>
-                      <Link href={`/producto/${item.name.toLowerCase().replace(/\s+/g, "-").replace(/[áàä]/g, "a").replace(/[éèë]/g, "e").replace(/[íìï]/g, "i").replace(/[óòö]/g, "o").replace(/[úùü]/g, "u").replace(/ñ/g, "n")}`}>
-                        <button className="text-xs text-primary hover:underline mt-0.5">Ver →</button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -595,15 +600,10 @@ export default function ProductDetail() {
           <div className="mt-12 rounded-2xl bg-primary/5 border border-primary/20 p-6">
             <h2 className="font-serif text-lg font-bold text-foreground mb-4 flex items-center gap-2">
               <Truck className="w-5 h-5 text-primary" />
-              Entrega y pago
+              {lang === "es" ? "Entrega y pago" : "Delivery & payment"}
             </h2>
             <div className="grid sm:grid-cols-2 gap-4 text-sm">
-              {[
-                { title: "Entrega en 48 horas", desc: "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla y alrededores" },
-                { title: "Montaje incluido", desc: "Nuestro equipo monta el producto en tu habitación sin coste adicional" },
-                { title: "Formas de pago", desc: "Efectivo, Bizum, tarjeta crédito/débito o contrareembolso al recibir" },
-                { title: "14 días de devolución", desc: "Si no estás satisfecho, recogemos el producto sin preguntas" },
-              ].map(({ title, desc }) => (
+              {deliveryItems.map(({ title, desc }) => (
                 <div key={title} className="flex items-start gap-3">
                   <CheckCircle className="w-4 h-4 text-primary mt-0.5 shrink-0" />
                   <div>
@@ -617,21 +617,17 @@ export default function ProductDetail() {
 
           {/* Testimonials */}
           <div className="mt-12">
-            <h2 className="font-serif text-xl font-bold text-foreground mb-5">Lo que dicen nuestros clientes</h2>
+            <h2 className="font-serif text-xl font-bold text-foreground mb-5">{t.testimonialsTitle}</h2>
             <div className="grid sm:grid-cols-3 gap-4">
-              {[
-                { name: "María G.", location: "Fuenlabrada", text: "Pedí el canapé el lunes y lo tenía el miércoles. El chico fue muy amable y lo subió él solo." },
-                { name: "Carlos R.", location: "Leganés", text: "Vinieron a casa a enseñarme los colchones sin compromiso. Al final compré el Hybrid HR y estoy encantado." },
-                { name: "Ana M.", location: "Getafe", text: "Precio muy competitivo y entrega rapidísima. El colchón es exactamente lo que buscaba." },
-              ].map((t) => (
-                <div key={t.name} className="p-4 rounded-xl bg-card border border-border">
+              {testimonials.map((review) => (
+                <div key={review.name} className="p-4 rounded-xl bg-card border border-border">
                   <div className="flex gap-0.5 mb-2">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                     ))}
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed">"{t.text}"</p>
-                  <div className="mt-3 text-xs text-muted-foreground font-medium">{t.name} · {t.location}</div>
+                  <p className="text-sm text-foreground leading-relaxed">"{review.text}"</p>
+                  <div className="mt-3 text-xs text-muted-foreground font-medium">{review.name} · {review.location}</div>
                 </div>
               ))}
             </div>
@@ -643,7 +639,7 @@ export default function ProductDetail() {
           <div className="container text-center text-sm text-muted-foreground">
             <p className="font-semibold text-foreground mb-1">Descanso Rápido Castilla</p>
             <p>Fuenlabrada, Madrid · WhatsApp: <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-primary hover:underline">+34 711 204 284</a></p>
-            <p className="mt-2 text-xs">© 2025 Descanso Rápido Castilla. Todos los derechos reservados.</p>
+            <p className="mt-2 text-xs">{t.footerCopyright}</p>
           </div>
         </footer>
 
