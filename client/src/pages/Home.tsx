@@ -286,14 +286,26 @@ export default function Home() {
                       <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">+{product.sizes.length - 4}</span>
                     )}
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="mb-3">
                     <span className="font-semibold text-primary text-lg">{product.price}</span>
+                  </div>
+                  <div className="flex flex-col gap-2">
                     <a
-                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20me%20interesa%20el%20${encodeURIComponent(product.name)}`}
+                      href={`https://descanso-rapido-castilla.myshopify.com/products/${product.id}`}
                       target="_blank" rel="noopener noreferrer"
+                      className="w-full"
                     >
-                      <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5">
-                        Pedir <ChevronRight className="w-3.5 h-3.5" />
+                      <Button size="sm" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground gap-1.5">
+                        <CreditCard className="w-3.5 h-3.5" /> Comprar ahora
+                      </Button>
+                    </a>
+                    <a
+                      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hola, me interesa el ${product.name}. ¿Podéis visitarme o puedo reservar sin pagar?`)}`}
+                      target="_blank" rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button size="sm" variant="outline" className="w-full border-[#25D366] text-[#25D366] hover:bg-[#25D366]/5 gap-1.5">
+                        <MessageCircle className="w-3.5 h-3.5" /> Reservar o ver
                       </Button>
                     </a>
                   </div>
