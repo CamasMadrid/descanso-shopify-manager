@@ -1,0 +1,43 @@
+{
+  "build_command": "pnpm run build",
+  "capabilities": [
+    "server",
+    "db",
+    "user"
+  ],
+  "dev_command": "pnpm run dev",
+  "env_vars": {
+    "DATABASE_URL": "mysql://24YeJNoJpCzCJhm.root:ZYFWrgo125L98u9gSZds@gateway06.us-east-1.prod.aws.tidbcloud.com:4000/NteP5R75gry86mQCEyPh6j?ssl={\"rejectUnauthorized\":true}"
+  },
+  "experiments": [
+    "no_db_push"
+  ],
+  "git_remote": {
+    "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663668909283/NteP5R75gry86mQCEyPh6j",
+    "access_key_id": "ASIAZV3A2ECZIYVMCYXL",
+    "secret_access_key": "+eRZVESSDejhXqy2CqMUZ/c98UR8HoMcOZmN4oVd",
+    "session_token": "IQoJb3JpZ2luX2VjEOD//////////wEaCXVzLWVhc3QtMSJHMEUCIQDSoGQdZr1TdH/BoCHgKBKCrqXWQazQrB0FITPXzbX8VAIgWFvLz8LkEZ5C9xputgftdwfE3Goca1pbQvB7j/F2lJIq/wMIqP//////////ARAEGgw2NjUzODYwOTg4NjYiDNqDVPl0oXlwCBkMgirTA7ZKnfEMCXy0PO1TU4rUldP5orNfuvjz0dkeeQwrU898mahul90YupkODA+3uoWybpOZ8l8Bv9XncpFcqQGEQ2FwWE74rLu6l7YRKcZbxSQAjhPA/ncqc4xflnbHcevkeadbicPDxWbih0LFtkjgNI0mb9DeXiJNfISY+QQiQXWWvTf343AkufJJTlXSHlrhjZHoIHoOoYNFZHAoyBN44XqHOy9/T5Ib9S1l8d+Wm1fg97CVX+NE5hx666nTDYM3UFjWuxmspfRIAibOkk8BH9gHhRkyMEegBCTQsgJoztPDQTD8+WcshQu1ttF0MfdxCl73fn+JxbtJGCPwmro06asm6vcycTnbvxQFkzsNoVhc1phM81jRAUwF1YiIlVpvIYVPaun92KdRZUzv6/aJuNx5jIM9kbP9GFSi7ax5ZkIpNMw8jTW531yebCeyTup9X8Wqf/FneTEWyjaUxti2C6c/qLZLLXT+OPJN0W1E8KbJmqmkTmoJZ0q5IeRwUOXRVdVp8ILqZLXo2AEbaRzedlctsV1L6+4bLgGbuNSerVyGJuSf6cW/S5wQa4sycjw/fGAExpQ0NSIXrPDIv8xGuOTXqQLJOk4hRRz8doMy5W08UGg2MJOyp9AGOp0BM2oZ9XAEV5gshAv2VYuq2pYUw5M1PJ6GXhYy7nDISwIMfFhKuv7gQ3pekEXTMFhz9ynvTGzBGLrWN5EJPInlhdamBEzGs/H7VALDTMZkbTGSaBrcrjctLGNd5Buev+jvB8ERYKiKMw3Cmt+MrkbeKBEAues+rdzkY9wSWlbJx4BmVRMGXNI+asN2Pg89tUW2WzXEhXc7SxgL1//hrA==",
+    "expiration": "2026-05-18T03:04:51.000Z"
+  },
+  "name": "descanso-shopify-manager",
+  "path": "/home/ubuntu/descanso-shopify-manager",
+  "port": 3000,
+  "secrets": {
+    "BUILT_IN_FORGE_API_KEY": "QE9bfvDQiKTKGhwwTRprET",
+    "BUILT_IN_FORGE_API_URL": "https://forge.manus.ai",
+    "JWT_SECRET": "3MdAiqK8QJrn92HjFgeob9",
+    "OAUTH_SERVER_URL": "https://api.manus.im",
+    "OWNER_NAME": "Bill",
+    "OWNER_OPEN_ID": "9i6AbJXBZ9Uzu37j5k5Fzy",
+    "VITE_ANALYTICS_ENDPOINT": "https://manus-analytics.com",
+    "VITE_ANALYTICS_WEBSITE_ID": "17c5f8b2-3259-47da-bd26-8f316ca3a19f",
+    "VITE_APP_ID": "NteP5R75gry86mQCEyPh6j",
+    "VITE_APP_LOGO": "",
+    "VITE_APP_TITLE": "Descanso Rapido Castilla - Store Manager",
+    "VITE_FRONTEND_FORGE_API_KEY": "F89dKDkn8DbYUyZPwFpSzs",
+    "VITE_FRONTEND_FORGE_API_URL": "https://forge.manus.ai",
+    "VITE_OAUTH_PORTAL_URL": "https://manus.im"
+  },
+  "template_id": "web-db-user",
+  "test_command": "pnpm test"
+}
