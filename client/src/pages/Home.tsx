@@ -13,7 +13,7 @@ const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5
 const LIFESTYLE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/lifestyle-bedroom-h6krn835mojxD4zXBGoKPq.webp";
 
 const CANAPE_EXCELLENT = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-excellent-clean-NSFixs2vvWmm2KZbrrBBqL.webp";
-const CANAPE_PREMIUM = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-premium-clean-YxWsDqQ8xVoZArqPweodcg.webp";
+const CANAPE_PREMIUM = "/manus-storage/canape-premium-clean_5a178942.jpg";
 const CANAPE_ARTICULADO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-articulado-clean-eHwfxaXXiMCRYiXe3s7YjH.webp";
 const COLCHON_HYBRID = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
 const COLCHON_MEMORY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
@@ -426,13 +426,13 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <Card key={t.name} className="p-6 border border-border">
+              <Card key={t.name} className="p-6 border border-border flex flex-col">
                 <div className="flex gap-1 mb-3">
                   {[1,2,3,4,5].map(i => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-foreground text-sm leading-relaxed mb-4">"{t.text}"</p>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold text-sm">
+                <p className="text-foreground text-sm leading-relaxed mb-4 flex-1">"{t.text}"</p>
+                <div className="flex items-center gap-2 mt-auto pt-2">
+                  <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center text-primary font-semibold text-sm shrink-0">
                     {t.name[0]}
                   </div>
                   <div>
