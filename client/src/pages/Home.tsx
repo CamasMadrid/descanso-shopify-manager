@@ -24,6 +24,34 @@ const COLCHON_MEMORY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283
 const BASE_LUCY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/base-lucy-clean-jXtnAsBSxs6PHZnBuQTXMB.webp";
 
 const WHATSAPP_NUMBER = "34711204284";
+const SHOPIFY_STORE = "descanso-rapido-castilla.myshopify.com";
+
+// Shopify variant IDs — keyed by product handle then size
+const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
+  "canape-excellent": {
+    "90cm": 53952203456853, "105cm": 53952203489621, "135cm": 53952203522389,
+    "150cm": 53952203555157, "160cm": 53952203587925, "180cm": 53952203620693,
+  },
+  "canape-premium": {
+    "90cm": 53952203653461, "105cm": 53952203686229, "135cm": 53952203718997,
+    "150cm": 53952203751765, "160cm": 53952203784533, "180cm": 53952203817301,
+  },
+  "canape-articulado": {
+    "135cm": 53952205914453, "150cm": 53952205947221, "160cm": 53952205979989, "180cm": 53952206012757,
+  },
+  "colchon-memory": {
+    "90cm": 53952205455701, "105cm": 53952205488469, "135cm": 53952205521237,
+    "150cm": 53952205554005, "160cm": 53952205586773, "180cm": 53952205619541,
+  },
+  "colchon-hybrid": {
+    "90cm": 53952205652309, "105cm": 53952205685077, "135cm": 53952205717845,
+    "150cm": 53952205750613, "160cm": 53952205783381, "180cm": 53952205816149,
+  },
+  "base-lucy": {
+    "90cm": 53952206045525, "135cm": 53952206078293, "150cm": 53952206111061,
+    "160cm": 53952206143829, "180cm": 53952206176597,
+  },
+};
 
 const productImages: Record<string, string> = {
   "canape-excellent": CANAPE_EXCELLENT,
@@ -65,9 +93,10 @@ export default function Home() {
   const { lang, setLang, t } = useLang();
   const { currency, setCurrency, formatPrice } = useCurrency();
   const [activeCategory, setActiveCategory] = useState<"all" | "canapes" | "colchones" | "bases">("all");
-  const [pillowModal, setPillowModal] = useState<{ open: boolean; productId: string; productName: string }>({ open: false, productId: "", productName: "" });
+  const [pillowModal, setPillowModal] = useState<{ open: boolean; productId: string; productName: string; variantId: number | null }>({ open: false, productId: "", productName: "", variantId: null });
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
   const [pillowError, setPillowError] = useState(false);
+  const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
 
   const products = productMeta.map(m => ({
     ...m,
@@ -95,9 +124,11 @@ export default function Home() {
   ];
 
   const handleBuyNow = (productId: string, productName: string) => {
+    const selectedSize = selectedSizes[productId];
+    const variantId = selectedSize ? (SHOPIFY_VARIANTS[productId]?.[selectedSize] ?? null) : null;
     setPillowChoice(null);
     setPillowError(false);
-    setPillowModal({ open: true, productId, productName });
+    setPillowModal({ open: true, productId, productName, variantId });
   };
 
   const handleContinueToCheckout = () => {
@@ -105,18 +136,17 @@ export default function Home() {
       setPillowError(true);
       return;
     }
-    // Pass the pillow choice as a Shopify cart note (order attribute)
-    // Using /cart/add with attributes then redirect to checkout
     const note = pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
-    // Shopify checkout URL with note attribute appended
-    const baseUrl = `https://descanso-rapido-castilla.myshopify.com/cart`;
-    const params = new URLSearchParams({
-      "note": note,
-      "return_to": "/checkout",
-    });
-    const url = `${baseUrl}?${params.toString()}`;
+    let url: string;
+    if (pillowModal.variantId) {
+      // Direct cart permalink with variant + note attribute
+      url = `https://${SHOPIFY_STORE}/cart/${pillowModal.variantId}:1?attributes[Regalo almohada]=${encodeURIComponent(note)}`;
+    } else {
+      // Fallback: product page (customer picks size there)
+      url = `https://${SHOPIFY_STORE}/products/${pillowModal.productId}?note=${encodeURIComponent(note)}`;
+    }
     window.open(url, "_blank", "noopener,noreferrer");
-    setPillowModal({ open: false, productId: "", productName: "" });
+    setPillowModal({ open: false, productId: "", productName: "", variantId: null });
   };
 
   // Clicking an option only selects it — no navigation
@@ -395,15 +425,24 @@ export default function Home() {
                     </Link>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 mb-3 leading-relaxed">{product.description}</p>
-                  <div className="flex flex-wrap gap-1 mb-1">
-                    {product.sizes.slice(0, 4).map(s => (
-                      <span key={s} className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">{s}</span>
+                  {/* Size selector */}
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {product.sizes.map(s => (
+                      <button
+                        key={s}
+                        type="button"
+                        onClick={() => setSelectedSizes(prev => ({ ...prev, [product.id]: prev[product.id] === s ? "" : s }))}
+                        className={`text-xs px-2.5 py-1 rounded border transition-all ${
+                          selectedSizes[product.id] === s
+                            ? "bg-primary text-primary-foreground border-primary font-semibold"
+                            : "bg-muted border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                        }`}
+                      >
+                        {s}
+                      </button>
                     ))}
-                    {product.sizes.length > 4 && (
-                      <span className="text-xs bg-muted px-2 py-0.5 rounded text-muted-foreground">+{product.sizes.length - 4}</span>
-                    )}
                   </div>
-                  <p className="text-xs text-muted-foreground mb-3">{t.productSizeHint}</p>
+                  <p className="text-xs text-muted-foreground mb-3">{selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}</p>
                   <div className="mb-3">
                     <span className="font-semibold text-primary text-lg">{product.displayPrice}</span>
                   </div>
