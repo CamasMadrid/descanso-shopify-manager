@@ -51,6 +51,12 @@ export interface Translations {
   upsellPromptBtn: string;
   productVerDetalles: string;
 
+  // Size picker modal
+  sizeModalTitle: string;
+  sizeModalDesc: (name: string) => string;
+  sizeModalContinue: string;
+  sizeModalCancel: string;
+
   // Pillow modal
   pillowTitle: string;
   pillowDesc: (name: string) => string;
@@ -172,6 +178,11 @@ const es: Translations = {
   upsellPromptBtn: "Consultar precio conjunto",
   productVerDetalles: "Ver detalles →",
 
+  sizeModalTitle: "Elige tu talla",
+  sizeModalDesc: (name) => `Selecciona el tamaño de tu ${name} para continuar al pago:`,
+  sizeModalContinue: "Continuar →",
+  sizeModalCancel: "Cancelar",
+
   pillowTitle: "¡Tu almohada de regalo!",
   pillowDesc: (name) => `Por comprar ${name} online, te regalamos una almohada. ¿Cuál prefieres?`,
   pillowOption1Title: "🛏️ Almohada doble española",
@@ -284,6 +295,11 @@ const en: Translations = {
   upsellPromptDesc: "Get a special bundle discount. Message us on WhatsApp and we'll give you a price.",
   upsellPromptBtn: "Ask for bundle price",
   productVerDetalles: "View details →",
+
+  sizeModalTitle: "Choose your size",
+  sizeModalDesc: (name) => `Select the size of your ${name} to continue to checkout:`,
+  sizeModalContinue: "Continue →",
+  sizeModalCancel: "Cancel",
 
   pillowTitle: "Your free pillow!",
   pillowDesc: (name) => `As a thank you for buying ${name} online, we're including a free pillow. Which would you prefer?`,

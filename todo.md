@@ -76,3 +76,6 @@
 - [ ] Add currency toggle pill to nav (Home, ProductDetail)
 - [ ] Wire all product prices through currency formatter
 - [ ] Persist currency choice across navigation (localStorage)
+
+## Phase 10: UX Improvements
+- [x] Size picker popup/modal — clicking "Comprar ahora" without size opens a modal with size buttons and prices, then proceeds to pillow modal and checkout

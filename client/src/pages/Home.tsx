@@ -11,7 +11,7 @@ import {
   CheckCircle, ArrowRight, MessageCircle, Gift
 } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
-import { useCurrency, type Currency } from "@/contexts/CurrencyContext";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/hero-48h-delivery-nwmBqks655ZGdDDfya8dbh.webp";
 const LIFESTYLE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/lifestyle-bedroom-h6krn835mojxD4zXBGoKPq.webp";
@@ -89,15 +89,25 @@ const BASE_PRICES: Record<string, number> = {
   "base-lucy": 129,
 };
 
+// Per-size EUR prices (same order as productMeta sizes arrays)
+const PRICES_BY_SIZE: Record<string, number[]> = {
+  "canape-excellent": [249, 279, 309, 339, 369, 399],
+  "canape-premium": [329, 389, 429, 469, 499, 549],
+  "canape-articulado": [499, 549, 629, 699],
+  "colchon-memory": [149, 169, 189, 209, 229, 249],
+  "colchon-hybrid": [299, 339, 379, 419, 449, 499],
+  "base-lucy": [129, 139, 159, 179, 199],
+};
+
 export default function Home() {
   const { lang, setLang, t } = useLang();
-  const { currency, setCurrency, formatPrice } = useCurrency();
+  const { formatPrice } = useCurrency();
   const [activeCategory, setActiveCategory] = useState<"all" | "canapes" | "colchones" | "bases">("all");
   const [pillowModal, setPillowModal] = useState<{ open: boolean; productId: string; productName: string; variantId: number | null }>({ open: false, productId: "", productName: "", variantId: null });
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
   const [pillowError, setPillowError] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
-  const [sizeError, setSizeError] = useState<Record<string, boolean>>({});
+  const [sizeModal, setSizeModal] = useState<{ open: boolean; productId: string; productName: string }>({ open: false, productId: "", productName: "" });
 
   const products = productMeta.map(m => ({
     ...m,
@@ -127,12 +137,22 @@ export default function Home() {
   const handleBuyNow = (productId: string, productName: string) => {
     const selectedSize = selectedSizes[productId];
     if (!selectedSize) {
-      // Highlight the size selector by scrolling to it and shaking it
-      setSizeError(prev => ({ ...prev, [productId]: true }));
-      setTimeout(() => setSizeError(prev => ({ ...prev, [productId]: false })), 2000);
+      // Open size picker modal instead of inline error
+      setSizeModal({ open: true, productId, productName });
       return;
     }
     const variantId = SHOPIFY_VARIANTS[productId]?.[selectedSize] ?? null;
+    setPillowChoice(null);
+    setPillowError(false);
+    setPillowModal({ open: true, productId, productName, variantId });
+  };
+
+  const handleSizeModalSelect = (size: string) => {
+    const { productId, productName } = sizeModal;
+    setSelectedSizes(prev => ({ ...prev, [productId]: size }));
+    setSizeModal({ open: false, productId: "", productName: "" });
+    // Immediately proceed to pillow modal with the chosen size
+    const variantId = SHOPIFY_VARIANTS[productId]?.[size] ?? null;
     setPillowChoice(null);
     setPillowError(false);
     setPillowModal({ open: true, productId, productName, variantId });
@@ -162,8 +182,49 @@ export default function Home() {
     setPillowError(false);
   };
 
+  // Get the product sizes for the current size modal
+  const sizeModalProduct = productMeta.find(p => p.id === sizeModal.productId);
+  const sizeModalPrices = PRICES_BY_SIZE[sizeModal.productId] ?? [];
+
   return (
     <div className="min-h-screen bg-background">
+      {/* ── Size Picker Modal ── */}
+      <Dialog open={sizeModal.open} onOpenChange={(open) => setSizeModal(prev => ({ ...prev, open }))}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-lg">
+              <span className="text-2xl">📐</span>
+              {t.sizeModalTitle}
+            </DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground">
+              {t.sizeModalDesc(sizeModal.productName)}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-2 gap-2 my-3">
+            {(sizeModalProduct?.sizes ?? []).map((size, idx) => (
+              <button
+                key={size}
+                type="button"
+                onClick={() => handleSizeModalSelect(size)}
+                className="flex flex-col items-center justify-center rounded-xl border-2 border-border p-3 hover:border-primary hover:bg-primary/5 active:scale-[0.97] transition-all duration-150 text-left group"
+              >
+                <span className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors">{size}</span>
+                <span className="text-xs text-primary font-medium mt-0.5">
+                  {lang === 'es' ? 'Desde' : 'From'} {formatPrice(sizeModalPrices[idx] ?? 0)}
+                </span>
+              </button>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => setSizeModal({ open: false, productId: "", productName: "" })}
+            className="w-full text-sm text-muted-foreground hover:text-foreground transition-colors py-1"
+          >
+            {t.sizeModalCancel}
+          </button>
+        </DialogContent>
+      </Dialog>
+
       {/* ── Pillow Gift Modal ── */}
       <Dialog open={pillowModal.open} onOpenChange={(open) => setPillowModal(prev => ({ ...prev, open }))}>
         <DialogContent className="max-w-sm">
@@ -438,8 +499,8 @@ export default function Home() {
                       </button>
                     ))}
                   </div>
-                  <p className={`text-xs mb-3 transition-colors ${sizeError[product.id] ? 'text-red-500 font-medium animate-pulse' : selectedSizes[product.id] ? 'text-green-600' : 'text-muted-foreground'}`}>
-                    {sizeError[product.id] ? (lang === 'es' ? '👆 Elige un tamaño para continuar' : '👆 Please select a size to continue') : selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}
+                  <p className={`text-xs mb-3 transition-colors ${selectedSizes[product.id] ? 'text-green-600 font-medium' : 'text-muted-foreground'}`}>
+                    {selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}
                   </p>
                   <div className="mb-3">
                     <span className="font-semibold text-primary text-lg">{product.displayPrice}</span>
