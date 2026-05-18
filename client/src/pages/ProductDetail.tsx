@@ -423,18 +423,7 @@ export default function ProductDetail() {
                   EN
                 </button>
               </div>
-              {/* Currency toggle */}
-              <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
-                {(["EUR", "USD", "GBP"] as Currency[]).map((c) => (
-                  <button
-                    key={c}
-                    onClick={() => setCurrency(c)}
-                    className={`px-2 py-1 rounded-full transition-all duration-200 ${currency === c ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-                  >
-                    {c === "EUR" ? "€" : c === "USD" ? "$" : "£"}
-                  </button>
-                ))}
-              </div>
+              {/* Currency: EUR only */}
               <Link href="/">
                 <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
                   <ArrowLeft className="w-4 h-4" />

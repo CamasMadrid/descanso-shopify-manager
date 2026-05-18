@@ -279,18 +279,7 @@ export default function Home() {
                 EN
               </button>
             </div>
-            {/* Currency toggle */}
-            <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
-              {(["EUR", "USD", "GBP"] as Currency[]).map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setCurrency(c)}
-                  className={`px-2 py-1 rounded-full transition-all duration-200 ${currency === c ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
-                >
-                  {c === "EUR" ? "€" : c === "USD" ? "$" : "£"}
-                </button>
-              ))}
-            </div>
+            {/* Currency: EUR only */}
             <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20me%20interesa%20información%20sobre%20vuestros%20productos`}
                target="_blank" rel="noopener noreferrer">
               <Button size="sm" className="bg-[#25D366] hover:bg-[#1ebe5d] text-white gap-1.5">
