@@ -97,6 +97,7 @@ export default function Home() {
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
   const [pillowError, setPillowError] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
+  const [sizeError, setSizeError] = useState<Record<string, boolean>>({});
 
   const products = productMeta.map(m => ({
     ...m,
@@ -125,7 +126,13 @@ export default function Home() {
 
   const handleBuyNow = (productId: string, productName: string) => {
     const selectedSize = selectedSizes[productId];
-    const variantId = selectedSize ? (SHOPIFY_VARIANTS[productId]?.[selectedSize] ?? null) : null;
+    if (!selectedSize) {
+      // Highlight the size selector by scrolling to it and shaking it
+      setSizeError(prev => ({ ...prev, [productId]: true }));
+      setTimeout(() => setSizeError(prev => ({ ...prev, [productId]: false })), 2000);
+      return;
+    }
+    const variantId = SHOPIFY_VARIANTS[productId]?.[selectedSize] ?? null;
     setPillowChoice(null);
     setPillowError(false);
     setPillowModal({ open: true, productId, productName, variantId });
@@ -442,7 +449,9 @@ export default function Home() {
                       </button>
                     ))}
                   </div>
-                  <p className="text-xs text-muted-foreground mb-3">{selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}</p>
+                  <p className={`text-xs mb-3 transition-colors ${sizeError[product.id] ? 'text-red-500 font-medium animate-pulse' : selectedSizes[product.id] ? 'text-green-600' : 'text-muted-foreground'}`}>
+                    {sizeError[product.id] ? (lang === 'es' ? '👆 Elige un tamaño para continuar' : '👆 Please select a size to continue') : selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}
+                  </p>
                   <div className="mb-3">
                     <span className="font-semibold text-primary text-lg">{product.displayPrice}</span>
                   </div>

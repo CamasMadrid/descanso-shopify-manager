@@ -1,8 +1,8 @@
 {
   "build_command": "pnpm run build",
   "capabilities": [
-    "server",
     "db",
+    "server",
     "user"
   ],
   "dev_command": "pnpm run dev",
@@ -15,10 +15,10 @@
   ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663668909283/NteP5R75gry86mQCEyPh6j",
-    "access_key_id": "ASIAZV3A2ECZHMBO6BUC",
-    "secret_access_key": "VdYsiqALohHJ+bvpa207Wxfq5y9RWmR3Xkk2w7w3",
-    "session_token": "IQoJb3JpZ2luX2VjEOD//////////wEaCXVzLWVhc3QtMSJHMEUCIQCLgggXW7wstxv+yaOONfhPs1+lrS2R84njknhFG4GsrwIgUUMnrXu04gbZ5yhONDZSOXf/ONUIB4g/vMNmorfF4Toq/wMIqP//////////ARAEGgw2NjUzODYwOTg4NjYiDEHLZtKBjP/VwuFHyirTA0OYexfVbIIxhQLXGfAf2lW9nMoXvoOY/4PTE2+2ZYD5JKErgfZ0g2uBYpAE6+o9qQ/e2o88kaYXerpXC6HopqlfUfNtIhkgDUuoLbqjs4iBtgJ0SG4GLpqXkzQBrhry1dVjKyt1pmUcR1T/KR9BTfRk3Zco6mppGO2Nd06JD2MQwAvzedBsCwpLYl0xJpNqmPpeXpGRw98BMJKIVO9qumZYtTWt2qRoceqwym4QYe8GpjqtRQBPjQDTFxvR13TK4ghvEzbNou6+OvxYXWzVE1QCnsKVBj5pdxJpekDC06bC17cd/0GrxeB6cIKW4kTfVPRLWLHhe3Yq8HFO1PzGtD0MvYliJn8sOAi6KRDqT5pseSvq7oXqzxbqVDealJsalm2dldTASB++Qu88uI3mCJ5Ssog9iBfaE9pzxtR3KoTJ8VI4RthtRfSPkq18Ij0W6UDmjQoDKVHOeAOxVGv9NspOtvggX2pEmZ7ucutKEQFye3w9bZ5PQp76K5T4grBvgc083TmsD0ftcO2h38KN2xLQACGmLdc8F+T0oxrD0oadGQWReFwveiYNY/ITodgj4UDje2q2TduQDW2b4p3QEFms993EPteTRAdMZfIVK5XzKD7kMLC2p9AGOp0BATFmBgHbzb211p77v3katMVuAtseApqUAePpjHXKG9N6y8Omm4NZevaaPBA/k0AD5WSSsygzqmszRS7MxCbDY72S5FpCDoYWYeVv3z6GO8BDaxE5+CbQiM5jxhZBEa3k2tWC+LjkMMxJjzM1kj4gr6astkMlMNWLtsj4pH9xgZ1PBdt1xlwXQkvpWRXvMCsquvEPnedaM/wM/NZxug==",
-    "expiration": "2026-05-18T03:13:52.000Z"
+    "access_key_id": "ASIAZV3A2ECZP4VIVF7Y",
+    "secret_access_key": "9cyzPd3kErpDS9aOo61mV0KQMh7Lo4Dl2tR0xWpB",
+    "session_token": "IQoJb3JpZ2luX2VjEPv//////////wEaCXVzLWVhc3QtMSJHMEUCIFK/nQc0PoHFJdug95UOjLvsMDH3IuRjiGfLsOciXCzZAiEA7QxFrdC8fDZAG2N0stOaSANOZBdoyWf9d7auXEMZVPoq/wMIw///////////ARAEGgw2NjUzODYwOTg4NjYiDC14baKHPL/RBPvhDSrTAyWXt3STzhcQtaPnQ+i3hhKyl25fN5HOWGN1l8v2TEc50OLV0fJZIQ6QinRJ0PybqymK/Y6wKT4fHKGlm8wNppknLwkunrjTJnVfHJzJ755dgLzzJDdsyVzUuLRLp5UZA/JCoUNWJMye9+vxc8azp+RuxWYejRHBZcd9OR36tz5jUnpaj+Sfxs8H5bx8lrB4pFBY2sCvKCKAl194/7TX3bL236tK2KNjPU5ftw/CiJpyZ4TwGeSI9w0ytWuP9cTif5JMcu7rS86MMVvF+9OGdNPeJnYgHofcps/lBaAhnYx3rEPFsVjgShurX0nkESN+1muuYiJDmPp5n50PP29Zm8SIQPGrY6bd63WIjCaHa3GAOFnyAfqBOz96w+THy9Ct72gnby/91wC1ym60QFJ0iawLC2rXcI+UTqQsUpDFyBi/m7T2ihTbXM5VCKaUisFI/MMPJpDBdteHWFMpjAJOVF7KP/pBWNxC6SaWFH2cI0glM5MVROOLwTge6J/1jbNOeAOrUb1xR6ALtEZro2KwAyTT903LT/zDuimUN3xm1llOI0rd6WvLK2n3LISGjP/r3Yn2LQqi/V5UvhbxgyxsYFPJb71msQUMg62LBV6lcJ25wBaAMMqprdAGOp0BGr5Y3guNVFUgsmW+qU+npNjJYBJrlyIVBILfid/T74ydDf9EfaLXSwWMrF/e4dVfNkcB7j8jfIeUbaBeHGKhWtChwgOQ3uFaYvrFwvMMFKGLyrJE7S4Agl8Uy6gNDOqhCZTqyHIwmRFTg/XF86hZE6E3ET51joF3GRtI/cl/ztla3NTYiFsOJUjhV5kzarCC/ztk4kn7AgLCUQyjww==",
+    "expiration": "2026-05-19T06:04:58.000Z"
   },
   "name": "descanso-shopify-manager",
   "path": "/home/ubuntu/descanso-shopify-manager",
