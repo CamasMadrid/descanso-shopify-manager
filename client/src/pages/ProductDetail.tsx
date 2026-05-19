@@ -12,6 +12,35 @@ import { useLang } from "@/contexts/LanguageContext";
 import { useCurrency, type Currency } from "@/contexts/CurrencyContext";
 
 const WHATSAPP_NUMBER = "34711204284";
+const SHOPIFY_STORE = "descanso-rapido-castilla.myshopify.com";
+
+// Shopify variant IDs — keyed by product handle then size label (e.g. "90 × 190 cm")
+const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
+  "canape-excellent": {
+    "90 × 190 cm": 53953966178645, "105 × 190 cm": 53953966211413, "135 × 190 cm": 53953966244181,
+    "150 × 190 cm": 53953966276949, "160 × 190 cm": 53953966309717, "180 × 190 cm": 53953966342485,
+  },
+  "canape-premium": {
+    "90 × 190 cm": 53953966539093, "105 × 190 cm": 53953966571861, "135 × 190 cm": 53953966604629,
+    "150 × 190 cm": 53953966637397, "160 × 190 cm": 53953966670165, "180 × 190 cm": 53953966702933,
+  },
+  "canape-articulado": {
+    "135 × 190 cm": 53953966899541, "150 × 190 cm": 53953966932309,
+    "160 × 190 cm": 53953966965077, "180 × 190 cm": 53953966997845,
+  },
+  "colchon-memory": {
+    "90 × 190 cm": 53953967128917, "105 × 190 cm": 53953967161685, "135 × 190 cm": 53953967194453,
+    "150 × 190 cm": 53953967227221, "160 × 190 cm": 53953967259989, "180 × 190 cm": 53953967292757,
+  },
+  "colchon-hybrid": {
+    "90 × 190 cm": 53953967358293, "105 × 190 cm": 53953967391061, "135 × 190 cm": 53953967423829,
+    "150 × 190 cm": 53953967456597, "160 × 190 cm": 53953967489365, "180 × 190 cm": 53953967522133,
+  },
+  "base-lucy": {
+    "80 × 190 cm": 53953967587669, "90 × 190 cm": 53953967620437, "105 × 190 cm": 53953967653205,
+    "135 × 190 cm": 53953967685973, "150 × 190 cm": 53953967718741,
+  },
+};
 
 const CANAPE_EXCELLENT = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-excellent-clean-NSFixs2vvWmm2KZbrrBBqL.webp";
 const CANAPE_PREMIUM = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-premium-v2-HdWMbhFnc8FSscqxCXzBZu.webp";
@@ -268,9 +297,14 @@ export default function ProductDetail() {
       setPillowError(true);
       return;
     }
-    const sizeNote = selectedSize ? ` — Talla: ${selectedSize}` : "";
-    const note = (pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales") + sizeNote;
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${meta.id}?note=${encodeURIComponent(note)}`;
+    const note = pillowChoice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
+    const variantId = id && selectedSize ? SHOPIFY_VARIANTS[id]?.[selectedSize] : null;
+    let url: string;
+    if (variantId) {
+      url = `https://${SHOPIFY_STORE}/cart/${variantId}:1?attributes[Regalo almohada]=${encodeURIComponent(note)}`;
+    } else {
+      url = `https://${SHOPIFY_STORE}/products/${meta.id}?note=${encodeURIComponent(note)}`;
+    }
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal(false);
   };
@@ -278,9 +312,14 @@ export default function ProductDetail() {
   const handlePillowSelect = (choice: "double" | "two-singles") => {
     setPillowChoice(choice);
     setPillowError(false);
-    const sizeNote = selectedSize ? ` — Talla: ${selectedSize}` : "";
-    const note = (choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales") + sizeNote;
-    const url = `https://descanso-rapido-castilla.myshopify.com/products/${meta.id}?note=${encodeURIComponent(note)}`;
+    const note = choice === "double" ? "Regalo: 1 almohada doble española" : "Regalo: 2 almohadas individuales";
+    const variantId = id && selectedSize ? SHOPIFY_VARIANTS[id]?.[selectedSize] : null;
+    let url: string;
+    if (variantId) {
+      url = `https://${SHOPIFY_STORE}/cart/${variantId}:1?attributes[Regalo almohada]=${encodeURIComponent(note)}`;
+    } else {
+      url = `https://${SHOPIFY_STORE}/products/${meta.id}?note=${encodeURIComponent(note)}`;
+    }
     window.open(url, "_blank", "noopener,noreferrer");
     setPillowModal(false);
   };
