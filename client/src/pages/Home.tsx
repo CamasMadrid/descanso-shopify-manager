@@ -63,12 +63,12 @@ const productImages: Record<string, string> = {
 };
 
 const productMeta = [
-  { id: "canape-excellent", badgeColor: "bg-amber-100 text-amber-800", sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes" },
-  { id: "canape-premium", badgeColor: "bg-slate-100 text-slate-700", sizes: ["90cm", "135cm", "150cm"], price: "Desde 329€", category: "canapes" },
-  { id: "canape-articulado", badgeColor: "bg-blue-100 text-blue-800", sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 499€", category: "canapes" },
-  { id: "colchon-memory", badgeColor: "bg-green-100 text-green-800", sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 149€", category: "colchones" },
-  { id: "colchon-hybrid", badgeColor: "bg-slate-100 text-slate-700", sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 299€", category: "colchones" },
-  { id: "base-lucy", badgeColor: "bg-purple-100 text-purple-700", sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"], price: "Desde 129€", category: "bases" },
+  { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
+  { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
+  { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
+  { id: "colchon-memory",   badgeColor: "bg-green-100 text-green-800",  sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 149€", category: "colchones", deliveryDays: null },
+  { id: "colchon-hybrid",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 299€", category: "colchones", deliveryDays: null },
+  { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"],           price: "Desde 129€", category: "bases",    deliveryDays: null },
 ];
 
 const areas = ["Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón", "Parla", "Humanes", "Griñón", "Arroyomolinos"];
@@ -117,6 +117,7 @@ export default function Home() {
     description: t.products[m.id]?.description ?? "",
     badge: t.products[m.id]?.badge ?? "",
     displayPrice: `${lang === "es" ? "Desde" : "From"} ${formatPrice(BASE_PRICES[m.id] ?? 0)}`,
+    deliveryDays: m.deliveryDays,
   }));
 
   const filtered = activeCategory === "all" ? products : products.filter(p => p.category === activeCategory);
@@ -469,6 +470,18 @@ export default function Home() {
                   />
                   <span className={`absolute top-3 left-3 text-xs font-semibold px-2.5 py-1 rounded-full ${product.badgeColor}`}>
                     {product.badge}
+                  </span>
+                  {/* Delivery time badge */}
+                  <span className={`absolute top-3 right-3 text-xs font-semibold px-2.5 py-1 rounded-full flex items-center gap-1 ${
+                    product.deliveryDays
+                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                      : "bg-green-50 text-green-700 border border-green-200"
+                  }`}>
+                    <Truck className="w-3 h-3" />
+                    {product.deliveryDays
+                      ? (lang === "es" ? `${product.deliveryDays} días` : `${product.deliveryDays} days`)
+                      : "48h"
+                    }
                   </span>
                 </div>
                 <CardContent className="p-5">

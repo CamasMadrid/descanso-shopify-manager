@@ -565,6 +565,18 @@ export default function ProductDetail() {
                 <p className="text-xs text-center text-muted-foreground -mt-1">
                   {t.btnBuyNowSub}
                 </p>
+                {/* Delivery notice for Articulado */}
+                {id === "canape-articulado" && (
+                  <div className="flex items-start gap-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2.5 text-xs text-amber-800">
+                    <span className="text-base leading-none mt-0.5">⏱️</span>
+                    <p>
+                      {lang === "es"
+                        ? <><strong>Entrega en 5–10 días laborables.</strong> El mecanismo motorizado requiere un plazo de preparación adicional. El resto de nuestros productos se entregan en <strong>48 horas</strong>.</>
+                        : <><strong>Delivery in 5–10 working days.</strong> The motorised mechanism requires extra preparation time. All our other products are delivered in <strong>48 hours</strong>.</>
+                      }
+                    </p>
+                  </div>
+                )}
 
                 <Tooltip>
                   <TooltipTrigger asChild>
