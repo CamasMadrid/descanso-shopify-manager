@@ -12,7 +12,11 @@ import { useLang } from "@/contexts/LanguageContext";
 
 const AREAS = [
   "Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón",
-  "Parla", "Humanes", "Griñón", "Arroyomolinos", "Otra zona"
+  "Parla", "Humanes", "Griñón", "Arroyomolinos",
+  "Alcalá de Henares", "Torrejón de Ardoz", "Pozuelo de Alarcón",
+  "Majadahonda", "Rivas-Vaciamadrid", "Valdemoro", "Pinto",
+  "Arganda del Rey", "San Sebastián de los Reyes", "Alcobendas",
+  "Boadilla del Monte", "Las Rozas", "Madrid capital", "Otra zona"
 ];
 
 const TIME_SLOTS = [
@@ -140,12 +144,12 @@ export default function ReservarVisita() {
             <div className="space-y-4">
               {(lang === "es" ? [
                 { icon: Clock, title: "Visita en 24-48h", desc: "Confirmamos cita en el mismo día" },
-                { icon: MapPin, title: "Zona sur Madrid", desc: "Fuenlabrada, Leganés, Getafe, Móstoles y más" },
+                { icon: MapPin, title: "Comunidad de Madrid", desc: "Toda la región de Madrid" },
                 { icon: Phone, title: "Asesoramiento experto", desc: "Te ayudamos a elegir el colchón y base perfectos" },
                 { icon: CheckCircle, title: "Sin compromiso", desc: "La visita es gratuita y sin obligación de compra" },
               ] : [
                 { icon: Clock, title: "Visit within 24-48h", desc: "We confirm the appointment on the same day" },
-                { icon: MapPin, title: "South Madrid area", desc: "Fuenlabrada, Leganés, Getafe, Móstoles and more" },
+                { icon: MapPin, title: "Community of Madrid", desc: "Across the entire Madrid region" },
                 { icon: Phone, title: "Expert advice", desc: "We help you choose the perfect mattress and base" },
                 { icon: CheckCircle, title: "No commitment", desc: "The visit is free with no obligation to buy" },
               ]).map(({ icon: Icon, title, desc }) => (

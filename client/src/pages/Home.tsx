@@ -71,7 +71,7 @@ const productMeta = [
   { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"],           price: "Desde 129€", category: "bases",    deliveryDays: null },
 ];
 
-const areas = ["Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón", "Parla", "Humanes", "Griñón", "Arroyomolinos"];
+const areas = ["Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón", "Parla", "Humanes", "Griñón", "Arroyomolinos", "Alcalá de Henares", "Torrejón", "Pozuelo", "Majadahonda", "Rivas", "Valdemoro"];
 
 const testimonialNames = [
   { name: "María G.", location: "Fuenlabrada" },
@@ -728,7 +728,7 @@ export default function Home() {
                   {lang === "es" ? "Entrega garantizada en 48–72 horas" : "Guaranteed delivery in 48–72 hours"}
                 </div>
                 <div className="text-sm text-primary-foreground/80">
-                  {lang === "es" ? "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón y alrededores" : "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón and surroundings"}
+                  {lang === "es" ? "Toda la Comunidad de Madrid" : "Entire Community of Madrid"}
                 </div>
               </div>
             </div>
@@ -855,7 +855,7 @@ export default function Home() {
                 </div>
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4" />
-                  <span>Fuenlabrada, Madrid</span>
+                  <span>Comunidad de Madrid</span>
                 </div>
               </div>
             </div>

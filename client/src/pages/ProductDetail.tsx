@@ -349,12 +349,12 @@ export default function ProductDetail() {
     : (meta.category === "canapes" ? "Storage Beds" : meta.category === "colchones" ? "Mattresses" : "Divan Bases");
 
   const deliveryItems = lang === "es" ? [
-    { title: "Entrega en 48 horas", desc: "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla y alrededores" },
+    { title: "Entrega en 48 horas", desc: "Toda la Comunidad de Madrid" },
     { title: "Montaje incluido", desc: "Nuestro equipo monta el producto en tu habitación sin coste adicional" },
     { title: "Formas de pago", desc: "Efectivo, Bizum, tarjeta crédito/débito o contrareembolso al recibir" },
     { title: "14 días de devolución", desc: "Si no estás satisfecho, recogemos el producto sin preguntas" },
   ] : [
-    { title: "48-hour delivery", desc: "Fuenlabrada, Leganés, Getafe, Móstoles, Alcorcón, Parla and surrounding areas" },
+    { title: "48-hour delivery", desc: "Entire Community of Madrid" },
     { title: "Assembly included", desc: "Our team assembles the product in your room at no extra cost" },
     { title: "Payment options", desc: "Cash, Bizum, credit/debit card or cash on delivery" },
     { title: "14-day returns", desc: "If you're not satisfied, we collect the product — no questions asked" },
@@ -710,7 +710,7 @@ export default function ProductDetail() {
         <footer className="border-t border-border bg-muted/30 py-8">
           <div className="container text-center text-sm text-muted-foreground">
             <p className="font-semibold text-foreground mb-1">Descanso Rápido Castilla</p>
-            <p>Fuenlabrada, Madrid · WhatsApp: <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-primary hover:underline">+34 711 204 284</a></p>
+            <p>Comunidad de Madrid · WhatsApp: <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-primary hover:underline">+34 711 204 284</a></p>
             <p className="mt-2 text-xs">{t.footerCopyright}</p>
           </div>
         </footer>

@@ -134,7 +134,7 @@ export interface Translations {
 }
 
 const es: Translations = {
-  topBar: "🚚 Entrega en 48 horas · Fuenlabrada y alrededores · Pago al recibir disponible",
+  topBar: "🚚 Entrega en 48 horas · Comunidad de Madrid · Pago al recibir disponible",
   navProducts: "Productos",
   navShowroom: "Showroom Móvil",
   navDelivery: "Entrega",
@@ -145,7 +145,7 @@ const es: Translations = {
   heroBadge: "⚡ Entrega en 48 horas garantizada",
   heroTitle1: "Tu cama nueva,",
   heroTitle2: "en dos días.",
-  heroDesc: "Canapés, colchones y bases tapizadas de calidad. Entregamos con nuestras propias furgonetas en Fuenlabrada y toda la zona sur de Madrid.",
+  heroDesc: "Canapés, colchones y bases tapizadas de calidad. Entregamos con nuestras propias furgonetas en toda la Comunidad de Madrid.",
   heroCtaPrimary: "Ver productos",
   heroCtaSecondary: "Showroom en tu casa",
   heroTrust1: "Sin intermediarios",
@@ -154,8 +154,8 @@ const es: Translations = {
 
   usp1Title: "Entrega 48h",
   usp1Desc: "Con nuestras furgonetas",
-  usp2Title: "Zona sur Madrid",
-  usp2Desc: "Fuenlabrada y alrededores",
+  usp2Title: "Comunidad de Madrid",
+  usp2Desc: "Entrega en toda la región",
   usp3Title: "Sin riesgos",
   usp3Desc: "Paga al recibir",
   usp4Title: "Asesoramiento",
@@ -201,12 +201,12 @@ const es: Translations = {
   showroomFeature1: "Visita gratuita y sin compromiso",
   showroomFeature2: "Muestras de materiales reales",
   showroomFeature3: "Asesoramiento personalizado en casa",
-  showroomFeature4: "Zona sur Madrid: Fuenlabrada, Leganés, Getafe y más",
+  showroomFeature4: "Toda la Comunidad de Madrid",
   showroomBtn: "Reservar visita gratuita",
   showroomAreas: "Zonas de cobertura:",
 
   deliveryTitle: "Entrega en 48 horas",
-  deliverySubtitle: "Garantizamos la entrega en 48 horas en toda la zona sur de Madrid.",
+  deliverySubtitle: "Garantizamos la entrega en 48 horas en toda la Comunidad de Madrid.",
   delivery1Title: "Pedido online",
   delivery1Desc: "Compra en nuestra web con tarjeta y recibe tu pedido en 48h.",
   delivery2Title: "Confirmación",
@@ -237,7 +237,7 @@ const es: Translations = {
   ctaBtn1: "Ver todos los productos",
   ctaBtn2: "Hablar por WhatsApp",
 
-  footerTagline: "Canapés, colchones y bases tapizadas. Entrega en 48h en el sur de Madrid.",
+  footerTagline: "Canapés, colchones y bases tapizadas. Entrega en 48h en toda la Comunidad de Madrid.",
   footerAddress: "Fuenlabrada, Madrid · +34 711 204 284",
   footerCopyright: "© 2025 Descanso Rápido Castilla. Todos los derechos reservados.",
 
@@ -252,7 +252,7 @@ const es: Translations = {
 };
 
 const en: Translations = {
-  topBar: "🚚 48-hour delivery · Fuenlabrada & surrounding areas · Pay on delivery available",
+  topBar: "🚚 48-hour delivery · Community of Madrid · Pay on delivery available",
   navProducts: "Products",
   navShowroom: "Mobile Showroom",
   navDelivery: "Delivery",
@@ -263,7 +263,7 @@ const en: Translations = {
   heroBadge: "⚡ Guaranteed 48-hour delivery",
   heroTitle1: "Your new bed,",
   heroTitle2: "in two days.",
-  heroDesc: "Quality storage beds, mattresses and divan bases. We deliver with our own vans across Fuenlabrada and the south Madrid corridor.",
+  heroDesc: "Quality storage beds, mattresses and divan bases. We deliver with our own vans across the entire Community of Madrid.",
   heroCtaPrimary: "View products",
   heroCtaSecondary: "Home showroom visit",
   heroTrust1: "No middlemen",
@@ -272,8 +272,8 @@ const en: Translations = {
 
   usp1Title: "48h Delivery",
   usp1Desc: "With our own vans",
-  usp2Title: "South Madrid",
-  usp2Desc: "Fuenlabrada & surroundings",
+  usp2Title: "Community of Madrid",
+  usp2Desc: "Delivery across the region",
   usp3Title: "Zero risk",
   usp3Desc: "Pay on delivery",
   usp4Title: "Expert advice",
@@ -319,12 +319,12 @@ const en: Translations = {
   showroomFeature1: "Free visit, no obligation to buy",
   showroomFeature2: "Real material samples brought to you",
   showroomFeature3: "Personalised advice in your own home",
-  showroomFeature4: "South Madrid: Fuenlabrada, Leganés, Getafe & more",
+  showroomFeature4: "Across the entire Community of Madrid",
   showroomBtn: "Book a free home visit",
   showroomAreas: "Coverage areas:",
 
   deliveryTitle: "48-hour delivery",
-  deliverySubtitle: "We guarantee delivery within 48 hours across the south Madrid corridor.",
+  deliverySubtitle: "We guarantee delivery within 48 hours across the entire Community of Madrid.",
   delivery1Title: "Order online",
   delivery1Desc: "Buy on our website by card and receive your order within 48 hours.",
   delivery2Title: "Confirmation call",
@@ -355,7 +355,7 @@ const en: Translations = {
   ctaBtn1: "View all products",
   ctaBtn2: "Chat on WhatsApp",
 
-  footerTagline: "Storage beds, mattresses and divan bases. 48h delivery across south Madrid.",
+  footerTagline: "Storage beds, mattresses and divan bases. 48h delivery across the Community of Madrid.",
   footerAddress: "Fuenlabrada, Madrid · +34 711 204 284",
   footerCopyright: "© 2025 Descanso Rápido Castilla. All rights reserved.",
 
