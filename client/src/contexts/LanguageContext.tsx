@@ -142,7 +142,7 @@ const es: Translations = {
   navWhatsApp: "WhatsApp",
   brandSubtitle: "Castilla · Madrid",
 
-  heroBadge: "⚡ Entrega en 48 horas garantizada",
+  heroBadge: "⚡ Camas en stock — entrega garantizada en 48 horas",
   heroTitle1: "Tu cama nueva,",
   heroTitle2: "en dos días.",
   heroDesc: "Canapés, colchones y bases tapizadas de calidad. Entregamos con nuestras propias furgonetas en toda la Comunidad de Madrid.",
@@ -260,7 +260,7 @@ const en: Translations = {
   navWhatsApp: "WhatsApp",
   brandSubtitle: "Castilla · Madrid",
 
-  heroBadge: "⚡ Guaranteed 48-hour delivery",
+  heroBadge: "⚡ In-stock beds — 48-hour delivery guaranteed",
   heroTitle1: "Your new bed,",
   heroTitle2: "in two days.",
   heroDesc: "Quality storage beds, mattresses and divan bases. We deliver with our own vans across the entire Community of Madrid.",
