@@ -134,12 +134,12 @@ export default function ReservarVisita() {
           {/* Left: info */}
           <div>
             <h1 className="font-serif text-3xl font-bold text-foreground mb-4">
-              {lang === "es" ? "El showroom viene a ti" : "The showroom comes to you"}
+              {lang === "es" ? "La cama viene a ti" : "The bed comes to you"}
             </h1>
             <p className="text-muted-foreground leading-relaxed mb-8">
               {lang === "es"
-                ? "Nuestro equipo se desplaza a tu domicilio con muestras de materiales para que puedas ver y tocar los productos antes de decidir. Sin compromiso de compra."
-                : "Our team travels to your home with material samples so you can see and feel the products before deciding. No purchase commitment."}
+                ? "Llegamos a tu domicilio con un canapé montado y una selección de colchones reales para que te tumbas y los pruebes tú mismo. Sin compromiso de compra."
+                : "We arrive at your home with a fully assembled storage bed and a selection of real mattresses for you to lie on and try out properly. No purchase commitment."}
             </p>
             <div className="space-y-4">
               {(lang === "es" ? [
