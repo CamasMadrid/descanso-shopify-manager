@@ -327,16 +327,16 @@ export default function Home() {
           </nav>
           <div className="flex items-center gap-2">
             {/* Language toggle */}
-            <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">
+            <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium shrink-0">
               <button
                 onClick={() => setLang("es")}
-                className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "es" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                className={`px-3 py-1.5 rounded-full transition-all duration-200 min-w-[36px] text-center ${lang === "es" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
               >
                 ES
               </button>
               <button
                 onClick={() => setLang("en")}
-                className={`px-2.5 py-1 rounded-full transition-all duration-200 ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
+                className={`px-3 py-1.5 rounded-full transition-all duration-200 min-w-[36px] text-center ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}`}
               >
                 EN
               </button>
