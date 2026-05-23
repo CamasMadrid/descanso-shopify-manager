@@ -78,12 +78,12 @@ const productImages: Record<string, string> = {
 };
 
 const productMeta = [
-  { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
-  { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
-  { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
   { id: "colchon-visconube",    badgeColor: "bg-green-100 text-green-800",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 215€", category: "colchones", deliveryDays: null },
   { id: "colchon-viscografeno", badgeColor: "bg-slate-100 text-slate-700",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120/135 × 180/190 cm", "120/135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 335€", category: "colchones", deliveryDays: null },
   { id: "colchon-macanuu",      badgeColor: "bg-teal-100 text-teal-800",   sizes: ["80 × 180/190 cm", "80 × 200 cm", "90 × 180/190 cm", "90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 240€", category: "colchones", deliveryDays: null },
+  { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
+  { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
+  { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
   { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"],           price: "Desde 129€", category: "bases",    deliveryDays: null },
 ];
 
