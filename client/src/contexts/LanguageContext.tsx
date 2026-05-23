@@ -245,8 +245,9 @@ const es: Translations = {
     "canape-excellent": { name: "Canapé Excellent", subtitle: "Madera con almacenaje", description: "Canapé abatible de madera con 28 cm de almacenaje interior. Disponible en 4 colores.", badge: "Más vendido" },
     "canape-premium": { name: "Canapé Premium", subtitle: "Polipiel tapizado", description: "Canapé abatible tapizado en polipiel con 30 cm de almacenaje. Acabado elegante.", badge: "Premium" },
     "canape-articulado": { name: "Canapé Articulado", subtitle: "Motorizado con láminas", description: "Canapé articulado motorizado con somier de láminas integrado. Confort máximo.", badge: "Top gama" },
-    "colchon-memory": { name: "Colchón New Memory HR", subtitle: "Viscoelástico · 21 cm", description: "Colchón de espuma viscoelástica y HR de alta resistencia. Ideal para uso diario.", badge: "Económico" },
-    "colchon-hybrid": { name: "Colchón Hybrid HR", subtitle: "Muelles + Visco Aloe · 31 cm", description: "Muelles ensacados con capa de viscoelástica con aloe vera. Alta resistencia para mayor peso.", badge: "Premium" },
+    "colchon-visconube": { name: "Colchón Visconube", subtitle: "Viscoelástico doble cara · 24 cm", description: "Núcleo HR 23 kg/m³. Cara invierno con viscoelástica + Super Soft; cara verano con tejido 3D transpirable. Banda lateral diseño.", badge: "Económico" },
+    "colchon-viscografeno": { name: "Colchón Viscografeno", subtitle: "Visco grafeno doble cara · 29-30 cm", description: "Núcleo HR 25 kg/m³. Lámina viscoelástica termoreguladora + Super Soft en cara invierno; tejido 3D en cara verano.", badge: "Premium" },
+    "colchon-macanuu": { name: "Colchón Macanuu", subtitle: "HR doble cara · 26 cm", description: "Núcleo HR 25 kg/m³. Ambas caras con tejido stretch 300g, fibra 250g y Super Soft. Banda lateral de tela.", badge: "Calidad-precio" },
     "base-lucy": { name: "Base Tapizada Lucy", subtitle: "Tela 3D transpirable", description: "Base tapizada en tela 3D gris con aireadores laterales. Estructura tubular 40×30mm.", badge: "Nuevo" },
   },
 };
@@ -363,8 +364,9 @@ const en: Translations = {
     "canape-excellent": { name: "Excellent Storage Bed", subtitle: "Solid wood with storage", description: "Lift-up storage bed in solid wood with 28 cm of internal storage. Available in 4 colours.", badge: "Best seller" },
     "canape-premium": { name: "Premium Storage Bed", subtitle: "Faux leather upholstered", description: "Lift-up storage bed upholstered in faux leather with 30 cm of storage. Elegant finish.", badge: "Premium" },
     "canape-articulado": { name: "Motorised Adjustable Bed", subtitle: "Electric with slatted base", description: "Motorised adjustable bed with integrated slatted base. Maximum comfort.", badge: "Top of range" },
-    "colchon-memory": { name: "New Memory HR Mattress", subtitle: "Memory foam · 21 cm", description: "Memory foam and high-resilience HR mattress. Ideal for everyday use.", badge: "Economy" },
-    "colchon-hybrid": { name: "Hybrid HR Mattress", subtitle: "Pocket springs + Aloe Visco · 31 cm", description: "Pocket springs with aloe vera memory foam layer. High resistance for heavier sleepers.", badge: "Premium" },
+    "colchon-visconube": { name: "Visconube Mattress", subtitle: "Double-sided visco · 24 cm", description: "HR core 23 kg/m³. Winter side: memory foam + Super Soft padding; summer side: 3D breathable fabric. Design side band.", badge: "Economy" },
+    "colchon-viscografeno": { name: "Viscografeno Mattress", subtitle: "Graphene visco double-sided · 29-30 cm", description: "HR core 25 kg/m³. Thermo-sensitive graphene visco layer + Super Soft on winter side; 3D breathable fabric on summer side.", badge: "Premium" },
+    "colchon-macanuu": { name: "Macanuu Mattress", subtitle: "HR double-sided · 26 cm", description: "HR core 25 kg/m³. Both sides: 300g stretch fabric, 250g fibre padding and Super Soft. Fabric side band.", badge: "Best value" },
     "base-lucy": { name: "Lucy Divan Base", subtitle: "Breathable 3D fabric", description: "Divan base upholstered in grey 3D breathable fabric with side air vents. 40×30mm tubular frame.", badge: "New" },
   },
 };

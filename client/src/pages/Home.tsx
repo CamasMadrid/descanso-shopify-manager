@@ -19,8 +19,9 @@ const LIFESTYLE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/
 const CANAPE_EXCELLENT = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-excellent-clean-NSFixs2vvWmm2KZbrrBBqL.webp";
 const CANAPE_PREMIUM = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-premium-v2-HdWMbhFnc8FSscqxCXzBZu.webp";
 const CANAPE_ARTICULADO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-articulado-clean-eHwfxaXXiMCRYiXe3s7YjH.webp";
-const COLCHON_HYBRID = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
-const COLCHON_MEMORY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
+const COLCHON_VISCONUBE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
+const COLCHON_VISCOGRAFENO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
+const COLCHON_MACANUU = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
 const BASE_LUCY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/base-lucy-clean-jXtnAsBSxs6PHZnBuQTXMB.webp";
 
 const WHATSAPP_NUMBER = "34711204284";
@@ -39,13 +40,26 @@ const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
   "canape-articulado": {
     "135cm": 53953966899541, "150cm": 53953966932309, "160cm": 53953966965077, "180cm": 53953966997845,
   },
-  "colchon-memory": {
-    "90cm": 53953967128917, "105cm": 53953967161685, "135cm": 53953967194453,
-    "150cm": 53953967227221, "160cm": 53953967259989, "180cm": 53953967292757,
+  "colchon-visconube": {
+    "80/90 × 180/190 cm": 53994462118229, "80/90 × 200 cm": 53994462150997,
+    "105 × 180/190 cm": 53994462183765, "105 × 200 cm": 53994462216533,
+    "120 × 180/190 cm": 53994462249301, "120 × 200 cm": 53994462282069,
+    "135 × 180/190 cm": 53994462314837, "135 × 200 cm": 53994462347605,
+    "150 × 180/190 cm": 53994462380373, "150 × 200 cm": 53994462413141,
   },
-  "colchon-hybrid": {
-    "90cm": 53953967358293, "105cm": 53953967391061, "135cm": 53953967423829,
-    "150cm": 53953967456597, "160cm": 53953967489365, "180cm": 53953967522133,
+  "colchon-viscografeno": {
+    "80/90 × 180/190 cm": 53994462609749, "80/90 × 200 cm": 53994462642517,
+    "105 × 180/190 cm": 53994462675285, "105 × 200 cm": 53994462708053,
+    "120/135 × 180/190 cm": 53994462740821, "120/135 × 200 cm": 53994462773589,
+    "150 × 180/190 cm": 53994462806357, "150 × 200 cm": 53994462839125,
+  },
+  "colchon-macanuu": {
+    "80 × 180/190 cm": 53994463035733, "80 × 200 cm": 53994463068501,
+    "90 × 180/190 cm": 53994463101269, "90 × 200 cm": 53994463134037,
+    "105 × 180/190 cm": 53994463166805, "105 × 200 cm": 53994463199573,
+    "120 × 180/190 cm": 53994463232341, "120 × 200 cm": 53994463265109,
+    "135 × 180/190 cm": 53994463297877, "135 × 200 cm": 53994463330645,
+    "150 × 180/190 cm": 53994463363413, "150 × 200 cm": 53994463396181,
   },
   "base-lucy": {
     "80cm": 53953967587669, "90cm": 53953967620437, "105cm": 53953967653205,
@@ -57,8 +71,9 @@ const productImages: Record<string, string> = {
   "canape-excellent": CANAPE_EXCELLENT,
   "canape-premium": CANAPE_PREMIUM,
   "canape-articulado": CANAPE_ARTICULADO,
-  "colchon-memory": COLCHON_MEMORY,
-  "colchon-hybrid": COLCHON_HYBRID,
+  "colchon-visconube": COLCHON_VISCONUBE,
+  "colchon-viscografeno": COLCHON_VISCOGRAFENO,
+  "colchon-macanuu": COLCHON_MACANUU,
   "base-lucy": BASE_LUCY,
 };
 
@@ -66,8 +81,9 @@ const productMeta = [
   { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
   { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
   { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
-  { id: "colchon-memory",   badgeColor: "bg-green-100 text-green-800",  sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 149€", category: "colchones", deliveryDays: null },
-  { id: "colchon-hybrid",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "105cm", "135cm", "150cm", "160cm", "180cm"], price: "Desde 299€", category: "colchones", deliveryDays: null },
+  { id: "colchon-visconube",    badgeColor: "bg-green-100 text-green-800",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 215€", category: "colchones", deliveryDays: null },
+  { id: "colchon-viscografeno", badgeColor: "bg-slate-100 text-slate-700",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120/135 × 180/190 cm", "120/135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 335€", category: "colchones", deliveryDays: null },
+  { id: "colchon-macanuu",      badgeColor: "bg-teal-100 text-teal-800",   sizes: ["80 × 180/190 cm", "80 × 200 cm", "90 × 180/190 cm", "90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 240€", category: "colchones", deliveryDays: null },
   { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"],           price: "Desde 129€", category: "bases",    deliveryDays: null },
 ];
 

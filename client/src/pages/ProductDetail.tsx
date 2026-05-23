@@ -28,13 +28,26 @@ const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
     "135 × 190 cm": 53953966899541, "150 × 190 cm": 53953966932309,
     "160 × 190 cm": 53953966965077, "180 × 190 cm": 53953966997845,
   },
-  "colchon-memory": {
-    "90 × 190 cm": 53953967128917, "105 × 190 cm": 53953967161685, "135 × 190 cm": 53953967194453,
-    "150 × 190 cm": 53953967227221, "160 × 190 cm": 53953967259989, "180 × 190 cm": 53953967292757,
+  "colchon-visconube": {
+    "80/90 × 180/190 cm": 53994462118229, "80/90 × 200 cm": 53994462150997,
+    "105 × 180/190 cm": 53994462183765, "105 × 200 cm": 53994462216533,
+    "120 × 180/190 cm": 53994462249301, "120 × 200 cm": 53994462282069,
+    "135 × 180/190 cm": 53994462314837, "135 × 200 cm": 53994462347605,
+    "150 × 180/190 cm": 53994462380373, "150 × 200 cm": 53994462413141,
   },
-  "colchon-hybrid": {
-    "90 × 190 cm": 53953967358293, "105 × 190 cm": 53953967391061, "135 × 190 cm": 53953967423829,
-    "150 × 190 cm": 53953967456597, "160 × 190 cm": 53953967489365, "180 × 190 cm": 53953967522133,
+  "colchon-viscografeno": {
+    "80/90 × 180/190 cm": 53994462609749, "80/90 × 200 cm": 53994462642517,
+    "105 × 180/190 cm": 53994462675285, "105 × 200 cm": 53994462708053,
+    "120/135 × 180/190 cm": 53994462740821, "120/135 × 200 cm": 53994462773589,
+    "150 × 180/190 cm": 53994462806357, "150 × 200 cm": 53994462839125,
+  },
+  "colchon-macanuu": {
+    "80 × 180/190 cm": 53994463035733, "80 × 200 cm": 53994463068501,
+    "90 × 180/190 cm": 53994463101269, "90 × 200 cm": 53994463134037,
+    "105 × 180/190 cm": 53994463166805, "105 × 200 cm": 53994463199573,
+    "120 × 180/190 cm": 53994463232341, "120 × 200 cm": 53994463265109,
+    "135 × 180/190 cm": 53994463297877, "135 × 200 cm": 53994463330645,
+    "150 × 180/190 cm": 53994463363413, "150 × 200 cm": 53994463396181,
   },
   "base-lucy": {
     "80 × 190 cm": 53953967587669, "90 × 190 cm": 53953967620437, "105 × 190 cm": 53953967653205,
@@ -45,8 +58,9 @@ const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
 const CANAPE_EXCELLENT = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-excellent-clean-NSFixs2vvWmm2KZbrrBBqL.webp";
 const CANAPE_PREMIUM = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-premium-v2-HdWMbhFnc8FSscqxCXzBZu.webp";
 const CANAPE_ARTICULADO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/canape-articulado-clean-eHwfxaXXiMCRYiXe3s7YjH.webp";
-const COLCHON_HYBRID = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
-const COLCHON_MEMORY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
+const COLCHON_VISCONUBE = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
+const COLCHON_VISCOGRAFENO = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-new-memory-hr-clean-mC9twP9Jw4fHPT9PjuVUvr.webp";
+const COLCHON_MACANUU = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/colchon-hybrid-hr-clean-967DAKq2PKQgB5zAs3fLUg.webp";
 const BASE_LUCY = "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/base-lucy-clean-jXtnAsBSxs6PHZnBuQTXMB.webp";
 
 interface ProductData {
@@ -63,8 +77,9 @@ const BASE_PRICES_BY_SIZE: Record<string, number[]> = {
   "canape-excellent": [249, 279, 309, 339],
   "canape-premium": [329, 389, 429],
   "canape-articulado": [499, 549, 629, 699],
-  "colchon-memory": [149, 169, 189, 209, 229, 249],
-  "colchon-hybrid": [299, 339, 379, 419, 449, 499],
+  "colchon-visconube": [215, 240, 240, 265, 265, 295, 265, 295, 295, 320],
+  "colchon-viscografeno": [335, 370, 375, 405, 430, 465, 455, 495],
+  "colchon-macanuu": [240, 265, 240, 265, 265, 295, 310, 335, 310, 335, 350, 375],
   "base-lucy": [129, 139, 159, 179, 199],
 };
 
@@ -81,7 +96,7 @@ const productMeta: Record<string, ProductData> = {
       { label: "150 × 190 cm", price: "Desde 339€" },
     ],
     category: "canapes",
-    upsellIds: ["colchon-memory", "colchon-hybrid"],
+    upsellIds: ["colchon-visconube", "colchon-viscografeno"],
   },
   "canape-premium": {
     id: "canape-premium",
@@ -93,7 +108,7 @@ const productMeta: Record<string, ProductData> = {
       { label: "150 × 190 cm", price: "Desde 429€" },
     ],
     category: "canapes",
-    upsellIds: ["colchon-hybrid", "base-lucy"],
+    upsellIds: ["colchon-viscografeno", "base-lucy"],
   },
   "canape-articulado": {
     id: "canape-articulado",
@@ -106,37 +121,64 @@ const productMeta: Record<string, ProductData> = {
       { label: "150 × 190 cm", price: "Desde 699€" },
     ],
     category: "canapes",
-    upsellIds: ["colchon-hybrid"],
+    upsellIds: ["colchon-viscografeno"],
   },
-  "colchon-memory": {
-    id: "colchon-memory",
-    image: COLCHON_MEMORY,
+  "colchon-visconube": {
+    id: "colchon-visconube",
+    image: COLCHON_VISCONUBE,
     badgeColor: "bg-green-100 text-green-800",
     sizes: [
-      { label: "90 × 190 cm", price: "Desde 149€" },
-      { label: "105 × 190 cm", price: "Desde 169€" },
-      { label: "135 × 190 cm", price: "Desde 189€" },
-      { label: "150 × 190 cm", price: "Desde 209€" },
-      { label: "160 × 190 cm", price: "Desde 229€" },
-      { label: "180 × 190 cm", price: "Desde 249€" },
+      { label: "80/90 × 180/190 cm", price: "Desde 215€" },
+      { label: "80/90 × 200 cm",     price: "Desde 240€" },
+      { label: "105 × 180/190 cm",   price: "Desde 240€" },
+      { label: "105 × 200 cm",       price: "Desde 265€" },
+      { label: "120 × 180/190 cm",   price: "Desde 265€" },
+      { label: "120 × 200 cm",       price: "Desde 295€" },
+      { label: "135 × 180/190 cm",   price: "Desde 265€" },
+      { label: "135 × 200 cm",       price: "Desde 295€" },
+      { label: "150 × 180/190 cm",   price: "Desde 295€" },
+      { label: "150 × 200 cm",       price: "Desde 320€" },
     ],
     category: "colchones",
     upsellIds: ["canape-excellent", "base-lucy"],
   },
-  "colchon-hybrid": {
-    id: "colchon-hybrid",
-    image: COLCHON_HYBRID,
+  "colchon-viscografeno": {
+    id: "colchon-viscografeno",
+    image: COLCHON_VISCOGRAFENO,
     badgeColor: "bg-slate-100 text-slate-700",
     sizes: [
-      { label: "90 × 190 cm", price: "Desde 299€" },
-      { label: "105 × 190 cm", price: "Desde 339€" },
-      { label: "135 × 190 cm", price: "Desde 379€" },
-      { label: "150 × 190 cm", price: "Desde 419€" },
-      { label: "160 × 190 cm", price: "Desde 449€" },
-      { label: "180 × 190 cm", price: "Desde 499€" },
+      { label: "80/90 × 180/190 cm",   price: "Desde 335€" },
+      { label: "80/90 × 200 cm",       price: "Desde 370€" },
+      { label: "105 × 180/190 cm",     price: "Desde 375€" },
+      { label: "105 × 200 cm",         price: "Desde 405€" },
+      { label: "120/135 × 180/190 cm", price: "Desde 430€" },
+      { label: "120/135 × 200 cm",     price: "Desde 465€" },
+      { label: "150 × 180/190 cm",     price: "Desde 455€" },
+      { label: "150 × 200 cm",         price: "Desde 495€" },
     ],
     category: "colchones",
     upsellIds: ["canape-premium", "canape-articulado"],
+  },
+  "colchon-macanuu": {
+    id: "colchon-macanuu",
+    image: COLCHON_MACANUU,
+    badgeColor: "bg-teal-100 text-teal-800",
+    sizes: [
+      { label: "80 × 180/190 cm",  price: "Desde 240€" },
+      { label: "80 × 200 cm",      price: "Desde 265€" },
+      { label: "90 × 180/190 cm",  price: "Desde 240€" },
+      { label: "90 × 200 cm",      price: "Desde 265€" },
+      { label: "105 × 180/190 cm", price: "Desde 265€" },
+      { label: "105 × 200 cm",     price: "Desde 295€" },
+      { label: "120 × 180/190 cm", price: "Desde 310€" },
+      { label: "120 × 200 cm",     price: "Desde 335€" },
+      { label: "135 × 180/190 cm", price: "Desde 310€" },
+      { label: "135 × 200 cm",     price: "Desde 335€" },
+      { label: "150 × 180/190 cm", price: "Desde 350€" },
+      { label: "150 × 200 cm",     price: "Desde 375€" },
+    ],
+    category: "colchones",
+    upsellIds: ["canape-excellent", "base-lucy"],
   },
   "base-lucy": {
     id: "base-lucy",
@@ -150,7 +192,7 @@ const productMeta: Record<string, ProductData> = {
       { label: "150 × 190 cm", price: "Desde 199€" },
     ],
     category: "bases",
-    upsellIds: ["colchon-memory", "colchon-hybrid"],
+    upsellIds: ["colchon-visconube", "colchon-macanuu"],
   },
 };
 
@@ -210,36 +252,52 @@ const productContent: Record<string, Record<string, {
       upsellReasons: ["Recommended for adjustable bases"],
     },
   },
-  "colchon-memory": {
+  "colchon-visconube": {
     es: {
-      subtitle: "Viscoelástico de alta resistencia · 21 cm",
-      longDescription: "El Colchón New Memory HR ofrece la comodidad de la viscoelástica a un precio accesible. Con 21 cm de altura total, combina una capa superior de memoria viscoelástica con un núcleo de espuma HR de alta resistencia. Tratamiento antiácaros y funda lavable incluida.",
-      features: ["Capa viscoelástica adaptable", "Núcleo HR de alta resistencia", "21 cm de altura total", "Tratamiento antiácaros", "Funda lavable con cremallera", "Reversible (cara verano/invierno)"],
-      specs: [{ label: "Altura total", value: "21 cm" }, { label: "Capa superior", value: "3 cm viscoelástica" }, { label: "Núcleo", value: "HR alta resistencia 18 cm" }, { label: "Funda", value: "Tejido Aloe Vera lavable" }, { label: "Firmeza", value: "Media (adaptable)" }, { label: "Garantía", value: "5 años" }],
+      subtitle: "Viscoelástico doble cara · 24 cm · HR 23 kg/m³",
+      longDescription: "El Colchón Visconube es nuestra opción más accesible con tecnología viscoelástica real. Núcleo HR de 23 kg/m³ para un soporte duradero. Cara invierno con fibra hueca de silicona + capa viscoelástica + acolchado Super Soft en tejido stretch; cara verano con fibra hueca + tejido 3D de alta transpirabilidad. Banda lateral de diseño.",
+      features: ["Doble cara invierno/verano", "Núcleo HR 23 kg/m³", "24 cm de altura total (±1 cm)", "Capa viscoelástica adaptable", "Tejido 3D alta transpirabilidad", "Acolchado Super Soft"],
+      specs: [{ label: "Altura total", value: "24 cm (±1 cm)" }, { label: "Núcleo", value: "HR 23 kg/m³" }, { label: "Cara invierno", value: "Visco + Super Soft + stretch" }, { label: "Cara verano", value: "Fibra silicona + tejido 3D" }, { label: "Banda lateral", value: "Diseño" }, { label: "Garantía", value: "5 años" }],
       upsellReasons: ["El canapé más popular para este colchón", "Base económica y resistente"],
     },
     en: {
-      subtitle: "High-resilience memory foam · 21 cm",
-      longDescription: "The New Memory HR Mattress delivers memory foam comfort at an accessible price. At 21 cm total height, it combines a top layer of memory foam with a high-resilience HR foam core. Anti-mite treatment and washable cover included.",
-      features: ["Adaptive memory foam layer", "High-resilience HR core", "21 cm total height", "Anti-mite treatment", "Zip-off washable cover", "Reversible (summer/winter sides)"],
-      specs: [{ label: "Total height", value: "21 cm" }, { label: "Top layer", value: "3 cm memory foam" }, { label: "Core", value: "18 cm HR high-resilience" }, { label: "Cover", value: "Washable Aloe Vera fabric" }, { label: "Firmness", value: "Medium (adaptive)" }, { label: "Warranty", value: "5 years" }],
+      subtitle: "Double-sided visco · 24 cm · HR 23 kg/m³",
+      longDescription: "The Visconube Mattress is our most accessible option with real memory foam technology. HR core at 23 kg/m³ for lasting support. Winter side: silicone hollow fibre + memory foam layer + Super Soft padding in stretch fabric; summer side: hollow fibre + high-breathability 3D fabric. Design side band.",
+      features: ["Double-sided winter/summer", "HR core 23 kg/m³", "24 cm total height (±1 cm)", "Adaptive memory foam layer", "High-breathability 3D fabric", "Super Soft padding"],
+      specs: [{ label: "Total height", value: "24 cm (±1 cm)" }, { label: "Core", value: "HR 23 kg/m³" }, { label: "Winter side", value: "Visco + Super Soft + stretch" }, { label: "Summer side", value: "Hollow fibre + 3D fabric" }, { label: "Side band", value: "Design" }, { label: "Warranty", value: "5 years" }],
       upsellReasons: ["Most popular bed base for this mattress", "Economical and sturdy base"],
     },
   },
-  "colchon-hybrid": {
+  "colchon-viscografeno": {
     es: {
-      subtitle: "Muelles ensacados + Viscoelástica Aloe · 31 cm",
-      longDescription: "El Colchón Hybrid HR combina lo mejor de dos mundos: la transpirabilidad y soporte de los muelles ensacados con la comodidad de la viscoelástica enriquecida con aloe vera. Con 31 cm de altura, ofrece un descanso premium. Especialmente recomendado para personas con más de 90 kg.",
-      features: ["Muelles ensacados independientes", "Capa viscoelástica con Aloe Vera", "31 cm de altura premium", "Alta transpirabilidad", "Ideal para peso superior a 90 kg", "Funda lavable con cremallera"],
-      specs: [{ label: "Altura total", value: "31 cm" }, { label: "Muelles", value: "Ensacados independientes" }, { label: "Capa superior", value: "5 cm visco Aloe Vera" }, { label: "Transpirabilidad", value: "Alta (muelles ventilados)" }, { label: "Firmeza", value: "Media-alta" }, { label: "Garantía", value: "10 años" }],
+      subtitle: "Visco grafeno doble cara · 29-30 cm · HR 25 kg/m³",
+      longDescription: "El Colchón Viscografeno es nuestra opción premium. Núcleo HR de 25 kg/m³ de alta densidad. Cara invierno con lámina viscoelástica termoreguladora (grafeno) + fibra hueca de silicona + acolchado Super Soft en tejido stretch; cara verano con fibra hueca + tejido 3D de alta transpirabilidad. Banda lateral de diseño.",
+      features: ["Doble cara invierno/verano", "Núcleo HR 25 kg/m³ alta densidad", "29-30 cm de altura premium", "Lámina viscoelástica termoreguladora", "Tejido 3D alta transpirabilidad", "Acolchado Super Soft"],
+      specs: [{ label: "Altura total", value: "29-30 cm" }, { label: "Núcleo", value: "HR 25 kg/m³" }, { label: "Cara invierno", value: "Visco grafeno + Super Soft + stretch" }, { label: "Cara verano", value: "Fibra silicona + tejido 3D" }, { label: "Banda lateral", value: "Diseño" }, { label: "Garantía", value: "10 años" }],
       upsellReasons: ["Combinación perfecta para dormitorio premium", "Máximo confort con base articulada"],
     },
     en: {
-      subtitle: "Pocket springs + Aloe Vera visco · 31 cm",
-      longDescription: "The Hybrid HR Mattress combines the best of both worlds: the breathability and support of pocket springs with the comfort of aloe vera-enriched memory foam. At 31 cm height, it delivers a premium sleep experience. Especially recommended for people over 90 kg or couples with very different weights.",
-      features: ["Independent pocket springs", "Aloe Vera memory foam layer", "31 cm premium height", "High breathability", "Ideal for 90 kg+ sleepers", "Zip-off washable cover"],
-      specs: [{ label: "Total height", value: "31 cm" }, { label: "Springs", value: "Independent pocket springs" }, { label: "Top layer", value: "5 cm Aloe Vera visco" }, { label: "Breathability", value: "High (ventilated springs)" }, { label: "Firmness", value: "Medium-firm" }, { label: "Warranty", value: "10 years" }],
+      subtitle: "Graphene visco double-sided · 29-30 cm · HR 25 kg/m³",
+      longDescription: "The Viscografeno Mattress is our premium option. High-density HR core at 25 kg/m³. Winter side: thermo-sensitive graphene memory foam layer + silicone hollow fibre + Super Soft padding in stretch fabric; summer side: hollow fibre + high-breathability 3D fabric. Design side band.",
+      features: ["Double-sided winter/summer", "High-density HR core 25 kg/m³", "29-30 cm premium height", "Thermo-sensitive graphene visco layer", "High-breathability 3D fabric", "Super Soft padding"],
+      specs: [{ label: "Total height", value: "29-30 cm" }, { label: "Core", value: "HR 25 kg/m³" }, { label: "Winter side", value: "Graphene visco + Super Soft + stretch" }, { label: "Summer side", value: "Hollow fibre + 3D fabric" }, { label: "Side band", value: "Design" }, { label: "Warranty", value: "10 years" }],
       upsellReasons: ["Perfect pairing for a premium bedroom", "Maximum comfort on an adjustable base"],
+    },
+  },
+  "colchon-macanuu": {
+    es: {
+      subtitle: "HR doble cara · 26 cm · HR 25 kg/m³",
+      longDescription: "El Colchón Macanuu ofrece la mejor relación calidad-precio de nuestra gama. Núcleo HR de 25 kg/m³ de alta densidad. Ambas caras con tejido stretch 300g, acolchado de fibra 250g y acolchado Super Soft. Banda lateral de tela. Ideal para quienes buscan durabilidad y confort sin pagar por la viscoelástica.",
+      features: ["Doble cara simétrica", "Núcleo HR 25 kg/m³ alta densidad", "26 cm de altura total (±1 cm)", "Tejido stretch 300g ambas caras", "Acolchado fibra 250g + Super Soft", "Banda lateral de tela"],
+      specs: [{ label: "Altura total", value: "26 cm (±1 cm)" }, { label: "Núcleo", value: "HR 25 kg/m³" }, { label: "Tejido", value: "Stretch 300g ambas caras" }, { label: "Acolchado", value: "Fibra 250g + Super Soft" }, { label: "Banda lateral", value: "Tela" }, { label: "Garantía", value: "5 años" }],
+      upsellReasons: ["El canapé más popular para este colchón", "Base económica y resistente"],
+    },
+    en: {
+      subtitle: "HR double-sided · 26 cm · HR 25 kg/m³",
+      longDescription: "The Macanuu Mattress offers the best value in our range. High-density HR core at 25 kg/m³. Both sides feature 300g stretch fabric, 250g fibre padding and Super Soft padding. Fabric side band. Ideal for those seeking durability and comfort without paying for memory foam.",
+      features: ["Symmetric double-sided", "High-density HR core 25 kg/m³", "26 cm total height (±1 cm)", "300g stretch fabric both sides", "250g fibre + Super Soft padding", "Fabric side band"],
+      specs: [{ label: "Total height", value: "26 cm (±1 cm)" }, { label: "Core", value: "HR 25 kg/m³" }, { label: "Fabric", value: "300g stretch both sides" }, { label: "Padding", value: "250g fibre + Super Soft" }, { label: "Side band", value: "Fabric" }, { label: "Warranty", value: "5 years" }],
+      upsellReasons: ["Most popular bed base for this mattress", "Economical and sturdy base"],
     },
   },
   "base-lucy": {
