@@ -95,24 +95,26 @@ const testimonialNames = [
   { name: "Ana M.", location: "Getafe" },
 ];
 
-// Base EUR prices for each product (used for currency conversion)
+// Base EUR prices for each product — starting (smallest) price
 const BASE_PRICES: Record<string, number> = {
-  "canape-excellent": 249,
-  "canape-premium": 329,
-  "canape-articulado": 499,
-  "colchon-memory": 149,
-  "colchon-hybrid": 299,
-  "base-lucy": 129,
+  "colchon-visconube":    215,
+  "colchon-viscografeno": 335,
+  "colchon-macanuu":      240,
+  "canape-excellent":     249,
+  "canape-premium":       329,
+  "canape-articulado":    499,
+  "base-lucy":            129,
 };
 
 // Per-size EUR prices (same order as productMeta sizes arrays)
 const PRICES_BY_SIZE: Record<string, number[]> = {
-  "canape-excellent": [249, 279, 309, 339, 369, 399],
-  "canape-premium": [329, 389, 429, 469, 499, 549],
-  "canape-articulado": [499, 549, 629, 699],
-  "colchon-memory": [149, 169, 189, 209, 229, 249],
-  "colchon-hybrid": [299, 339, 379, 419, 449, 499],
-  "base-lucy": [129, 139, 159, 179, 199],
+  "colchon-visconube":    [215, 240, 240, 265, 265, 295, 265, 295, 295, 320],
+  "colchon-viscografeno": [335, 370, 375, 405, 430, 465, 455, 495],
+  "colchon-macanuu":      [240, 265, 240, 265, 265, 295, 310, 335, 310, 335, 350, 375],
+  "canape-excellent":     [249, 279, 309, 339, 369, 399],
+  "canape-premium":       [329, 389, 429, 469, 499, 549],
+  "canape-articulado":    [499, 549, 629, 699],
+  "base-lucy":            [129, 139, 159, 179, 199],
 };
 
 export default function Home() {
@@ -532,7 +534,18 @@ export default function Home() {
                     {selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}
                   </p>
                   <div className="mb-3">
-                    <span className="font-semibold text-primary text-lg">{product.displayPrice}</span>
+                    {(() => {
+                      const selSize = selectedSizes[product.id];
+                      const sizeIdx = selSize ? product.sizes.indexOf(selSize) : -1;
+                      const prices = PRICES_BY_SIZE[product.id] ?? [];
+                      const price = sizeIdx >= 0 ? prices[sizeIdx] : prices[0];
+                      const prefix = sizeIdx >= 0 ? '' : (lang === 'es' ? 'Desde ' : 'From ');
+                      return (
+                        <span className="font-semibold text-primary text-lg">
+                          {price != null ? `${prefix}${formatPrice(price)}` : product.displayPrice}
+                        </span>
+                      );
+                    })()}
                   </div>
                   <div className="flex flex-col gap-2">
                     <div>
