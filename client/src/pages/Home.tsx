@@ -28,17 +28,25 @@ const WHATSAPP_NUMBER = "34711204284";
 const SHOPIFY_STORE = "descanso-rapido-castilla.myshopify.com";
 
 // Shopify variant IDs — keyed by product handle then size
+// Canapés/base use "width × length cm" keys (e.g. "90 × 190 cm")
+// Mattresses already use full dimension labels
 const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
   "canape-excellent": {
-    "90cm": 53953966178645, "105cm": 53953966211413, "135cm": 53953966244181,
-    "150cm": 53953966276949, "160cm": 53953966309717, "180cm": 53953966342485,
+    "90 × 190 cm": 53953966178645, "90 × 200 cm": 53953966178645,
+    "105 × 190 cm": 53953966211413, "105 × 200 cm": 53953966211413,
+    "135 × 190 cm": 53953966244181, "135 × 200 cm": 53953966244181,
+    "150 × 190 cm": 53953966276949, "150 × 200 cm": 53953966276949,
   },
   "canape-premium": {
-    "90cm": 53953966539093, "105cm": 53953966571861, "135cm": 53953966604629,
-    "150cm": 53953966637397, "160cm": 53953966670165, "180cm": 53953966702933,
+    "90 × 190 cm": 53953966539093, "90 × 200 cm": 53953966539093,
+    "135 × 190 cm": 53953966604629, "135 × 200 cm": 53953966604629,
+    "150 × 190 cm": 53953966637397, "150 × 200 cm": 53953966637397,
   },
   "canape-articulado": {
-    "135cm": 53953966899541, "150cm": 53953966932309, "160cm": 53953966965077, "180cm": 53953966997845,
+    "135 × 190 cm": 53953966899541, "135 × 200 cm": 53953966899541,
+    "150 × 190 cm": 53953966932309, "150 × 200 cm": 53953966932309,
+    "160 × 190 cm": 53953966965077, "160 × 200 cm": 53953966965077,
+    "180 × 190 cm": 53953966997845, "180 × 200 cm": 53953966997845,
   },
   "colchon-visconube": {
     "80/90 × 180/190 cm": 53994462118229, "80/90 × 200 cm": 53994462150997,
@@ -62,8 +70,10 @@ const SHOPIFY_VARIANTS: Record<string, Record<string, number>> = {
     "150 × 180/190 cm": 53994463363413, "150 × 200 cm": 53994463396181,
   },
   "base-lucy": {
-    "80cm": 53953967587669, "90cm": 53953967620437, "105cm": 53953967653205,
-    "135cm": 53953967685973, "150cm": 53953967718741,
+    "90 × 190 cm": 53953967620437, "90 × 200 cm": 53953967620437,
+    "105 × 190 cm": 53953967653205, "105 × 200 cm": 53953967653205,
+    "135 × 190 cm": 53953967685973, "135 × 200 cm": 53953967685973,
+    "150 × 190 cm": 53953967718741, "150 × 200 cm": 53953967718741,
   },
 };
 
@@ -81,10 +91,10 @@ const productMeta = [
   { id: "colchon-macanuu",      badgeColor: "bg-teal-100 text-teal-800",   sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 209€", category: "colchones", deliveryDays: null },
   { id: "colchon-visconube",    badgeColor: "bg-green-100 text-green-800",  sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 189€", category: "colchones", deliveryDays: null },
   { id: "colchon-viscografeno", badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 299€", category: "colchones", deliveryDays: null },
-  { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
-  { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
-  { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
-  { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["90cm", "105cm", "135cm", "150cm"],                    price: "Desde 139€", category: "bases",    deliveryDays: null },
+  { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 399€", category: "canapes",   deliveryDays: null, hasLength: true },
+  { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null, hasLength: true },
+  { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10", hasLength: true },
+  { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["90cm", "105cm", "135cm", "150cm"],                    price: "Desde 139€", category: "bases",    deliveryDays: null, hasLength: true },
 ];
 
 const areas = ["Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón", "Parla", "Humanes", "Griñón", "Arroyomolinos", "Alcalá de Henares", "Torrejón", "Pozuelo", "Majadahonda", "Rivas", "Valdemoro"];
@@ -113,10 +123,11 @@ const PRICES_BY_SIZE: Record<string, number[]> = {
   "colchon-visconube":    [189, 209, 209, 239, 239, 259, 259, 289],
   "colchon-viscografeno": [299, 329, 329, 359, 379, 419, 409, 439],
   "colchon-macanuu":      [209, 239, 239, 259, 279, 299, 309, 329],
-  "canape-excellent":     [399, 409, 419, 449],
-  "canape-premium":       [329, 389, 429, 469, 499, 549],
-  "canape-articulado":    [499, 549, 629, 699],
-  "base-lucy":            [139, 169, 169, 179],
+  // canape/base: alternating [width×190, width×200] pairs per width
+  "canape-excellent":     [399, 419, 409, 429, 419, 439, 449, 469],  // 90, 105, 135, 150
+  "canape-premium":       [329, 349, 429, 449, 469, 489],             // 90, 135, 150
+  "canape-articulado":    [499, 519, 549, 569, 629, 649, 699, 719],  // 135, 150, 160, 180
+  "base-lucy":            [139, 149, 169, 179, 169, 179, 179, 189],  // 90, 105, 135, 150
 };
 
 export default function Home() {
@@ -127,7 +138,18 @@ export default function Home() {
   const [pillowChoice, setPillowChoice] = useState<"double" | "two-singles" | null>(null);
   const [pillowError, setPillowError] = useState(false);
   const [selectedSizes, setSelectedSizes] = useState<Record<string, string>>({});
+  const [selectedLengths, setSelectedLengths] = useState<Record<string, string>>({});
   const [sizeModal, setSizeModal] = useState<{ open: boolean; productId: string; productName: string }>({ open: false, productId: "", productName: "" });
+
+  // Build the variant key: for products with a length dropdown, combine width + length
+  const getVariantKey = (productId: string, width: string, length?: string) => {
+    const meta = productMeta.find(p => p.id === productId);
+    if (meta && (meta as any).hasLength) {
+      const len = length ?? selectedLengths[productId] ?? "190";
+      return `${width.replace('cm', '')} × ${len} cm`;
+    }
+    return width;
+  };
 
   const products = productMeta.map(m => ({
     ...m,
@@ -162,7 +184,8 @@ export default function Home() {
       setSizeModal({ open: true, productId, productName });
       return;
     }
-    const variantId = SHOPIFY_VARIANTS[productId]?.[selectedSize] ?? null;
+    const variantKey = getVariantKey(productId, selectedSize);
+    const variantId = SHOPIFY_VARIANTS[productId]?.[variantKey] ?? null;
     setPillowChoice(null);
     setPillowError(false);
     setPillowModal({ open: true, productId, productName, variantId });
@@ -173,7 +196,8 @@ export default function Home() {
     setSelectedSizes(prev => ({ ...prev, [productId]: size }));
     setSizeModal({ open: false, productId: "", productName: "" });
     // Immediately proceed to pillow modal with the chosen size
-    const variantId = SHOPIFY_VARIANTS[productId]?.[size] ?? null;
+    const variantKey = getVariantKey(productId, size);
+    const variantId = SHOPIFY_VARIANTS[productId]?.[variantKey] ?? null;
     setPillowChoice(null);
     setPillowError(false);
     setPillowModal({ open: true, productId, productName, variantId });
@@ -515,21 +539,21 @@ export default function Home() {
                     </Link>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 mb-3 leading-relaxed">{product.description}</p>
-                  {/* Size selector — dropdown */}
-                  <div className="mb-3">
+                  {/* Size selector — width + optional length dropdowns */}
+                  <div className="flex gap-2 mb-3">
                     <select
                       value={selectedSizes[product.id] ?? ""}
                       onChange={e => setSelectedSizes(prev => ({ ...prev, [product.id]: e.target.value }))}
-                      className={`w-full text-sm rounded-md border px-3 py-2 bg-background transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 ${
+                      className={`flex-1 text-sm rounded-md border px-3 py-2 bg-background transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 ${
                         selectedSizes[product.id]
                           ? 'border-primary text-foreground font-medium'
                           : 'border-border text-muted-foreground'
                       }`}
                     >
-                      <option value="">{lang === 'es' ? '— Elige tu talla —' : '— Choose size —'}</option>
+                      <option value="">{lang === 'es' ? '— Ancho —' : '— Width —'}</option>
                       {product.sizes.map((s, idx) => {
                         const prices = PRICES_BY_SIZE[product.id] ?? [];
-                        const p = prices[idx];
+                        const p = prices[idx * ((product as any).hasLength ? 2 : 1)];
                         return (
                           <option key={s} value={s}>
                             {s}{p != null ? `  —  ${formatPrice(p)}` : ''}
@@ -537,14 +561,30 @@ export default function Home() {
                         );
                       })}
                     </select>
+                    {(product as any).hasLength && (
+                      <select
+                        value={selectedLengths[product.id] ?? "190"}
+                        onChange={e => setSelectedLengths(prev => ({ ...prev, [product.id]: e.target.value }))}
+                        className="w-24 text-sm rounded-md border border-border px-2 py-2 bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      >
+                        <option value="190">190 cm</option>
+                        <option value="200">200 cm</option>
+                      </select>
+                    )}
                   </div>
                   <div className="mb-3">
                     {(() => {
                       const selSize = selectedSizes[product.id];
-                      const sizeIdx = selSize ? product.sizes.indexOf(selSize) : -1;
+                      const selLen = selectedLengths[product.id] ?? "190";
+                      const hasLen = (product as any).hasLength;
+                      const widthIdx = selSize ? product.sizes.indexOf(selSize) : -1;
                       const prices = PRICES_BY_SIZE[product.id] ?? [];
-                      const price = sizeIdx >= 0 ? prices[sizeIdx] : prices[0];
-                      const prefix = sizeIdx >= 0 ? '' : (lang === 'es' ? 'Desde ' : 'From ');
+                      // For hasLength products, prices alternate: [w0×190, w0×200, w1×190, w1×200, ...]
+                      const priceIdx = hasLen
+                        ? (widthIdx >= 0 ? widthIdx * 2 + (selLen === "200" ? 1 : 0) : 0)
+                        : (widthIdx >= 0 ? widthIdx : 0);
+                      const price = prices[priceIdx];
+                      const prefix = widthIdx >= 0 ? '' : (lang === 'es' ? 'Desde ' : 'From ');
                       return (
                         <span className="font-semibold text-primary text-lg">
                           {price != null ? `${prefix}${formatPrice(price)}` : product.displayPrice}
