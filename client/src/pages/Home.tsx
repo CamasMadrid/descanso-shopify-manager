@@ -78,13 +78,13 @@ const productImages: Record<string, string> = {
 };
 
 const productMeta = [
-  { id: "colchon-macanuu",      badgeColor: "bg-teal-100 text-teal-800",   sizes: ["80 × 180/190 cm", "80 × 200 cm", "90 × 180/190 cm", "90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 240€", category: "colchones", deliveryDays: null },
-  { id: "colchon-visconube",    badgeColor: "bg-green-100 text-green-800",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120 × 180/190 cm", "120 × 200 cm", "135 × 180/190 cm", "135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 215€", category: "colchones", deliveryDays: null },
-  { id: "colchon-viscografeno", badgeColor: "bg-slate-100 text-slate-700",  sizes: ["80/90 × 180/190 cm", "80/90 × 200 cm", "105 × 180/190 cm", "105 × 200 cm", "120/135 × 180/190 cm", "120/135 × 200 cm", "150 × 180/190 cm", "150 × 200 cm"], price: "Desde 335€", category: "colchones", deliveryDays: null },
+  { id: "colchon-macanuu",      badgeColor: "bg-teal-100 text-teal-800",   sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 209€", category: "colchones", deliveryDays: null },
+  { id: "colchon-visconube",    badgeColor: "bg-green-100 text-green-800",  sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 189€", category: "colchones", deliveryDays: null },
+  { id: "colchon-viscografeno", badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90 × 190 cm", "90 × 200 cm", "105 × 190 cm", "105 × 200 cm", "135 × 190 cm", "135 × 200 cm", "150 × 190 cm", "150 × 200 cm"], price: "Desde 299€", category: "colchones", deliveryDays: null },
   { id: "canape-excellent",  badgeColor: "bg-amber-100 text-amber-800",  sizes: ["90cm", "105cm", "135cm", "150cm"], price: "Desde 249€", category: "canapes",   deliveryDays: null },
   { id: "canape-premium",   badgeColor: "bg-slate-100 text-slate-700",  sizes: ["90cm", "135cm", "150cm"],            price: "Desde 329€", category: "canapes",   deliveryDays: null },
   { id: "canape-articulado",badgeColor: "bg-blue-100 text-blue-800",    sizes: ["135cm", "150cm", "160cm", "180cm"],  price: "Desde 499€", category: "canapes",   deliveryDays: "5–10" },
-  { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["80cm", "90cm", "105cm", "135cm", "150cm"],           price: "Desde 129€", category: "bases",    deliveryDays: null },
+  { id: "base-lucy",        badgeColor: "bg-purple-100 text-purple-700",sizes: ["90cm", "105cm", "135cm", "150cm"],                    price: "Desde 139€", category: "bases",    deliveryDays: null },
 ];
 
 const areas = ["Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón", "Parla", "Humanes", "Griñón", "Arroyomolinos", "Alcalá de Henares", "Torrejón", "Pozuelo", "Majadahonda", "Rivas", "Valdemoro"];
@@ -96,25 +96,27 @@ const testimonialNames = [
 ];
 
 // Base EUR prices for each product — starting (smallest) price
+// Formula: cost × 2 × 1.21 (inc. 21% VAT), rounded to nearest €9
 const BASE_PRICES: Record<string, number> = {
-  "colchon-visconube":    215,
-  "colchon-viscografeno": 335,
-  "colchon-macanuu":      240,
-  "canape-excellent":     249,
+  "colchon-visconube":    189,
+  "colchon-viscografeno": 299,
+  "colchon-macanuu":      209,
+  "canape-excellent":     399,
   "canape-premium":       329,
   "canape-articulado":    499,
-  "base-lucy":            129,
+  "base-lucy":            139,
 };
 
 // Per-size EUR prices (same order as productMeta sizes arrays)
+// Mattress sizes: 90×190, 90×200, 105×190, 105×200, 135×190, 135×200, 150×190, 150×200
 const PRICES_BY_SIZE: Record<string, number[]> = {
-  "colchon-visconube":    [215, 240, 240, 265, 265, 295, 265, 295, 295, 320],
-  "colchon-viscografeno": [335, 370, 375, 405, 430, 465, 455, 495],
-  "colchon-macanuu":      [240, 265, 240, 265, 265, 295, 310, 335, 310, 335, 350, 375],
-  "canape-excellent":     [249, 279, 309, 339, 369, 399],
+  "colchon-visconube":    [189, 209, 209, 239, 239, 259, 259, 289],
+  "colchon-viscografeno": [299, 329, 329, 359, 379, 419, 409, 439],
+  "colchon-macanuu":      [209, 239, 239, 259, 279, 299, 309, 329],
+  "canape-excellent":     [399, 409, 419, 449],
   "canape-premium":       [329, 389, 429, 469, 499, 549],
   "canape-articulado":    [499, 549, 629, 699],
-  "base-lucy":            [129, 139, 159, 179, 199],
+  "base-lucy":            [139, 169, 169, 179],
 };
 
 export default function Home() {
