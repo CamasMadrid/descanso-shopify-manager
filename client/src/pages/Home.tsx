@@ -515,26 +515,29 @@ export default function Home() {
                     </Link>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2 mb-3 leading-relaxed">{product.description}</p>
-                  {/* Size selector */}
-                  <div className="flex flex-wrap gap-1 mb-2">
-                    {product.sizes.map(s => (
-                      <button
-                        key={s}
-                        type="button"
-                        onClick={() => setSelectedSizes(prev => ({ ...prev, [product.id]: prev[product.id] === s ? "" : s }))}
-                        className={`text-xs px-2.5 py-1 rounded border transition-all ${
-                          selectedSizes[product.id] === s
-                            ? "bg-primary text-primary-foreground border-primary font-semibold"
-                            : "bg-muted border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-                        }`}
-                      >
-                        {s}
-                      </button>
-                    ))}
+                  {/* Size selector — dropdown */}
+                  <div className="mb-3">
+                    <select
+                      value={selectedSizes[product.id] ?? ""}
+                      onChange={e => setSelectedSizes(prev => ({ ...prev, [product.id]: e.target.value }))}
+                      className={`w-full text-sm rounded-md border px-3 py-2 bg-background transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 ${
+                        selectedSizes[product.id]
+                          ? 'border-primary text-foreground font-medium'
+                          : 'border-border text-muted-foreground'
+                      }`}
+                    >
+                      <option value="">{lang === 'es' ? '— Elige tu talla —' : '— Choose size —'}</option>
+                      {product.sizes.map((s, idx) => {
+                        const prices = PRICES_BY_SIZE[product.id] ?? [];
+                        const p = prices[idx];
+                        return (
+                          <option key={s} value={s}>
+                            {s}{p != null ? `  —  ${formatPrice(p)}` : ''}
+                          </option>
+                        );
+                      })}
+                    </select>
                   </div>
-                  <p className={`text-xs mb-3 transition-colors ${selectedSizes[product.id] ? 'text-green-600 font-medium' : 'text-muted-foreground'}`}>
-                    {selectedSizes[product.id] ? `✓ ${selectedSizes[product.id]} ${lang === 'es' ? 'seleccionado' : 'selected'}` : t.productSizeHint}
-                  </p>
                   <div className="mb-3">
                     {(() => {
                       const selSize = selectedSizes[product.id];
