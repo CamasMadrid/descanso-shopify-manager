@@ -686,13 +686,13 @@ export default function Home() {
             <div className="relative">
               <img src={LIFESTYLE_IMG} alt="Cosy bedroom" className="rounded-2xl shadow-xl w-full object-cover aspect-[4/3]" />
               {/* Coverage badge */}
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg p-4 max-w-[200px]">
-                <div className="text-xs font-semibold text-foreground mb-2">{t.showroomAreas}</div>
-                <div className="flex flex-wrap gap-1">
-                  {areas.slice(0, 5).map(a => (
-                    <span key={a} className="text-xs bg-primary/10 text-primary px-1.5 py-0.5 rounded">{a}</span>
-                  ))}
-                  <span className="text-xs text-muted-foreground">+{areas.length - 5}...</span>
+              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-lg p-4 max-w-[220px]">
+                <div className="flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-primary shrink-0" />
+                  <div>
+                    <div className="text-xs font-semibold text-foreground">{lang === 'es' ? 'Zona de cobertura' : 'Coverage area'}</div>
+                    <div className="text-sm font-bold text-primary mt-0.5">{lang === 'es' ? 'Toda la Comunidad de Madrid' : 'All of Madrid Region'}</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -910,10 +910,8 @@ export default function Home() {
               <div className="font-semibold mb-3 text-sm tracking-wide uppercase text-background/50">
                 {lang === "es" ? "Zona de entrega" : "Delivery area"}
               </div>
-              <div className="flex flex-wrap gap-2">
-                {areas.map(a => (
-                  <span key={a} className="text-xs bg-background/10 text-background/80 px-2 py-1 rounded">{a}</span>
-                ))}
+              <div className="text-sm text-background/80 font-medium">
+                {lang === 'es' ? 'Toda la Comunidad de Madrid' : 'All of the Madrid Region'}
               </div>
             </div>
             <div>
