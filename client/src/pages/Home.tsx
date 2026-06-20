@@ -355,13 +355,11 @@ export default function Home() {
       <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border">
         <div className="container flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground text-xs font-bold">DR</span>
-            </div>
-            <div>
-              <div className="font-serif font-semibold text-foreground leading-tight text-base">Descanso Rápido</div>
-              <div className="text-xs text-muted-foreground leading-tight">{t.brandSubtitle}</div>
-            </div>
+            <img
+              src="/manus-storage/camas-madrid-logo_4301d5f6.png"
+              alt="Camas Madrid"
+              className="h-10 w-auto object-contain"
+            />
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <a href="#productos" className="text-muted-foreground hover:text-foreground transition-colors">{t.navProducts}</a>
@@ -901,7 +899,7 @@ export default function Home() {
         <div className="container">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="font-serif font-bold text-xl mb-2">Descanso Rápido Castilla</div>
+              <div className="font-serif font-bold text-xl mb-2">Camas Madrid</div>
               <p className="text-background/60 text-sm leading-relaxed">
                 {t.footerTagline}
               </p>

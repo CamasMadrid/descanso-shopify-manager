@@ -150,7 +150,7 @@ export default function Enquiries() {
                           </a>
                         )}
                         {e.email && (
-                          <a href={`mailto:${e.email}?subject=Re: Consulta Descanso Rápido Castilla&body=${encodeURIComponent(replies[e.id] ?? e.ownerReply ?? e.aiDraftReply ?? "")}`}>
+                          <a href={`mailto:${e.email}?subject=Re: Consulta Camas Madrid&body=${encodeURIComponent(replies[e.id] ?? e.ownerReply ?? e.aiDraftReply ?? "")}`}>
                             <Button size="sm" variant="outline" className="gap-1.5 h-8 text-xs">
                               <Mail className="w-3 h-3" /> Responder por email
                             </Button>

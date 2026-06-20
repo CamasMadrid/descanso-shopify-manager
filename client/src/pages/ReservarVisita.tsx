@@ -107,9 +107,11 @@ export default function ReservarVisita() {
                 <ArrowLeft className="w-4 h-4" /> {lang === "es" ? "Volver" : "Back"}
               </Button>
             </Link>
-            <div className="font-serif font-semibold text-foreground">
-              {lang === "es" ? "Reservar visita a domicilio" : "Book a home visit"}
-            </div>
+            <img
+              src="/manus-storage/camas-madrid-logo_4301d5f6.png"
+              alt="Camas Madrid"
+              className="h-8 w-auto object-contain hidden sm:block"
+            />
           </div>
           {/* Language toggle */}
           <div className="flex items-center rounded-full border border-border bg-muted/50 p-0.5 text-xs font-medium">

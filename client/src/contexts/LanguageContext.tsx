@@ -239,7 +239,7 @@ const es: Translations = {
 
   footerTagline: "Canapés, colchones y bases tapizadas. Entrega en 48h en toda la Comunidad de Madrid.",
   footerAddress: "Fuenlabrada, Madrid · +34 711 204 284",
-  footerCopyright: "© 2025 Descanso Rápido Castilla. Todos los derechos reservados.",
+  footerCopyright: "© 2025 Camas Madrid. Todos los derechos reservados.",
 
   products: {
     "canape-excellent": { name: "Canapé Excellent", subtitle: "Madera con almacenaje", description: "Canapé abatible de madera con 28 cm de almacenaje interior. Disponible en 4 colores.", badge: "Más vendido" },
@@ -358,7 +358,7 @@ const en: Translations = {
 
   footerTagline: "Storage beds, mattresses and divan bases. 48h delivery across the Community of Madrid.",
   footerAddress: "Fuenlabrada, Madrid · +34 711 204 284",
-  footerCopyright: "© 2025 Descanso Rápido Castilla. All rights reserved.",
+  footerCopyright: "© 2025 Camas Madrid. All rights reserved.",
 
   products: {
     "canape-excellent": { name: "Excellent Storage Bed", subtitle: "Solid wood with storage", description: "Lift-up storage bed in solid wood with 28 cm of internal storage. Available in 4 colours.", badge: "Best seller" },

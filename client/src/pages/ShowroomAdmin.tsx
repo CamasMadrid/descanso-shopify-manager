@@ -144,7 +144,7 @@ export default function ShowroomAdmin() {
                       {/* Actions */}
                       <div className="flex flex-col gap-2 shrink-0">
                         {b.phone && (
-                          <a href={`https://wa.me/34${b.phone.replace(/\s/g, "")}?text=${encodeURIComponent(`Hola ${b.name}, te confirmo la visita para el ${b.preferredDate} entre las ${b.preferredTime}. ¡Hasta pronto! — Descanso Rápido Castilla`)}`}
+                          <a href={`https://wa.me/34${b.phone.replace(/\s/g, "")}?text=${encodeURIComponent(`Hola ${b.name}, te confirmo la visita para el ${b.preferredDate} entre las ${b.preferredTime}. ¡Hasta pronto! — Camas Madrid`)}`}
                              target="_blank" rel="noopener noreferrer">
                             <Button size="sm" className="bg-[#25D366] hover:bg-[#1ebe5d] text-white gap-1.5 h-8 text-xs w-full">
                               <MessageCircle className="w-3 h-3" /> WhatsApp

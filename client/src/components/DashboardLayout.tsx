@@ -116,7 +116,7 @@ export default function DashboardLayout({
             </div>
             <div className="text-center">
               <h1 className="text-xl font-semibold tracking-tight">
-                Descanso Rápido Castilla
+                Camas Madrid
               </h1>
               <p className="text-sm text-muted-foreground mt-1">Panel de Administración</p>
             </div>
@@ -227,7 +227,7 @@ function DashboardLayoutContent({
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold tracking-tight truncate leading-tight">
-                      Descanso Rápido
+                      Camas Madrid
                     </p>
                     <p className="text-[10px] text-muted-foreground truncate leading-tight">
                       Admin Panel

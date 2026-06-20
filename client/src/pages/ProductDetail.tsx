@@ -496,13 +496,11 @@ export default function ProductDetail() {
         <header className="sticky top-0 z-40 bg-background/95 backdrop-blur border-b border-border">
           <div className="container flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground text-xs font-bold">DR</span>
-              </div>
-              <div>
-                <div className="font-serif font-semibold text-foreground leading-tight text-base">Descanso Rápido</div>
-                <div className="text-xs text-muted-foreground leading-tight">{t.brandSubtitle}</div>
-              </div>
+              <img
+                src="/manus-storage/camas-madrid-logo_4301d5f6.png"
+                alt="Camas Madrid"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <div className="flex items-center gap-2">
               {/* Language toggle */}
@@ -767,7 +765,7 @@ export default function ProductDetail() {
         {/* Footer */}
         <footer className="border-t border-border bg-muted/30 py-8">
           <div className="container text-center text-sm text-muted-foreground">
-            <p className="font-semibold text-foreground mb-1">Descanso Rápido Castilla</p>
+            <p className="font-semibold text-foreground mb-1">Camas Madrid</p>
             <p>Comunidad de Madrid · WhatsApp: <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-primary hover:underline">+34 711 204 284</a></p>
             <p className="mt-2 text-xs">{t.footerCopyright}</p>
           </div>

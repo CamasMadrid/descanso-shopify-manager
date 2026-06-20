@@ -117,7 +117,7 @@ export default function Dashboard() {
               Panel General
             </h1>
             <p className="text-sm text-muted-foreground mt-0.5">
-              Bienvenido al panel de administración de Descanso Rápido Castilla
+              Bienvenido al panel de administración de Camas Madrid
             </p>
           </div>
           <Button
