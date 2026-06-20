@@ -400,7 +400,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 min-h-[520px]">
           {/* Left: text */}
           <div className="flex flex-col justify-center px-8 py-16 md:py-20 bg-warm-light/30">
-            <Badge className="w-fit mb-4 bg-primary/10 text-primary border-primary/20 text-xs font-semibold tracking-wide">
+            <Badge className="w-fit max-w-full mb-4 bg-primary/10 text-primary border-primary/20 text-xs font-semibold tracking-wide whitespace-normal break-words">
               {t.heroBadge}
             </Badge>
             <h1 className="font-serif text-4xl md:text-5xl font-bold text-foreground leading-tight mb-4">
