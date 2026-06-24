@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 
 export type Lang = "es" | "en";
 
@@ -385,8 +385,26 @@ const LanguageContext = createContext<LanguageContextType>({
   t: es,
 });
 
+function getInitialLang(): Lang {
+  // If the visitor arrives via bedsmadrid.com (or www.bedsmadrid.com), default to English
+  const hostname = typeof window !== "undefined" ? window.location.hostname : "";
+  if (hostname === "bedsmadrid.com" || hostname === "www.bedsmadrid.com") {
+    return "en";
+  }
+  return "es";
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("es");
+  const [lang, setLang] = useState<Lang>(getInitialLang);
+
+  // Also handle navigation to the site after initial load (e.g. if hostname changes in dev)
+  useEffect(() => {
+    const hostname = window.location.hostname;
+    if (hostname === "bedsmadrid.com" || hostname === "www.bedsmadrid.com") {
+      setLang("en");
+    }
+  }, []);
+
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>
       {children}
