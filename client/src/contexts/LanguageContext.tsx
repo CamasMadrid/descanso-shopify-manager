@@ -12,6 +12,7 @@ export interface Translations {
   navWhatsApp: string;
   brandName: string;
   brandSubtitle: string;
+  logoUrl: string;
 
   // Hero
   heroBadge: string;
@@ -143,6 +144,7 @@ const es: Translations = {
   navWhatsApp: "WhatsApp",
   brandName: "Camas Madrid",
   brandSubtitle: "Castilla · Madrid",
+  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/camas-madrid-logo-v2-GqpvJsRJxFTaZz2vpJxqdJ.webp",
 
   heroBadge: "⚡ Entrega garantizada en 48 horas",
   heroTitle1: "Tu cama nueva,",
@@ -263,6 +265,7 @@ const en: Translations = {
   navWhatsApp: "WhatsApp",
   brandName: "Beds Madrid",
   brandSubtitle: "Castilla · Madrid",
+  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/beds-madrid-logo-YghKnhvCyn2MZMR4X2JaXu.webp",
 
   heroBadge: "⚡ 48-hour delivery guaranteed",
   heroTitle1: "Your new bed,",

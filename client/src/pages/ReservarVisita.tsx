@@ -25,7 +25,7 @@ const TIME_SLOTS = [
 ];
 
 export default function ReservarVisita() {
-  const { lang, setLang } = useLang();
+  const { lang, setLang, t } = useLang();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "", email: "", phone: "", district: "",
@@ -108,9 +108,9 @@ export default function ReservarVisita() {
               </Button>
             </Link>
             <img
-              src="/manus-storage/camas-madrid-logo_4301d5f6.png"
-              alt="Camas Madrid"
-              className="h-8 w-auto object-contain hidden sm:block"
+              src={t.logoUrl}
+              alt={t.brandName}
+              className="h-12 w-auto object-contain hidden sm:block"
             />
           </div>
           {/* Language toggle */}

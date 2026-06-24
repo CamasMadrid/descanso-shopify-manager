@@ -356,9 +356,9 @@ export default function Home() {
         <div className="container flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/manus-storage/camas-madrid-logo_4301d5f6.png"
+              src={t.logoUrl}
               alt={t.brandName}
-              className="h-10 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </Link>
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
