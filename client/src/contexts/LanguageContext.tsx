@@ -265,7 +265,7 @@ const en: Translations = {
   navWhatsApp: "WhatsApp",
   brandName: "Beds Madrid",
   brandSubtitle: "Castilla · Madrid",
-  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663668909283/NteP5R75gry86mQCEyPh6j/beds-madrid-logo-YghKnhvCyn2MZMR4X2JaXu.webp",
+  logoUrl: "/manus-storage/beds-madrid-logo-v2_d33eee72.png",
 
   heroBadge: "⚡ 48-hour delivery guaranteed",
   heroTitle1: "Your new bed,",
