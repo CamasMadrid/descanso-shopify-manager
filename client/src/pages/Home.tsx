@@ -357,7 +357,7 @@ export default function Home() {
           <Link href="/" className="flex items-center gap-2">
             <img
               src="/manus-storage/camas-madrid-logo_4301d5f6.png"
-              alt="Camas Madrid"
+              alt={t.brandName}
               className="h-10 w-auto object-contain"
             />
           </Link>
@@ -899,7 +899,7 @@ export default function Home() {
         <div className="container">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <div className="font-serif font-bold text-xl mb-2">Camas Madrid</div>
+              <div className="font-serif font-bold text-xl mb-2">{t.brandName}</div>
               <p className="text-background/60 text-sm leading-relaxed">
                 {t.footerTagline}
               </p>

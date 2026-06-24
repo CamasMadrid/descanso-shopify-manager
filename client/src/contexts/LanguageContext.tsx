@@ -10,6 +10,7 @@ export interface Translations {
   navDelivery: string;
   navContact: string;
   navWhatsApp: string;
+  brandName: string;
   brandSubtitle: string;
 
   // Hero
@@ -140,6 +141,7 @@ const es: Translations = {
   navDelivery: "Entrega",
   navContact: "Contacto",
   navWhatsApp: "WhatsApp",
+  brandName: "Camas Madrid",
   brandSubtitle: "Castilla · Madrid",
 
   heroBadge: "⚡ Entrega garantizada en 48 horas",
@@ -259,6 +261,7 @@ const en: Translations = {
   navDelivery: "Delivery",
   navContact: "Contact",
   navWhatsApp: "WhatsApp",
+  brandName: "Beds Madrid",
   brandSubtitle: "Castilla · Madrid",
 
   heroBadge: "⚡ 48-hour delivery guaranteed",
@@ -358,7 +361,7 @@ const en: Translations = {
 
   footerTagline: "Storage beds, mattresses and divan bases. 48h delivery across the Community of Madrid.",
   footerAddress: "Fuenlabrada, Madrid · +34 711 204 284",
-  footerCopyright: "© 2025 Camas Madrid. All rights reserved.",
+  footerCopyright: "© 2025 Beds Madrid. All rights reserved.",
 
   products: {
     "canape-excellent": { name: "Excellent Storage Bed", subtitle: "Solid wood with storage", description: "Lift-up storage bed in solid wood with 28 cm of internal storage. Available in 4 colours.", badge: "Best seller" },

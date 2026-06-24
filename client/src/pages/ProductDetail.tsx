@@ -498,7 +498,7 @@ export default function ProductDetail() {
             <Link href="/" className="flex items-center gap-2">
               <img
                 src="/manus-storage/camas-madrid-logo_4301d5f6.png"
-                alt="Camas Madrid"
+                alt={t.brandName}
                 className="h-10 w-auto object-contain"
               />
             </Link>
@@ -765,7 +765,7 @@ export default function ProductDetail() {
         {/* Footer */}
         <footer className="border-t border-border bg-muted/30 py-8">
           <div className="container text-center text-sm text-muted-foreground">
-            <p className="font-semibold text-foreground mb-1">Camas Madrid</p>
+            <p className="font-semibold text-foreground mb-1">{t.brandName}</p>
             <p>Comunidad de Madrid · WhatsApp: <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="text-primary hover:underline">+34 711 204 284</a></p>
             <p className="mt-2 text-xs">{t.footerCopyright}</p>
           </div>
