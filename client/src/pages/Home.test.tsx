@@ -27,11 +27,24 @@ describe("Pack Express homepage", () => {
     expect(screen.getAllByText("Entrega y montaje gratis hasta 25 km de Madrid centro.").length).toBeGreaterThan(0);
   });
 
+  it("keeps Express to size and colour, then reveals the matching preview", async () => {
+    const user = userEvent.setup();
+    renderHome();
+
+    expect(screen.queryByRole("button", { name: /Solo colchón/i })).toBeNull();
+    expect(screen.queryByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeNull();
+
+    await user.selectOptions(screen.getByRole("combobox"), "135 × 190 cm");
+    await user.click(screen.getByRole("button", { name: "Cambrian" }));
+
+    expect(screen.getByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeTruthy();
+  });
+
   it("switches the rendered mattress and storage-bed alternatives to September", async () => {
     const user = userEvent.setup();
     renderHome();
 
-    await user.click(screen.getByRole("button", { name: /Puedo esperar a septiembre/i }));
+    await user.click(screen.getByRole("button", { name: /Ver opciones para septiembre/i }));
 
     expect(screen.getAllByText("Desde septiembre").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Esencial").length).toBeGreaterThan(0);
@@ -40,6 +53,7 @@ describe("Pack Express homepage", () => {
     expect(screen.getAllByText("Canapé de Madera con Almacenaje").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Nórdico").length).toBeGreaterThan(0);
 
+    await user.selectOptions(screen.getByRole("combobox"), "135 × 190 cm");
     await user.click(screen.getByRole("button", { name: "Nórdico" }));
     expect(screen.getByAltText("Canapé de Madera con Almacenaje en acabado Nórdico")).toBeTruthy();
   });
@@ -48,6 +62,7 @@ describe("Pack Express homepage", () => {
     const user = userEvent.setup();
     renderHome();
 
+    await user.click(screen.getByRole("button", { name: /Ver opciones para septiembre/i }));
     await user.click(screen.getByRole("button", { name: /Solo colchón/i }));
 
     expect(screen.queryByText("Compara los dos canapés")).toBeNull();

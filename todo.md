@@ -104,3 +104,5 @@
 - [x] Restrict the remaining three mattress tiers to the September route
 - [x] Create verified bedroom-scene imagery for the September canapé from the supplied open/closed product photos and four finish swatches
 - [x] Obtain approval for the four September finish renders against the supplier swatches before publishing them
+- [x] Create, approve and display the missing Cambrian preview for the in-stock Express canapé
+- [x] Simplify the in-stock Express route to size and colour only, then reveal the selected colour preview

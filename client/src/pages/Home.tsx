@@ -20,6 +20,13 @@ import {
 
 const EXPRESS_CANAPE_CLOSED = "/manus-storage/express-canape-closed_ef8e4f68.jpg";
 const EXPRESS_CANAPE_OPEN = "/manus-storage/express-canape-open_d9775294.jpg";
+const EXPRESS_CANAPE_IMAGES: Record<string, string> = {
+  "Ártico": EXPRESS_CANAPE_CLOSED,
+  Blanco: "/manus-storage/express-canape-blanco_8a7cf9c2.png",
+  Cambrian: "/manus-storage/express-canape-cambrian_15ce54d3.png",
+  Cerezo: "/manus-storage/express-canape-cerezo_9431351e.png",
+  "Wengué": "/manus-storage/express-canape-wengue_b62d82bc.png",
+};
 const SEPTEMBER_CANAPE_IMAGES: Record<string, string> = {
   Blanco: "/manus-storage/september-canape-closed-blanco_4f3b89a2.png",
   "Nórdico": "/manus-storage/september-canape-closed-nordico_cfc2b7a0.png",
@@ -113,11 +120,16 @@ export default function Home() {
         timingExpressDesc: "Muestra solamente el Pack Express y sus colores en stock.",
         timingSeptemberDesc: "Descubre tres colchones y el canapé de madera disponibles desde septiembre.",
         sizeTitle: "3. Elige tu medida",
+        expressSizeTitle: "1. Elige tu medida",
         sizePlaceholder: "Selecciona una medida",
         mattressTitle: "4. Elige tu nivel de colchón",
         canapeTitle: "5. Tu canapé",
         finishTitle: "6. Elige el color o acabado",
+        expressFinishTitle: "2. Elige tu color",
         finishHint: "Todos estos acabados están disponibles para la opción seleccionada.",
+        expressFinishHint: "Selecciona tu color. Verás la cama después de elegir medida y color.",
+        previewTitle: "Vista previa de tu selección",
+        seeSeptember: "¿Puedes esperar? Ver opciones para septiembre",
         postcodeTitle: "7. Código postal y entrega",
         postcodePlaceholder: "Tu código postal",
         freeZone: "Entrega y montaje gratis hasta 25 km de Madrid centro.",
@@ -157,11 +169,16 @@ export default function Home() {
         timingExpressDesc: "Shows only the in-stock Pack Express and its available colours.",
         timingSeptemberDesc: "Discover three mattress ranges and the wood storage bed available from September.",
         sizeTitle: "3. Choose your size",
+        expressSizeTitle: "1. Choose your size",
         sizePlaceholder: "Select a size",
         mattressTitle: "4. Choose your mattress level",
         canapeTitle: "5. Your storage bed",
         finishTitle: "6. Choose colour or finish",
+        expressFinishTitle: "2. Choose your colour",
         finishHint: "These finishes are available for the selected option.",
+        expressFinishHint: "Select your colour. Your bed preview will appear once you choose size and colour.",
+        previewTitle: "Your selection preview",
+        seeSeptember: "Can you wait? View September options",
         postcodeTitle: "7. Postcode and delivery",
         postcodePlaceholder: "Your postcode",
         freeZone: "Free delivery and assembly within 25 km of central Madrid.",
@@ -190,6 +207,7 @@ export default function Home() {
 
   const includesMattress = purchaseType === "pack" || purchaseType === "mattress";
   const includesCanape = purchaseType === "pack" || purchaseType === "canape";
+  const isExpress = availability === "express";
   const selectedCanape = availability === "express" ? "express" : "premium";
   const finishOptions = getAvailableFinishes(selectedCanape);
   const currentFinish = finishOptions.includes(finish as never) ? finish : "";
@@ -197,9 +215,11 @@ export default function Home() {
   const activeMattressTier = mattressOptions.includes(mattressTier) ? mattressTier : mattressOptions[0];
   const displaySize = size === "Necesito otra medida" ? copy.customSize : size;
   const isCustomSize = size === "Necesito otra medida";
+  const selectedPreview = selectedCanape === "express" ? EXPRESS_CANAPE_IMAGES[currentFinish] : SEPTEMBER_CANAPE_IMAGES[currentFinish];
 
   function selectAvailability(next: Availability) {
     setAvailability(next);
+    if (next === "express") setPurchaseType("pack");
     setMattressTier(next === "express" ? "express" : "essential");
     setFinish("");
   }
@@ -288,7 +308,7 @@ export default function Home() {
 
             <div className="grid gap-7 lg:grid-cols-[1fr_340px] lg:items-start">
               <div className="space-y-8 rounded-[2rem] border border-border bg-white p-5 shadow-sm sm:p-8">
-                <div>
+                <div hidden={isExpress}>
                   <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.productTitle}</h3>
                   <div className="grid gap-3 sm:grid-cols-3">
                     {(["pack", "canape", "mattress"] as PurchaseType[]).map((type) => (
@@ -304,7 +324,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div>
+                <div hidden={isExpress}>
                   <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.timingTitle}</h3>
                   <div className="grid gap-3 sm:grid-cols-2">
                     <ChoiceCard active={availability === "express"} onClick={() => selectAvailability("express")} title={copy.timingExpress} description={copy.timingExpressDesc} badge={isSpanish ? "En stock" : "In stock"} />
@@ -312,12 +332,12 @@ export default function Home() {
                   </div>
                 </div>
 
-                {includesCanape && (
+                {!isExpress && includesCanape && (
                   <div>
                     <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{isSpanish ? "Compara los dos canapés" : "Compare the two storage beds"}</h3>
                     <div className="grid gap-3 sm:grid-cols-2">
                       <ChoiceCard
-                        active={availability === "express"}
+                        active={false}
                         onClick={() => selectAvailability("express")}
                         title={canapeDetails.express[lang].name}
                         description={canapeDetails.express[lang].summary}
@@ -340,7 +360,7 @@ export default function Home() {
 
                 <div id="size-step" className="scroll-mt-32">
                   <div className="mb-3 flex items-end justify-between gap-3">
-                    <h3 className="font-serif text-2xl font-bold text-[#123b65]">{copy.sizeTitle}</h3>
+                    <h3 className="font-serif text-2xl font-bold text-[#123b65]">{isExpress ? copy.expressSizeTitle : copy.sizeTitle}</h3>
                     {sizeError && <span className="text-xs font-semibold text-red-600">{copy.chooseSize}</span>}
                   </div>
                   <div className="relative max-w-md">
@@ -353,7 +373,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                {includesMattress && (
+                {!isExpress && includesMattress && (
                   <div>
                     <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.mattressTitle}</h3>
                     <div className={`grid gap-3 ${mattressOptions.length === 1 ? "max-w-md" : "sm:grid-cols-3"}`}>
@@ -367,7 +387,7 @@ export default function Home() {
 
                 {includesCanape && (
                   <>
-                    <div>
+                    <div className={isExpress ? "hidden" : undefined}>
                       <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.canapeTitle}</h3>
                       <div className="max-w-md rounded-2xl border-2 border-primary bg-primary/[0.06] p-5">
                         <span className={`mb-3 inline-flex rounded-full px-2.5 py-1 text-[11px] font-bold ${availability === "express" ? "bg-emerald-100 text-emerald-800" : "bg-amber-100 text-amber-800"}`}>{canapeDetails[selectedCanape][lang].availability}</span>
@@ -380,8 +400,8 @@ export default function Home() {
                     </div>
 
                     <div>
-                      <h3 className="mb-1 font-serif text-2xl font-bold text-[#123b65]">{copy.finishTitle}</h3>
-                      <p className="mb-4 text-sm text-muted-foreground">{copy.finishHint}</p>
+                      <h3 className="mb-1 font-serif text-2xl font-bold text-[#123b65]">{isExpress ? copy.expressFinishTitle : copy.finishTitle}</h3>
+                      <p className="mb-4 text-sm text-muted-foreground">{isExpress ? copy.expressFinishHint : copy.finishHint}</p>
                       <div className="flex flex-wrap gap-3">
                         {finishOptions.map((option) => (
                           <button key={option} type="button" onClick={() => setFinish(option)} className={`group flex items-center gap-2 rounded-xl border-2 px-3 py-2 text-sm font-semibold transition ${currentFinish === option ? "border-primary bg-primary/[0.06] text-primary" : "border-border bg-white text-foreground hover:border-primary/40"}`}>
@@ -390,11 +410,16 @@ export default function Home() {
                           </button>
                         ))}
                       </div>
-                      {selectedCanape === "premium" && currentFinish && SEPTEMBER_CANAPE_IMAGES[currentFinish] && (
+                      {size && currentFinish && selectedPreview && (
                         <figure className="mt-5 max-w-md overflow-hidden rounded-2xl border border-border bg-white">
-                          <img src={SEPTEMBER_CANAPE_IMAGES[currentFinish]} alt={isSpanish ? `Canapé de Madera con Almacenaje en acabado ${currentFinish}` : `Wood Storage Bed in ${currentFinish} finish`} className="aspect-[4/3] w-full object-cover" />
-                          <figcaption className="px-4 py-3 text-sm font-semibold text-[#123b65]">{isSpanish ? `Vista previa del acabado ${currentFinish}` : `${currentFinish} finish preview`}</figcaption>
+                          <img src={selectedPreview} alt={isSpanish ? `${canapeDetails[selectedCanape][lang].name} en acabado ${currentFinish}` : `${canapeDetails[selectedCanape][lang].name} in ${currentFinish} finish`} className="aspect-[4/3] w-full object-cover" />
+                          <figcaption className="px-4 py-3 text-sm font-semibold text-[#123b65]">{copy.previewTitle}: {currentFinish} · {displaySize}</figcaption>
                         </figure>
+                      )}
+                      {isExpress && (
+                        <button type="button" onClick={() => selectAvailability("september")} className="mt-5 text-sm font-semibold text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary">
+                          {copy.seeSeptember}
+                        </button>
                       )}
                     </div>
                   </>
