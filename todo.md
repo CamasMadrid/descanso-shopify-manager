@@ -56,6 +56,7 @@
 - [ ] Create visual ad creatives (images/video)
 - [x] Prepare compliant WhatsApp-first summer liquidation campaign messaging and price-display guidance
 - [x] Verify external listing channels that permit WhatsApp-led enquiries and prepare prefilled offer messages without website changes
+- [x] Document a no-website workflow for managing WhatsApp and listing-platform enquiries without missed messages
 
 ## Phase 7: Final Delivery
 - [x] Full site review and polish
