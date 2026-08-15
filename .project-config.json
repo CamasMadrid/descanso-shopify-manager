@@ -15,10 +15,11 @@
   ],
   "git_remote": {
     "repo_url": "s3://vida-prod-gitrepo/webdev-git/310519663668909283/NteP5R75gry86mQCEyPh6j",
-    "access_key_id": "ASIAZV3A2ECZP4VIVF7Y",
-    "secret_access_key": "9cyzPd3kErpDS9aOo61mV0KQMh7Lo4Dl2tR0xWpB",
-    "session_token": "IQoJb3JpZ2luX2VjEPv//////////wEaCXVzLWVhc3QtMSJHMEUCIFK/nQc0PoHFJdug95UOjLvsMDH3IuRjiGfLsOciXCzZAiEA7QxFrdC8fDZAG2N0stOaSANOZBdoyWf9d7auXEMZVPoq/wMIw///////////ARAEGgw2NjUzODYwOTg4NjYiDC14baKHPL/RBPvhDSrTAyWXt3STzhcQtaPnQ+i3hhKyl25fN5HOWGN1l8v2TEc50OLV0fJZIQ6QinRJ0PybqymK/Y6wKT4fHKGlm8wNppknLwkunrjTJnVfHJzJ755dgLzzJDdsyVzUuLRLp5UZA/JCoUNWJMye9+vxc8azp+RuxWYejRHBZcd9OR36tz5jUnpaj+Sfxs8H5bx8lrB4pFBY2sCvKCKAl194/7TX3bL236tK2KNjPU5ftw/CiJpyZ4TwGeSI9w0ytWuP9cTif5JMcu7rS86MMVvF+9OGdNPeJnYgHofcps/lBaAhnYx3rEPFsVjgShurX0nkESN+1muuYiJDmPp5n50PP29Zm8SIQPGrY6bd63WIjCaHa3GAOFnyAfqBOz96w+THy9Ct72gnby/91wC1ym60QFJ0iawLC2rXcI+UTqQsUpDFyBi/m7T2ihTbXM5VCKaUisFI/MMPJpDBdteHWFMpjAJOVF7KP/pBWNxC6SaWFH2cI0glM5MVROOLwTge6J/1jbNOeAOrUb1xR6ALtEZro2KwAyTT903LT/zDuimUN3xm1llOI0rd6WvLK2n3LISGjP/r3Yn2LQqi/V5UvhbxgyxsYFPJb71msQUMg62LBV6lcJ25wBaAMMqprdAGOp0BGr5Y3guNVFUgsmW+qU+npNjJYBJrlyIVBILfid/T74ydDf9EfaLXSwWMrF/e4dVfNkcB7j8jfIeUbaBeHGKhWtChwgOQ3uFaYvrFwvMMFKGLyrJE7S4Agl8Uy6gNDOqhCZTqyHIwmRFTg/XF86hZE6E3ET51joF3GRtI/cl/ztla3NTYiFsOJUjhV5kzarCC/ztk4kn7AgLCUQyjww==",
-    "expiration": "2026-05-19T06:04:58.000Z"
+    "access_key_id": "ASIAZV3A2ECZOZJC3ZU3",
+    "secret_access_key": "3C/em3LPHZCn2JYLkA9c+QASKEM8aDmuCrkPi2ld",
+    "session_token": "IQoJb3JpZ2luX2VjEEoaCXVzLWVhc3QtMSJGMEQCIAUUGEShwpOVubJCnDqHfDzjj9ifkTIHRkvACAciUfn6AiAJosIvrq2MqCHfMdGl2ojEqOsZ6hBOI2erCji6/ttIWCr2AwgTEAQaDDY2NTM4NjA5ODg2NiIMecjo5PnaiccTDbMFKtMDF++AsswiYX2WLJIbHilMuCePzVw6/hQLFuNMTokuZyQWbQXO4YKbHQhniMiYPWANCDLIbf1KSs9nUhPLiQZR0W2c36I4iP8/vzz1qsyomK6394zcDH+CvGqdnhK1Tgq4G/2ugXMIIQVXl6oH/MfkxAxoVfnmEwtZdvL0TCRKP2pjAoUSqF1NZa1CLpyVGDZHmV0cpcBj18L/Ede6HlMIu1QOA20nc1+t+MR2nkH8zD80fcClXdI+vOn/4KHM+IDBcH2mC2wsLoyOneFQBpi7BuCCTKmJXpRjeYYFBmUQLZhjzuF922wyniNSq7pbF8bqXFdd864zueaaIEFr8vQP97JyzweookzUlviQ5K09SQh4+/KOztmkjcWqL/SJRhwfsLcO1XI0tj4PAHY0x+c3hFjXGFagpoRbhrk7r9JnVIbNACvdiXKT4RWZZqZxIzxnvW7LxZsGqUkcOB9HUkeEAIVnRcxfP9FvPz5pEkUD17fvSN2spM+GsTdWaJrsiyuZHYbIbx4fuIqCBL7fGHvjJy8U+JExJqQGbzxhriRY5ue2mPyMLWeHvdChj3Djt4wZd8LMjVWn8yf6jx5/loF58jzT55hN7+NjPEtTsQ56CNIrmPMw/eGA1AY6ngGUYV1caQw8d+9ZS0dVyitAZOrecasn/nbWpphWg08201Y5wc0eX4tRT1sBF7TNaHBO7v/SZG/qnDiN1FR0kEId/TxmyNQzVCHVVjPt5o/u8EafHCOdS4+j2kTTED/ocubiCqhnWjKm2JI3XyB1ZS9plYwcf3uYi++Zjdk8rho2suamW7cW8FYAM9sMlm7xY+9F6hZ2APc1mjQ7Nngn4g==",
+    "expiration": "2026-08-15T21:27:25.000Z",
+    "backend": "GIT_BACKEND_S3"
   },
   "name": "descanso-shopify-manager",
   "path": "/home/ubuntu/descanso-shopify-manager",

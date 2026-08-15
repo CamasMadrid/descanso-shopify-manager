@@ -45,6 +45,7 @@
 - [x] Write Facebook Marketplace listings for all products
 - [x] Write Milanuncios listings
 - [x] Write posting guide (how often to refresh, best times)
+- [x] Research up to 30 verified free online listing channels relevant to selling beds across Madrid
 
 ## Phase 6: Instagram Ads & Social Media
 - [x] Instagram campaign guide (marketing/instagram-campaign-guide.md)
