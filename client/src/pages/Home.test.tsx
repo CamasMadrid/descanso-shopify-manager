@@ -25,6 +25,7 @@ describe("Pack Express homepage", () => {
     expect(screen.getAllByText("Entrega Express").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Canapé Express de Gran Capacidad").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Entrega y montaje gratis hasta 25 km de Madrid centro.").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("¿Más lejos? Te damos la ruta más económica o el precio para el día que lo necesitas.").length).toBeGreaterThan(0);
   });
 
   it("keeps Express to size and colour, then reveals the matching preview", async () => {
