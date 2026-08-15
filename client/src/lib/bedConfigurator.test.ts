@@ -18,6 +18,8 @@ describe("bed configurator rules", () => {
     expect(getAvailableFinishes("premium")).toEqual(PREMIUM_FINISHES);
     expect(EXPRESS_COLOURS).toHaveLength(5);
     expect(PREMIUM_FINISHES).toHaveLength(4);
+    expect(PREMIUM_FINISHES).toContain("Cambrian");
+    expect(PREMIUM_FINISHES).not.toContain("Cerezo");
   });
 
   it("builds a Spanish Pack Express WhatsApp enquiry with the in-stock mattress and storage bed", () => {
