@@ -110,3 +110,4 @@
 - [x] Add 120 × 190 cm to the standard size options and verify its WhatsApp enquiry path
 - [x] Run explicit automated WhatsApp enquiry coverage for the 120 × 190 cm size
 - [x] Clarify outside-zone delivery copy: route-day value option versus quoted preferred-day delivery
+- [x] Fix incomplete WhatsApp enquiry details for Express selections beyond 90 × 190 cm and cover every standard size with regression tests

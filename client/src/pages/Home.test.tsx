@@ -34,11 +34,14 @@ describe("Pack Express homepage", () => {
 
     expect(screen.queryByRole("button", { name: /Solo colchón/i })).toBeNull();
     expect(screen.queryByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeNull();
+    expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(true);
 
     await user.selectOptions(screen.getByRole("combobox"), "135 × 190 cm");
+    expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(true);
     await user.click(screen.getByRole("button", { name: "Cambrian" }));
 
     expect(screen.getByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeTruthy();
+    expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(false);
   });
 
   it("switches the rendered mattress and storage-bed alternatives to September", async () => {

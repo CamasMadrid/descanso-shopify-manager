@@ -140,6 +140,7 @@ export default function Home() {
         send: "Consultar mi selección por WhatsApp",
         customSend: "Consultar medida especial por WhatsApp",
         chooseSize: "Elige tu medida para continuar",
+        chooseExpressSelection: "Elige medida y color para continuar",
         customSize: "Necesito otra medida",
         expressIncluded: "Incluido en el Pack Express",
         howTitle: "Así de sencillo",
@@ -189,6 +190,7 @@ export default function Home() {
         send: "Ask about my selection on WhatsApp",
         customSend: "Ask about a custom size on WhatsApp",
         chooseSize: "Choose your size to continue",
+        chooseExpressSelection: "Choose a size and colour to continue",
         customSize: "I need another size",
         expressIncluded: "Included in the Pack Express",
         howTitle: "Simple from start to finish",
@@ -216,6 +218,7 @@ export default function Home() {
   const displaySize = size === "Necesito otra medida" ? copy.customSize : size;
   const isCustomSize = size === "Necesito otra medida";
   const selectedPreview = selectedCanape === "express" ? EXPRESS_CANAPE_IMAGES[currentFinish] : SEPTEMBER_CANAPE_IMAGES[currentFinish];
+  const canSendEnquiry = Boolean(size) && (!isExpress || Boolean(currentFinish));
 
   function selectAvailability(next: Availability) {
     setAvailability(next);
@@ -225,7 +228,7 @@ export default function Home() {
   }
 
   function sendEnquiry() {
-    if (!size) {
+    if (!canSendEnquiry) {
       setSizeError(true);
       document.getElementById("size-step")?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
@@ -455,8 +458,8 @@ export default function Home() {
                     {includesCanape && <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Color" : "Colour"}</span><span className="text-right font-semibold text-foreground">{currentFinish || "—"}</span></div>}
                   </div>
                   <div className="border-t border-[#e7dbc4] pt-4 text-xs leading-relaxed text-muted-foreground"><span className="font-bold text-foreground">{isSpanish ? "Precio y entrega:" : "Price and delivery:"}</span> {isSpanish ? "te confirmamos la mejor opción antes de reservar." : "we confirm the best option before you reserve."}</div>
-                  <Button onClick={sendEnquiry} className="h-auto w-full gap-2 whitespace-normal bg-[#25D366] px-4 py-3 text-center text-sm font-bold leading-snug text-white hover:bg-[#1ebe5d]"><MessageCircle className="h-5 w-5 shrink-0" />{isCustomSize ? copy.customSend : copy.send}</Button>
-                  {!size && <p className="text-center text-xs font-medium text-muted-foreground">{copy.chooseSize}</p>}
+                  <Button onClick={sendEnquiry} disabled={!canSendEnquiry} className="h-auto w-full gap-2 whitespace-normal bg-[#25D366] px-4 py-3 text-center text-sm font-bold leading-snug text-white hover:bg-[#1ebe5d] disabled:cursor-not-allowed disabled:bg-[#7dbd92]"><MessageCircle className="h-5 w-5 shrink-0" />{isCustomSize ? copy.customSend : copy.send}</Button>
+                  {!canSendEnquiry && <p className="text-center text-xs font-medium text-muted-foreground">{isExpress ? copy.chooseExpressSelection : copy.chooseSize}</p>}
                 </div>
               </aside>
             </div>

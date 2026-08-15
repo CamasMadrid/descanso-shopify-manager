@@ -61,6 +61,29 @@ describe("bed configurator rules", () => {
     expect(message).toContain("Medida: 120 × 190 cm");
   });
 
+  it("keeps the full Express selection in the WhatsApp enquiry for every standard size", () => {
+    const standardExpressSizes = STANDARD_SIZES.filter((size) => size !== "Necesito otra medida");
+
+    for (const size of standardExpressSizes) {
+      const url = buildWhatsAppEnquiry({
+        purchaseType: "pack",
+        availability: "express",
+        size,
+        mattressTier: "express",
+        canapeStyle: "express",
+        finish: "Cambrian",
+        postcode: "28001",
+        deliveryNeed: "flexible",
+      }, "es");
+
+      const message = decodeURIComponent(url.split("text=")[1] ?? "");
+      expect(message).toContain(`Medida: ${size}`);
+      expect(message).toContain("Colchón: Entrega Express");
+      expect(message).toContain("Canapé: Canapé Express de Gran Capacidad");
+      expect(message).toContain("Color / acabado: Cambrian");
+    }
+  });
+
   it("builds a custom-size September enquiry with a requested delivery date", () => {
     const url = buildWhatsAppEnquiry({
       purchaseType: "pack",
