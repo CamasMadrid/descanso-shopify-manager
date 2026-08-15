@@ -107,3 +107,5 @@
 - [x] Create, approve and display the missing Cambrian preview for the in-stock Express canapé
 - [x] Simplify the in-stock Express route to size and colour only, then reveal the selected colour preview
 - [x] Correct the September finish list so it offers Cambrian, not Cerezo, with its approved preview
+- [x] Add 120 × 190 cm to the standard size options and verify its WhatsApp enquiry path
+- [x] Run explicit automated WhatsApp enquiry coverage for the 120 × 190 cm size

@@ -10,7 +10,8 @@ import {
 describe("bed configurator rules", () => {
   it("keeps the custom-size route available without adding more standard size choices", () => {
     expect(STANDARD_SIZES).toContain("Necesito otra medida");
-    expect(STANDARD_SIZES).toHaveLength(5);
+    expect(STANDARD_SIZES).toContain("120 × 190 cm");
+    expect(STANDARD_SIZES).toHaveLength(6);
   });
 
   it("uses five in-stock Express colours and four September premium finishes", () => {
@@ -42,6 +43,22 @@ describe("bed configurator rules", () => {
     expect(message).toContain("Canapé: Canapé Express de Gran Capacidad");
     expect(message).toContain("Color / acabado: Cerezo");
     expect(message).toContain("Código postal: 28001");
+  });
+
+  it("carries the 120 × 190 cm Express size into the WhatsApp enquiry", () => {
+    const url = buildWhatsAppEnquiry({
+      purchaseType: "pack",
+      availability: "express",
+      size: "120 × 190 cm",
+      mattressTier: "express",
+      canapeStyle: "express",
+      finish: "Cambrian",
+      postcode: "28001",
+      deliveryNeed: "flexible",
+    }, "es");
+
+    const message = decodeURIComponent(url.split("text=")[1] ?? "");
+    expect(message).toContain("Medida: 120 × 190 cm");
   });
 
   it("builds a custom-size September enquiry with a requested delivery date", () => {

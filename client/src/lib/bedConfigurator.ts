@@ -5,7 +5,7 @@ export type CanapeStyle = "express" | "premium";
 
 export const WHATSAPP_NUMBER = "34711204284";
 
-export const STANDARD_SIZES = ["90 × 190 cm", "105 × 190 cm", "135 × 190 cm", "150 × 190 cm", "Necesito otra medida"] as const;
+export const STANDARD_SIZES = ["90 × 190 cm", "105 × 190 cm", "120 × 190 cm", "135 × 190 cm", "150 × 190 cm", "Necesito otra medida"] as const;
 
 export const EXPRESS_COLOURS = ["Ártico", "Blanco", "Cambrian", "Cerezo", "Wengué"] as const;
 export const PREMIUM_FINISHES = ["Blanco", "Nórdico", "Cambrian", "Wengué"] as const;
