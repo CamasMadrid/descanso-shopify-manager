@@ -57,6 +57,7 @@
 - [x] Prepare compliant WhatsApp-first summer liquidation campaign messaging and price-display guidance
 - [x] Verify external listing channels that permit WhatsApp-led enquiries and prepare prefilled offer messages without website changes
 - [x] Document a no-website workflow for managing WhatsApp and listing-platform enquiries without missed messages
+- [x] Create a circle-safe WhatsApp profile icon based on the Camas Madrid branding
 
 ## Phase 7: Final Delivery
 - [x] Full site review and polish
