@@ -54,6 +54,7 @@
 - [x] Budget recommendation (€100–300/month)
 - [x] Content calendar and posting strategy
 - [ ] Create visual ad creatives (images/video)
+- [x] Prepare compliant WhatsApp-first summer liquidation campaign messaging and price-display guidance
 
 ## Phase 7: Final Delivery
 - [x] Full site review and polish
