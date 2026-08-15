@@ -55,6 +55,7 @@
 - [x] Content calendar and posting strategy
 - [ ] Create visual ad creatives (images/video)
 - [x] Prepare compliant WhatsApp-first summer liquidation campaign messaging and price-display guidance
+- [x] Verify external listing channels that permit WhatsApp-led enquiries and prepare prefilled offer messages without website changes
 
 ## Phase 7: Final Delivery
 - [x] Full site review and polish
