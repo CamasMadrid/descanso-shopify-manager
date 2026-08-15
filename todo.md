@@ -84,3 +84,23 @@
 
 ## Phase 10: UX Improvements
 - [x] Size picker popup/modal — clicking "Comprar ahora" without size opens a modal with size buttons and prices, then proceeds to pillow modal and checkout
+
+## Phase 11: Simplified Stock-Led Storefront Redesign
+- [x] Define and implement a guided mattress/canapé selector with product type, size, quality and colour steps
+- [x] Promote the budget line as available now and label other lines as September availability
+- [x] Replace the current catalogue-first grid with a simple, stock-led purchase flow
+- [x] Present four customer-facing tiers: in-stock fast-delivery value, September essential, September comfort and September premium
+- [x] Translate the Wood canapé supplier sheet into customer-facing selector copy and finish options
+- [x] Translate the 22 mm large-capacity canapé reference into customer-facing selector copy and compare it with the Wood model
+- [x] Configure conditional canapé finishes: five colours for the basic in-stock model and four finishes for the premium model
+- [x] Add a final “Necesito otra medida” size option that routes to a prefilled WhatsApp enquiry
+- [x] Create verified AI colour visualisations from real product photography without changing product construction or finish characteristics
+- [x] Show free delivery and assembly within 25 km of Madrid centre, with a prefilled WhatsApp quote route for addresses outside the free zone or urgent requested dates
+- [x] Use the supplied assembled-bedroom images for the available-now Express canapé and keep it visually separate from the September model
+- [x] Rebuild Home.tsx around a single-image, WhatsApp-first guided configurator rather than a catalogue grid
+- [x] Remove fabricated testimonial content from the redesigned homepage
+- [x] Add test coverage for configurator selection, stock messaging and WhatsApp enquiry generation
+- [x] Make Pack Express available only when both the Express canapé and the single in-stock mattress are selected
+- [x] Restrict the remaining three mattress tiers to the September route
+- [x] Create verified bedroom-scene imagery for the September canapé from the supplied open/closed product photos and four finish swatches
+- [x] Obtain approval for the four September finish renders against the supplier swatches before publishing them
