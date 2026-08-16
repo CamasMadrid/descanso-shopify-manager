@@ -21,18 +21,20 @@ describe("Pack Express homepage", () => {
     renderHome();
 
     expect(screen.getAllByText("Pack Express: cama + colchón").length).toBeGreaterThan(0);
+    expect(screen.getByText("Pack canapé + colchón · Matrimonio estándar 135 × 190 · €269")).toBeTruthy();
     expect(screen.getAllByText("Disponible ahora").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Entrega Express").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Canapé Express de Gran Capacidad").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Entrega y montaje gratis hasta 25 km de Madrid centro.").length).toBeGreaterThan(0);
     expect(screen.getAllByText("¿Más lejos? Te damos la ruta más económica o el precio para el día que lo necesitas.").length).toBeGreaterThan(0);
+    expect(screen.getByRole("link", { name: "Solo canapé" }).getAttribute("href")).toContain("https://wa.me/34711204284");
+    expect(screen.getByRole("link", { name: "Solo colchón" }).getAttribute("href")).toContain("https://wa.me/34711204284");
   });
 
   it("keeps Express to size and colour, then reveals the matching preview", async () => {
     const user = userEvent.setup();
     renderHome();
 
-    expect(screen.queryByRole("button", { name: /Solo colchón/i })).toBeNull();
     expect(screen.queryByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeNull();
     expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(true);
 
@@ -69,7 +71,7 @@ describe("Pack Express homepage", () => {
     renderHome();
 
     await user.click(screen.getByRole("button", { name: /Ver opciones para septiembre/i }));
-    await user.click(screen.getByRole("button", { name: /Solo colchón/i }));
+    await user.click(screen.getAllByRole("button", { name: /Solo colchón/i })[0]);
 
     expect(screen.queryByText("Compara los dos canapés")).toBeNull();
     expect(screen.getAllByText("Solo colchón").length).toBeGreaterThan(0);

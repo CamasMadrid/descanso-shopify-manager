@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useLang } from "@/contexts/LanguageContext";
 import {
   STANDARD_SIZES,
+  buildStandaloneWhatsAppEnquiry,
   buildWhatsAppEnquiry,
   canapeDetails,
   getExpressPackPrice,
@@ -108,7 +109,7 @@ export default function Home() {
   const isSpanish = lang === "es";
   const copy = isSpanish
     ? {
-        top: "Pack Express disponible ahora · Entrega y montaje gratis hasta 25 km de Madrid centro",
+        top: "Pack canapé + colchón · Matrimonio estándar 135 × 190 · €269",
         heroKicker: "Cama completa, sin esperar a septiembre",
         heroTitle: "Elige tu cama en pocos pasos.",
         heroText: "Empieza con nuestro Pack Express en stock. Si puedes esperar, también podrás reservar nuestras tres gamas de colchón y el canapé de madera para septiembre.",
@@ -131,6 +132,10 @@ export default function Home() {
         expressFinishHint: "Selecciona tu color. Verás la cama después de elegir medida y color.",
         previewTitle: "Vista previa de tu selección",
         seeSeptember: "¿Puedes esperar? Ver opciones para septiembre",
+        standaloneTitle: "¿Solo necesitas una pieza?",
+        standaloneText: "Escríbenos directamente y te damos opciones, precio y disponibilidad.",
+        standaloneCanape: "Solo canapé",
+        standaloneMattress: "Solo colchón",
         postcodeTitle: "7. Código postal y entrega",
         postcodePlaceholder: "Tu código postal",
         freeZone: "Entrega y montaje gratis hasta 25 km de Madrid centro.",
@@ -159,7 +164,7 @@ export default function Home() {
         footer: "Camas, colchones y canapés con atención personal en Madrid.",
       }
     : {
-        top: "Pack Express available now · Free delivery and assembly within 25 km of central Madrid",
+        top: "Storage bed + mattress pack · Standard double 135 × 190 · €269",
         heroKicker: "A complete bed, without waiting until September",
         heroTitle: "Choose your bed in a few simple steps.",
         heroText: "Start with our in-stock Pack Express. If you can wait, you can also reserve our three mattress ranges and wood storage bed for September.",
@@ -182,6 +187,10 @@ export default function Home() {
         expressFinishHint: "Select your colour. Your bed preview will appear once you choose size and colour.",
         previewTitle: "Your selection preview",
         seeSeptember: "Can you wait? View September options",
+        standaloneTitle: "Only need one item?",
+        standaloneText: "Message us directly for options, price and availability.",
+        standaloneCanape: "Storage bed only",
+        standaloneMattress: "Mattress only",
         postcodeTitle: "7. Postcode and delivery",
         postcodePlaceholder: "Your postcode",
         freeZone: "Free delivery and assembly within 25 km of central Madrid.",
@@ -434,6 +443,15 @@ export default function Home() {
                     </div>
                   </>
                 )}
+
+                <div className="rounded-2xl border border-dashed border-primary/30 bg-primary/[0.035] p-5">
+                  <h3 className="font-serif text-xl font-bold text-[#123b65]">{copy.standaloneTitle}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{copy.standaloneText}</p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a href={buildStandaloneWhatsAppEnquiry("canape", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneCanape}</Button></a>
+                    <a href={buildStandaloneWhatsAppEnquiry("mattress", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneMattress}</Button></a>
+                  </div>
+                </div>
 
                 <div>
                   <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.postcodeTitle}</h3>

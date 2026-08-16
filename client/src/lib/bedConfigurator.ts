@@ -143,6 +143,28 @@ export function buildWhatsAppEnquiry(selection: ConfiguratorSelection, lang: "es
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.filter(Boolean).join("\n"))}`;
 }
 
+export function buildStandaloneWhatsAppEnquiry(productType: Exclude<PurchaseType, "pack">, lang: "es" | "en") {
+  const isSpanish = lang === "es";
+  const product = productTypeLabels[productType][lang];
+  const lines = isSpanish
+    ? [
+        "Hola, quiero consultar un producto individual.",
+        `Producto: ${product}`,
+        "Medida que necesito: ____ × ____ cm",
+        "Código postal: ____",
+        "¿Podéis confirmarme opciones, disponibilidad y precio?",
+      ]
+    : [
+        "Hello, I would like to ask about one product.",
+        `Product: ${product}`,
+        "Size I need: ____ × ____ cm",
+        "Postcode: ____",
+        "Could you confirm options, availability and price?",
+      ];
+
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
+}
+
 export function getAvailableFinishes(canapeStyle: CanapeStyle) {
   return canapeStyle === "express" ? EXPRESS_COLOURS : PREMIUM_FINISHES;
 }

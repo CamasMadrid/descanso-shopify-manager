@@ -4,6 +4,7 @@ import {
   EXPRESS_PACK_PRICES,
   PREMIUM_FINISHES,
   STANDARD_SIZES,
+  buildStandaloneWhatsAppEnquiry,
   buildWhatsAppEnquiry,
   getAvailableFinishes,
 } from "./bedConfigurator";
@@ -114,5 +115,15 @@ describe("bed configurator rules", () => {
     expect(message).toContain("Necesito otra medida: ____ × ____ cm");
     expect(message).toContain("Fecha ideal de entrega: ____");
     expect(message).toContain("¿Podéis confirmarme disponibilidad y precio para esta medida?");
+  });
+
+  it("builds concise standalone product enquiries for WhatsApp", () => {
+    const canapeMessage = decodeURIComponent(buildStandaloneWhatsAppEnquiry("canape", "es").split("text=")[1] ?? "");
+    const mattressMessage = decodeURIComponent(buildStandaloneWhatsAppEnquiry("mattress", "es").split("text=")[1] ?? "");
+
+    expect(canapeMessage).toContain("Producto: Solo canapé");
+    expect(canapeMessage).toContain("Medida que necesito: ____ × ____ cm");
+    expect(mattressMessage).toContain("Producto: Solo colchón");
+    expect(mattressMessage).toContain("Código postal: ____");
   });
 });
