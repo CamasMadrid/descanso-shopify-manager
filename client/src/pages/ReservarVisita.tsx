@@ -9,6 +9,7 @@ import { CheckCircle, ArrowLeft, MapPin, Clock, Phone, MessageCircle } from "luc
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 import { useLang } from "@/contexts/LanguageContext";
+import { WHATSAPP_NUMBER } from "@/lib/bedConfigurator";
 
 const AREAS = [
   "Fuenlabrada", "Leganés", "Getafe", "Móstoles", "Alcorcón",
@@ -85,7 +86,7 @@ export default function ReservarVisita() {
                 <ArrowLeft className="w-4 h-4" /> {lang === "es" ? "Volver al inicio" : "Back to home"}
               </Button>
             </Link>
-            <a href="https://wa.me/34711204284?text=Hola,%20acabo%20de%20solicitar%20una%20visita%20a%20domicilio" target="_blank" rel="noopener noreferrer">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}?text=Hola,%20acabo%20de%20solicitar%20una%20visita%20a%20domicilio`} target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#25D366] hover:bg-[#1ebe5d] text-white gap-2">
                 <MessageCircle className="w-4 h-4" /> {lang === "es" ? "Confirmar por WhatsApp" : "Confirm on WhatsApp"}
               </Button>

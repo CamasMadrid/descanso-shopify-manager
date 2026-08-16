@@ -116,3 +116,5 @@
 - [x] Show “Entrega gratis*” with a footnote for 25 km and selected zones, and place standalone WhatsApp choices before colour selection
 - [x] Add a header offer for the standard 135 × 190 Pack Express at €269
 - [x] Replace the static header with a rolling offer banner for €269 standard double, from €249, and the two-bed same-day/same-address discount condition
+- [x] Update every storefront WhatsApp route to +34 711 204 284 (already configured as 34711204284 for wa.me)
+- [x] Audit all storefront pages and shared elements so every WhatsApp route uses +34 711 204 284 in wa.me format

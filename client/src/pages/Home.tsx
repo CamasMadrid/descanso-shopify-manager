@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useLang } from "@/contexts/LanguageContext";
 import {
   STANDARD_SIZES,
+  WHATSAPP_NUMBER,
   buildStandaloneWhatsAppEnquiry,
   buildWhatsAppEnquiry,
   canapeDetails,
@@ -293,7 +294,7 @@ export default function Home() {
               <button onClick={() => setLang("es")} className={`rounded-full px-3 py-1.5 ${lang === "es" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"}`}>ES</button>
               <button onClick={() => setLang("en")} className={`rounded-full px-3 py-1.5 ${lang === "en" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground"}`}>EN</button>
             </div>
-            <a href="https://wa.me/34711204284" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" className="hidden sm:block">
               <Button size="sm" className="gap-1.5 bg-[#25D366] text-white hover:bg-[#1ebe5d]"><MessageCircle className="h-4 w-4" /> WhatsApp</Button>
             </a>
           </div>
@@ -535,7 +536,7 @@ export default function Home() {
       <footer className="bg-[#0a4178] py-10 text-white">
         <div className="container flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div><img src={t.logoUrl} alt={t.brandName} className="h-14 w-auto rounded-lg bg-white p-1 object-contain" /><p className="mt-3 max-w-sm text-sm leading-relaxed text-white/70">{copy.footer}</p></div>
-          <a href="https://wa.me/34711204284" target="_blank" rel="noopener noreferrer"><Button className="gap-2 bg-[#25D366] text-white hover:bg-[#1ebe5d]"><MessageCircle className="h-4 w-4" />WhatsApp</Button></a>
+          <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer"><Button className="gap-2 bg-[#25D366] text-white hover:bg-[#1ebe5d]"><MessageCircle className="h-4 w-4" />WhatsApp</Button></a>
         </div>
       </footer>
     </div>

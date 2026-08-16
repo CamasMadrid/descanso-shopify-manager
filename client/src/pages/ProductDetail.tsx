@@ -10,8 +10,8 @@ import {
 } from "lucide-react";
 import { useLang } from "@/contexts/LanguageContext";
 import { useCurrency, type Currency } from "@/contexts/CurrencyContext";
+import { WHATSAPP_NUMBER } from "@/lib/bedConfigurator";
 
-const WHATSAPP_NUMBER = "34711204284";
 const SHOPIFY_STORE = "descanso-rapido-castilla.myshopify.com";
 
 // Shopify variant IDs — keyed by product handle then size label (e.g. "90 × 190 cm")
