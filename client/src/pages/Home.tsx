@@ -10,6 +10,7 @@ import {
   STANDARD_SIZES,
   buildWhatsAppEnquiry,
   canapeDetails,
+  getExpressPackPrice,
   getAvailableFinishes,
   mattressTierDetails,
   productTypeLabels,
@@ -137,6 +138,7 @@ export default function Home() {
         flexible: "Puedo ser flexible con el día",
         specific: "Necesito un día concreto",
         summaryTitle: "Tu selección",
+        expressPrice: "Precio del Pack Express",
         send: "Consultar mi selección por WhatsApp",
         customSend: "Consultar medida especial por WhatsApp",
         chooseSize: "Elige tu medida para continuar",
@@ -187,6 +189,7 @@ export default function Home() {
         flexible: "I can be flexible with the day",
         specific: "I need a specific day",
         summaryTitle: "Your selection",
+        expressPrice: "Express Pack price",
         send: "Ask about my selection on WhatsApp",
         customSend: "Ask about a custom size on WhatsApp",
         chooseSize: "Choose your size to continue",
@@ -219,6 +222,7 @@ export default function Home() {
   const isCustomSize = size === "Necesito otra medida";
   const selectedPreview = selectedCanape === "express" ? EXPRESS_CANAPE_IMAGES[currentFinish] : SEPTEMBER_CANAPE_IMAGES[currentFinish];
   const canSendEnquiry = Boolean(size) && (!isExpress || Boolean(currentFinish));
+  const expressPackPrice = isExpress && purchaseType === "pack" ? getExpressPackPrice(size) : undefined;
 
   function selectAvailability(next: Availability) {
     setAvailability(next);
@@ -370,7 +374,10 @@ export default function Home() {
                     <Ruler className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <select value={size} onChange={(event) => { setSize(event.target.value); setSizeError(false); }} className={`w-full appearance-none rounded-xl border bg-background py-3 pl-11 pr-10 text-sm font-medium outline-none transition focus:ring-2 focus:ring-primary/30 ${sizeError ? "border-red-400" : "border-border"}`}>
                       <option value="">{copy.sizePlaceholder}</option>
-                      {STANDARD_SIZES.map((option) => <option key={option} value={option}>{option === "Necesito otra medida" ? copy.customSize : option}</option>)}
+                      {STANDARD_SIZES.map((option) => {
+                        const optionPrice = isExpress ? getExpressPackPrice(option) : undefined;
+                        return <option key={option} value={option}>{option === "Necesito otra medida" ? copy.customSize : optionPrice ? `${option} — €${optionPrice}` : option}</option>;
+                      })}
                     </select>
                     <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                   </div>
@@ -450,10 +457,11 @@ export default function Home() {
                   <p className="mt-1 font-serif text-2xl font-bold">{purchaseType === "pack" ? (isSpanish ? "Pack Express" : "Express Pack") : productTypeLabels[purchaseType][lang]}</p>
                 </div>
                 <div className="space-y-4 p-6">
-                  <div className="space-y-3 text-sm">
-                    <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Disponibilidad" : "Availability"}</span><span className={`font-bold ${availability === "express" ? "text-emerald-700" : "text-amber-700"}`}>{availability === "express" ? copy.stock : (isSpanish ? "Desde septiembre" : "From September")}</span></div>
-                    <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Medida" : "Size"}</span><span className="text-right font-semibold text-foreground">{displaySize || "—"}</span></div>
-                    {includesMattress && <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Colchón" : "Mattress"}</span><span className="text-right font-semibold text-foreground">{mattressTierDetails[activeMattressTier][lang].name}</span></div>}
+                    <div className="space-y-3 text-sm">
+                      <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Disponibilidad" : "Availability"}</span><span className={`font-bold ${availability === "express" ? "text-emerald-700" : "text-amber-700"}`}>{availability === "express" ? copy.stock : (isSpanish ? "Desde septiembre" : "From September")}</span></div>
+                      <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Medida" : "Size"}</span><span className="text-right font-semibold text-foreground">{displaySize || "—"}</span></div>
+                      {expressPackPrice && <div className="flex justify-between gap-4 rounded-xl bg-emerald-50 px-3 py-2"><span className="font-semibold text-emerald-950">{copy.expressPrice}</span><span className="text-right text-base font-bold text-emerald-800">€{expressPackPrice}</span></div>}
+                      {includesMattress && <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Colchón" : "Mattress"}</span><span className="text-right font-semibold text-foreground">{mattressTierDetails[activeMattressTier][lang].name}</span></div>}
                     {includesCanape && <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Canapé" : "Storage bed"}</span><span className="text-right font-semibold text-foreground">{canapeDetails[selectedCanape][lang].name}</span></div>}
                     {includesCanape && <div className="flex justify-between gap-4"><span className="text-muted-foreground">{isSpanish ? "Color" : "Colour"}</span><span className="text-right font-semibold text-foreground">{currentFinish || "—"}</span></div>}
                   </div>

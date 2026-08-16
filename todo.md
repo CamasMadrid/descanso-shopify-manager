@@ -111,3 +111,4 @@
 - [x] Run explicit automated WhatsApp enquiry coverage for the 120 × 190 cm size
 - [x] Clarify outside-zone delivery copy: route-day value option versus quoted preferred-day delivery
 - [x] Fix incomplete WhatsApp enquiry details for Express selections beyond 90 × 190 cm and cover every standard size with regression tests
+- [x] Add approved Pack Express prices by size to the summary and WhatsApp enquiry

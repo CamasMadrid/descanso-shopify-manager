@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   EXPRESS_COLOURS,
+  EXPRESS_PACK_PRICES,
   PREMIUM_FINISHES,
   STANDARD_SIZES,
   buildWhatsAppEnquiry,
@@ -23,6 +24,16 @@ describe("bed configurator rules", () => {
     expect(PREMIUM_FINISHES).not.toContain("Cerezo");
   });
 
+  it("keeps the approved Pack Express price for every standard size", () => {
+    expect(EXPRESS_PACK_PRICES).toEqual({
+      "90 × 190 cm": 249,
+      "105 × 190 cm": 259,
+      "120 × 190 cm": 269,
+      "135 × 190 cm": 269,
+      "150 × 190 cm": 299,
+    });
+  });
+
   it("builds a Spanish Pack Express WhatsApp enquiry with the in-stock mattress and storage bed", () => {
     const url = buildWhatsAppEnquiry({
       purchaseType: "pack",
@@ -42,6 +53,7 @@ describe("bed configurator rules", () => {
     expect(message).toContain("Colchón: Entrega Express");
     expect(message).toContain("Canapé: Canapé Express de Gran Capacidad");
     expect(message).toContain("Color / acabado: Cerezo");
+    expect(message).toContain("Precio del Pack Express: €269");
     expect(message).toContain("Código postal: 28001");
   });
 
@@ -78,6 +90,7 @@ describe("bed configurator rules", () => {
 
       const message = decodeURIComponent(url.split("text=")[1] ?? "");
       expect(message).toContain(`Medida: ${size}`);
+      expect(message).toContain(`Precio del Pack Express: €${EXPRESS_PACK_PRICES[size]}`);
       expect(message).toContain("Colchón: Entrega Express");
       expect(message).toContain("Canapé: Canapé Express de Gran Capacidad");
       expect(message).toContain("Color / acabado: Cambrian");

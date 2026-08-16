@@ -38,9 +38,11 @@ describe("Pack Express homepage", () => {
 
     await user.selectOptions(screen.getByRole("combobox"), "135 × 190 cm");
     expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(true);
+    expect(screen.getByRole("option", { name: "135 × 190 cm — €269" })).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "Cambrian" }));
 
     expect(screen.getByAltText("Canapé Express de Gran Capacidad en acabado Cambrian")).toBeTruthy();
+    expect(screen.getByText("€269")).toBeTruthy();
     expect(screen.getByRole("button", { name: /Consultar mi selección por WhatsApp/i }).hasAttribute("disabled")).toBe(false);
   });
 

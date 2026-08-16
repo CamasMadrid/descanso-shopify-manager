@@ -7,6 +7,14 @@ export const WHATSAPP_NUMBER = "34711204284";
 
 export const STANDARD_SIZES = ["90 × 190 cm", "105 × 190 cm", "120 × 190 cm", "135 × 190 cm", "150 × 190 cm", "Necesito otra medida"] as const;
 
+export const EXPRESS_PACK_PRICES: Record<string, number> = {
+  "90 × 190 cm": 249,
+  "105 × 190 cm": 259,
+  "120 × 190 cm": 269,
+  "135 × 190 cm": 269,
+  "150 × 190 cm": 299,
+};
+
 export const EXPRESS_COLOURS = ["Ártico", "Blanco", "Cambrian", "Cerezo", "Wengué"] as const;
 export const PREMIUM_FINISHES = ["Blanco", "Nórdico", "Cambrian", "Wengué"] as const;
 
@@ -83,6 +91,10 @@ export type ConfiguratorSelection = {
   deliveryNeed?: "flexible" | "specific";
 };
 
+export function getExpressPackPrice(size: string) {
+  return EXPRESS_PACK_PRICES[size];
+}
+
 function selectedLabel<T extends string>(value: T | undefined, labels: Record<T, { es: string; en: string }>, lang: "es" | "en") {
   return value ? labels[value][lang] : "";
 }
@@ -96,6 +108,9 @@ export function buildWhatsAppEnquiry(selection: ConfiguratorSelection, lang: "es
   const availability = selection.availability === "express"
     ? (isSpanish ? "Disponible ahora" : "Available now")
     : (isSpanish ? "Desde septiembre" : "From September");
+  const expressPackPrice = selection.availability === "express" && selection.purchaseType === "pack"
+    ? getExpressPackPrice(selection.size)
+    : undefined;
 
   const lines = isSpanish
     ? [
@@ -103,6 +118,7 @@ export function buildWhatsAppEnquiry(selection: ConfiguratorSelection, lang: "es
         `Producto: ${product}`,
         `Disponibilidad: ${availability}`,
         selection.size ? `Medida: ${isCustomSize ? "Necesito otra medida: ____ × ____ cm" : selection.size}` : "Medida: ____",
+        expressPackPrice ? `Precio del Pack Express: €${expressPackPrice}` : "",
         mattress ? `Colchón: ${mattress}` : "",
         canape ? `Canapé: ${canape}` : "",
         selection.finish ? `Color / acabado: ${selection.finish}` : "",
@@ -115,6 +131,7 @@ export function buildWhatsAppEnquiry(selection: ConfiguratorSelection, lang: "es
         `Product: ${product}`,
         `Availability: ${availability}`,
         selection.size ? `Size: ${isCustomSize ? "I need another size: ____ × ____ cm" : selection.size}` : "Size: ____",
+        expressPackPrice ? `Express Pack price: €${expressPackPrice}` : "",
         mattress ? `Mattress: ${mattress}` : "",
         canape ? `Storage bed: ${canape}` : "",
         selection.finish ? `Colour / finish: ${selection.finish}` : "",
