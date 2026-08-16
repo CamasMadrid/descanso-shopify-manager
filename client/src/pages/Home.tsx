@@ -110,9 +110,9 @@ export default function Home() {
   const isSpanish = lang === "es";
   const copy = isSpanish
     ? {
-        rollingOffers: ["Cama matrimonio 135 × 190 · €269", "Descuento al comprar 2 camas**", "Camas desde €249"],
+        rollingOffers: ["Cama matrimonio 135 × 190 · €269", "Descuento al comprar 2 o más camas**", "Cama matrimonio 135 × 190 · €269", "Camas desde €249"],
         rollingOfferLabel: "Ofertas destacadas",
-        twoBedFootnote: "**Mismo día, misma dirección y cualquier medida. Contacta para confirmar el descuento.",
+        twoBedFootnote: "**2 o más camas, mismo día, misma dirección y cualquier medida. Contacta para confirmar el descuento.",
         heroKicker: "Cama completa, sin esperar a septiembre",
         heroTitle: "Elige tu cama en pocos pasos.",
         heroText: "Empieza con nuestro Pack Express en stock. Si puedes esperar, también podrás reservar nuestras tres gamas de colchón y el canapé de madera para septiembre.",
@@ -169,9 +169,9 @@ export default function Home() {
         footer: "Camas, colchones y canapés con atención personal en Madrid.",
       }
     : {
-        rollingOffers: ["Standard double 135 × 190 · €269", "Discount when you buy 2 beds**", "Beds from €249"],
+        rollingOffers: ["Standard double 135 × 190 · €269", "Discount when you buy 2 or more beds**", "Standard double 135 × 190 · €269", "Beds from €249"],
         rollingOfferLabel: "Featured offers",
-        twoBedFootnote: "**Same day, same address and any size. Contact us to confirm the discount.",
+        twoBedFootnote: "**2 or more beds, same day, same address and any size. Contact us to confirm the discount.",
         heroKicker: "A complete bed, without waiting until September",
         heroTitle: "Choose your bed in a few simple steps.",
         heroText: "Start with our in-stock Pack Express. If you can wait, you can also reserve our three mattress ranges and wood storage bed for September.",
