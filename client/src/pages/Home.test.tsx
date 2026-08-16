@@ -21,11 +21,15 @@ describe("Pack Express homepage", () => {
     renderHome();
 
     expect(screen.getAllByText("Pack Express: cama + colchón").length).toBeGreaterThan(0);
-    expect(screen.getByText("Pack canapé + colchón · Matrimonio estándar 135 × 190 · €269")).toBeTruthy();
+    expect(screen.getAllByText("Cama matrimonio 135 × 190 · €269").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Descuento al comprar 2 camas**").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Camas desde €249").length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Entrega gratis*").length).toBeGreaterThan(0);
+    expect(screen.getByText("*Dentro de 25 km de Madrid centro y otras zonas seleccionadas. Contacta para confirmación.")).toBeTruthy();
+    expect(screen.getByText("**Mismo día, misma dirección y cualquier medida. Contacta para confirmar el descuento.")).toBeTruthy();
     expect(screen.getAllByText("Disponible ahora").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Entrega Express").length).toBeGreaterThan(0);
     expect(screen.getAllByText("Canapé Express de Gran Capacidad").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Entrega y montaje gratis hasta 25 km de Madrid centro.").length).toBeGreaterThan(0);
     expect(screen.getAllByText("¿Más lejos? Te damos la ruta más económica o el precio para el día que lo necesitas.").length).toBeGreaterThan(0);
     expect(screen.getByRole("link", { name: "Solo canapé" }).getAttribute("href")).toContain("https://wa.me/34711204284");
     expect(screen.getByRole("link", { name: "Solo colchón" }).getAttribute("href")).toContain("https://wa.me/34711204284");

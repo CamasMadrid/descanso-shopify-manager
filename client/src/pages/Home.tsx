@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import {
   Check, ChevronDown, Clock3, MapPin, MessageCircle, PackageCheck,
-  Ruler, Sparkles, Truck, Wrench,
+  Ruler, Sparkles, Truck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/contexts/LanguageContext";
@@ -109,11 +109,15 @@ export default function Home() {
   const isSpanish = lang === "es";
   const copy = isSpanish
     ? {
-        top: "Pack canapé + colchón · Matrimonio estándar 135 × 190 · €269",
+        rollingOffers: ["Cama matrimonio 135 × 190 · €269", "Descuento al comprar 2 camas**", "Camas desde €249"],
+        rollingOfferLabel: "Ofertas destacadas",
+        twoBedFootnote: "**Mismo día, misma dirección y cualquier medida. Contacta para confirmar el descuento.",
         heroKicker: "Cama completa, sin esperar a septiembre",
         heroTitle: "Elige tu cama en pocos pasos.",
         heroText: "Empieza con nuestro Pack Express en stock. Si puedes esperar, también podrás reservar nuestras tres gamas de colchón y el canapé de madera para septiembre.",
         heroCta: "Crear mi selección",
+        heroFreeDelivery: "Entrega gratis*",
+        deliveryFootnote: "*Dentro de 25 km de Madrid centro y otras zonas seleccionadas. Contacta para confirmación.",
         stock: "Disponible ahora",
         productTitle: "1. ¿Qué necesitas?",
         timingTitle: "2. ¿Cuándo la necesitas?",
@@ -138,7 +142,7 @@ export default function Home() {
         standaloneMattress: "Solo colchón",
         postcodeTitle: "7. Código postal y entrega",
         postcodePlaceholder: "Tu código postal",
-        freeZone: "Entrega y montaje gratis hasta 25 km de Madrid centro.",
+        freeZone: "Entrega gratis*",
         outsideZone: "¿Más lejos? Te damos la ruta más económica o el precio para el día que lo necesitas.",
         flexible: "Puedo ser flexible con el día",
         specific: "Necesito un día concreto",
@@ -164,11 +168,15 @@ export default function Home() {
         footer: "Camas, colchones y canapés con atención personal en Madrid.",
       }
     : {
-        top: "Storage bed + mattress pack · Standard double 135 × 190 · €269",
+        rollingOffers: ["Standard double 135 × 190 · €269", "Discount when you buy 2 beds**", "Beds from €249"],
+        rollingOfferLabel: "Featured offers",
+        twoBedFootnote: "**Same day, same address and any size. Contact us to confirm the discount.",
         heroKicker: "A complete bed, without waiting until September",
         heroTitle: "Choose your bed in a few simple steps.",
         heroText: "Start with our in-stock Pack Express. If you can wait, you can also reserve our three mattress ranges and wood storage bed for September.",
         heroCta: "Build my selection",
+        heroFreeDelivery: "Free delivery*",
+        deliveryFootnote: "*Within 25 km of central Madrid and selected additional zones. Contact us to confirm.",
         stock: "Available now",
         productTitle: "1. What do you need?",
         timingTitle: "2. When do you need it?",
@@ -193,7 +201,7 @@ export default function Home() {
         standaloneMattress: "Mattress only",
         postcodeTitle: "7. Postcode and delivery",
         postcodePlaceholder: "Your postcode",
-        freeZone: "Free delivery and assembly within 25 km of central Madrid.",
+        freeZone: "Free delivery*",
         outsideZone: "Further away? We will give you the most economical route or the price for the day you need it.",
         flexible: "I can be flexible with the day",
         specific: "I need a specific day",
@@ -264,8 +272,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#fcfbf8] text-foreground">
-      <div className="bg-[#0a4178] px-4 py-2.5 text-center text-xs font-semibold text-white sm:text-sm">
-        {copy.top}
+      <div className="bg-[#0a4178] text-xs font-semibold text-white sm:text-sm" role="region" aria-label={copy.rollingOfferLabel}>
+        <span className="sr-only">{copy.rollingOffers.join(". ")}</span>
+        <div className="offer-marquee" aria-hidden="true">
+          <div className="offer-marquee-track">
+            {[...copy.rollingOffers, ...copy.rollingOffers].map((offer, index) => (
+              <span key={`${offer}-${index}`} className="offer-marquee-item">{offer}<span className="offer-marquee-separator">•</span></span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/95 backdrop-blur">
@@ -296,11 +311,12 @@ export default function Home() {
               <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">{copy.heroText}</p>
               <div className="mt-7 flex flex-wrap gap-3 text-sm font-medium text-foreground">
                 <span className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600" /> {isSpanish ? "Pack Express en stock" : "Pack Express in stock"}</span>
-                <span className="flex items-center gap-2"><Wrench className="h-4 w-4 text-emerald-600" /> {isSpanish ? "Montaje incluido en zona" : "Assembly included in zone"}</span>
+                <span className="flex items-center gap-2"><Truck className="h-4 w-4 text-emerald-600" /> {copy.heroFreeDelivery}</span>
               </div>
               <a href="#configurador" className="mt-8 inline-block">
                 <Button size="lg" className="gap-2 bg-[#0a4178] px-6 text-white hover:bg-[#083762]">{copy.heroCta} <ChevronDown className="h-4 w-4" /></Button>
               </a>
+              <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground"><span>{copy.deliveryFootnote}</span><br /><span>{copy.twoBedFootnote}</span></p>
             </div>
             <div className="order-1 overflow-hidden rounded-[2rem] border border-border/70 bg-white p-3 shadow-[0_24px_70px_-35px_rgba(10,65,120,0.55)] md:order-2">
               <img src={EXPRESS_CANAPE_CLOSED} alt={copy.imageAlt} className="aspect-[4/3] w-full rounded-[1.45rem] object-cover" />
@@ -392,6 +408,15 @@ export default function Home() {
                   </div>
                 </div>
 
+                <div className="rounded-2xl border border-dashed border-primary/30 bg-primary/[0.035] p-5">
+                  <h3 className="font-serif text-xl font-bold text-[#123b65]">{copy.standaloneTitle}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{copy.standaloneText}</p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a href={buildStandaloneWhatsAppEnquiry("canape", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneCanape}</Button></a>
+                    <a href={buildStandaloneWhatsAppEnquiry("mattress", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneMattress}</Button></a>
+                  </div>
+                </div>
+
                 {!isExpress && includesMattress && (
                   <div>
                     <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.mattressTitle}</h3>
@@ -443,15 +468,6 @@ export default function Home() {
                     </div>
                   </>
                 )}
-
-                <div className="rounded-2xl border border-dashed border-primary/30 bg-primary/[0.035] p-5">
-                  <h3 className="font-serif text-xl font-bold text-[#123b65]">{copy.standaloneTitle}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{copy.standaloneText}</p>
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    <a href={buildStandaloneWhatsAppEnquiry("canape", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneCanape}</Button></a>
-                    <a href={buildStandaloneWhatsAppEnquiry("mattress", lang)} target="_blank" rel="noopener noreferrer"><Button type="button" variant="outline" className="border-[#25D366] bg-white text-[#126b35] hover:bg-emerald-50"><MessageCircle className="h-4 w-4" />{copy.standaloneMattress}</Button></a>
-                  </div>
-                </div>
 
                 <div>
                   <h3 className="mb-3 font-serif text-2xl font-bold text-[#123b65]">{copy.postcodeTitle}</h3>

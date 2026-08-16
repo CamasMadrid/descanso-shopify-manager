@@ -113,4 +113,6 @@
 - [x] Fix incomplete WhatsApp enquiry details for Express selections beyond 90 × 190 cm and cover every standard size with regression tests
 - [x] Add approved Pack Express prices by size to the summary and WhatsApp enquiry
 - [x] Add simple direct-WhatsApp options for standalone canapé and standalone mattress enquiries
+- [x] Show “Entrega gratis*” with a footnote for 25 km and selected zones, and place standalone WhatsApp choices before colour selection
 - [x] Add a header offer for the standard 135 × 190 Pack Express at €269
+- [x] Replace the static header with a rolling offer banner for €269 standard double, from €249, and the two-bed same-day/same-address discount condition

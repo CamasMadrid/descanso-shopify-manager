@@ -229,4 +229,38 @@
     transform: scale(1.08);
     box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
   }
+
+  /* Rolling headline offers */
+  .offer-marquee {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .offer-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: offer-marquee 19s linear infinite;
+  }
+
+  .offer-marquee-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.72rem 1.2rem;
+    letter-spacing: 0.015em;
+  }
+
+  .offer-marquee-separator {
+    margin-left: 2.4rem;
+    color: oklch(0.82 0.10 85);
+  }
+
+  @keyframes offer-marquee {
+    to { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .offer-marquee-track {
+      animation: none;
+    }
+  }
 }
